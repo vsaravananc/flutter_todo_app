@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 
-/**
- * 
- *  STYLE EXTENSTION 
- * 
- */
+/// 
+///  STYLE EXTENSTION 
+/// 
 
 extension ThemeStyle on TextStyle {
   TextStyle get ffopensans => copyWith(fontFamily: "OpenSans");

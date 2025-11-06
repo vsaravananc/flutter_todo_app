@@ -6,6 +6,7 @@ class LightColors {
   static Color secondaryColor = const Color(0xFF4EA2FB);
   static Color backgroundColor = const Color(0xFFFFFFFF);
   static Color secondaryBackgroundColor = const Color(0xFFC0C0C0);
+  static Color textColor = const Color(0xFF000000);
 }
 
 class DarkColors {
@@ -13,4 +14,5 @@ class DarkColors {
   static Color secondaryColor = const Color(0xFF4EA2FB);
   static Color backgroundColor = const Color(0xFF000000);
   static Color secondaryBackgroundColor = const Color(0xFF444444);
+  static Color textColor = const Color(0xFFFFFFFF);
 }

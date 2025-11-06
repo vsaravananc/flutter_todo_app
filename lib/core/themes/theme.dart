@@ -4,12 +4,14 @@ import 'package:todoapp/core/themes/text_theme.dart';
 
 class AppTheme {
   static ThemeData lightTheme = ThemeData(
+    useMaterial3: true,
     brightness: Brightness.light,
     primaryColor: LightColors.primaryColor,
     scaffoldBackgroundColor: LightColors.backgroundColor,
     colorScheme: ColorScheme.light(
       primary: LightColors.primaryColor,
       secondary: LightColors.secondaryColor,
+      brightness: Brightness.light,
     ),
     appBarTheme: AppBarTheme(
       backgroundColor: LightColors.backgroundColor,
@@ -21,20 +23,22 @@ class AppTheme {
       ),
       elevation: 0,
     ),
-    floatingActionButtonTheme: FloatingActionButtonThemeData(
-      backgroundColor: LightColors.primaryColor,
-      foregroundColor: Colors.white,
+
+    textTheme: CustomTextTheme.baseTextTheme.apply(
+      bodyColor: LightColors.textColor,
+      displayColor: LightColors.textColor,
     ),
-    textTheme: CustomTextTheme.lightTheme,
   );
 
   static ThemeData darkTheme = ThemeData(
+    useMaterial3: true,
     brightness: Brightness.dark,
     primaryColor: DarkColors.primaryColor,
     scaffoldBackgroundColor: DarkColors.backgroundColor,
     colorScheme: ColorScheme.dark(
       primary: DarkColors.primaryColor,
       secondary: DarkColors.secondaryColor,
+      brightness: Brightness.dark,
     ),
     appBarTheme: AppBarTheme(
       backgroundColor: DarkColors.backgroundColor,
@@ -46,10 +50,9 @@ class AppTheme {
       ),
       elevation: 0,
     ),
-    floatingActionButtonTheme: FloatingActionButtonThemeData(
-      backgroundColor: DarkColors.primaryColor,
-      foregroundColor: Colors.white,
+    textTheme: CustomTextTheme.baseTextTheme.apply(
+      bodyColor: DarkColors.textColor,
+      displayColor: DarkColors.textColor,
     ),
-    textTheme: CustomTextTheme.darkTheme,
   );
 }
