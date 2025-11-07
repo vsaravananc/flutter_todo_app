@@ -88,6 +88,7 @@ class _WelcomeAcutalScreenState extends State<WelcomeAcutalScreen> {
          */
 
         PageView.builder(
+          physics: const AlwaysScrollableScrollPhysics(),
           key: const ValueKey('page-view'),
           controller: pageController,
           itemCount: 3,
