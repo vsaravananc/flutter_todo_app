@@ -12,29 +12,38 @@ class WelcomeGetStartedButtonWidget extends StatelessWidget {
       key: const ValueKey('value-listenable-builder-get-started-button'),
       valueListenable: selectedIndex,
       builder: (context, value, _) {
-        return Positioned(
-          right: 10,
+        bool isEnd = value == 2;
+        return AnimatedPositioned(
+          duration: const Duration(milliseconds: 550),
+          curve: Curves.ease,
+          right: isEnd ? 10 : -40,
           top: 0,
           bottom: 0,
           child: Column(
             key: const ValueKey('welcome-get-started-button-column'),
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              IconButton(
-                key: const ValueKey('welcome-get-started-button'),
-                onPressed: value == 2
-                    ? () {
-                        debugPrint("Get Started Button Clicked");
-                      }
-                    : () {},
-                icon: Icon(
-                  key: const ValueKey('welcome-get-started-button-icon'),
-                  Icons.arrow_forward,
-                  color: value == 2
-                      ? Theme.of(context).brightness == Brightness.dark
-                            ? DarkColors.textColor
-                            : LightColors.textColor
-                      : Colors.transparent,
+              AnimatedOpacity(
+                key: const ValueKey('welcome-get-started-button-opacity'),
+                duration: const Duration(milliseconds: 1250),
+                opacity: isEnd ? 1 : 0,
+                curve: Curves.ease,
+                child: IconButton(
+                  key: const ValueKey('welcome-get-started-button'),
+                  onPressed: isEnd
+                      ? () {
+                          debugPrint("Get Started Button Clicked");
+                        }
+                      : () {},
+                  icon: Icon(
+                    key: const ValueKey('welcome-get-started-button-icon'),
+                    Icons.arrow_forward,
+                    color: isEnd
+                        ? Theme.of(context).brightness == Brightness.dark
+                              ? DarkColors.textColor
+                              : LightColors.textColor
+                        : Colors.transparent,
+                  ),
                 ),
               ),
             ],
