@@ -14,7 +14,55 @@ class WelcomeScreen extends StatefulWidget {
   State<WelcomeScreen> createState() => _WelcomeScreenState();
 }
 
-class _WelcomeScreenState extends State<WelcomeScreen> {
+class _WelcomeScreenState extends State<WelcomeScreen>
+    with SingleTickerProviderStateMixin {
+  late AnimationController animationController;
+
+  @override
+  void initState() {
+    
+    animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 2800),
+    );
+
+    animationController.forward();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    animationController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      key: const ValueKey('welcome-screen'),
+      body: FadeTransition(
+        key: const ValueKey('fade-transition'),
+        opacity: animationController,
+        child: const WelcomeAcutalScreen(
+          key: const ValueKey('welcome-acutal-screen'),
+        ),
+      ),
+    );
+  }
+}
+
+///
+///  FILE_PURPOSE: WELCOME ACUTAL SCREEN
+///
+
+class WelcomeAcutalScreen extends StatefulWidget {
+  const WelcomeAcutalScreen({super.key});
+
+  @override
+  State<WelcomeAcutalScreen> createState() => _WelcomeAcutalScreenState();
+}
+
+class _WelcomeAcutalScreenState extends State<WelcomeAcutalScreen> {
   ValueNotifier<int> selectedIndex = ValueNotifier(0);
   late PageController pageController;
   @override
@@ -32,35 +80,47 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: const ValueKey('welcome-screen'),
-      body: Stack(
-        children: [
-          PageView.builder(
-            key: const ValueKey('page-view'),
-            controller: pageController,
-            itemCount: 3,
-            onPageChanged: (index) {
-              selectedIndex.value = index;
-            },
-            scrollDirection: Axis.vertical,
-            itemBuilder: (context, index) {
-              return WelcomeScreenHolderWidget(
-                index: index,
-                key: const ValueKey('welcome-screen-holder'),
-              );
-            },
-          ),
-          WelcomeIndicatorScreen(
-            selectedIndex: selectedIndex,
-            key: const ValueKey('welcome-indicator'),
-          ),
-          WelcomeGetStartedButtonWidget(
-            selectedIndex: selectedIndex,
-            key: const ValueKey('welcome-get-started-button'),
-          ),
-        ],
-      ),
+    return Stack(
+      children: [
+
+        /**
+         * FILE_PURPOSE: WELCOME SCREEN HOLDER
+         */
+
+        PageView.builder(
+          key: const ValueKey('page-view'),
+          controller: pageController,
+          itemCount: 3,
+          onPageChanged: (index) {
+            selectedIndex.value = index;
+          },
+          scrollDirection: Axis.vertical,
+          itemBuilder: (context, index) {
+            return WelcomeScreenHolderWidget(
+              index: index,
+              key: const ValueKey('welcome-screen-holder'),
+            );
+          },
+        ),
+
+        /**
+         * FILE_PURPOSE: WELCOME INDICATOR
+         */
+
+        WelcomeIndicatorScreen(
+          selectedIndex: selectedIndex,
+          key: const ValueKey('welcome-indicator'),
+        ),
+
+        /**
+         * FILE_PURPOSE: WELCOME GET STARTED BUTTON
+         */
+
+        WelcomeGetStartedButtonWidget(
+          selectedIndex: selectedIndex,
+          key: const ValueKey('welcome-get-started-button'),
+        ),
+      ],
     );
   }
 }
