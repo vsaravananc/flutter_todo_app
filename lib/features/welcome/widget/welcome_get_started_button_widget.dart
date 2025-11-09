@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:todoapp/core/route/routes.dart';
 import 'package:todoapp/core/themes/colors.dart';
 
 class WelcomeGetStartedButtonWidget extends StatelessWidget {
@@ -32,7 +33,10 @@ class WelcomeGetStartedButtonWidget extends StatelessWidget {
                   key: const ValueKey('welcome-get-started-button'),
                   onPressed: isEnd
                       ? () {
-                          debugPrint("Get Started Button Clicked");
+                          Navigator.of(context).pushNamedAndRemoveUntil(
+                            Routes.homeScreen,
+                            (route) => false,
+                          );
                         }
                       : () {},
                   icon: Icon(

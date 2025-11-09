@@ -11,22 +11,36 @@ class AppTheme {
     colorScheme: ColorScheme.light(
       primary: LightColors.primaryColor,
       secondary: LightColors.secondaryColor,
+      surface: LightColors.secondaryBackgroundColor,
       brightness: Brightness.light,
-    ),
-    appBarTheme: AppBarTheme(
-      backgroundColor: LightColors.backgroundColor,
-      iconTheme: IconThemeData(color: LightColors.primaryColor),
-      titleTextStyle: TextStyle(
-        color: LightColors.primaryColor,
-        fontSize: 20,
-        fontWeight: FontWeight.w600,
-      ),
-      elevation: 0,
     ),
 
     textTheme: CustomTextTheme.baseTextTheme.apply(
       bodyColor: LightColors.textColor,
       displayColor: LightColors.textColor,
+    ),
+
+    chipTheme: ChipThemeData(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
+      side: BorderSide.none,
+      showCheckmark: false,
+      selectedColor: LightColors.primaryColor,
+      backgroundColor: LightColors.secondaryColor,
+      brightness: Brightness.dark,
+      selectedShadowColor: LightColors.primaryColor,
+      labelStyle: TextStyle(
+        fontSize: 13,
+        fontWeight: FontWeight.w600,
+        fontFamily: 'OpenSans',
+        color: LightColors.textColor,
+      ),
+      surfaceTintColor: LightColors.textColor,
+      secondaryLabelStyle: TextStyle(
+        fontSize: 13,
+        fontWeight: FontWeight.w600,
+        fontFamily: 'OpenSans',
+        color: LightColors.textColor,
+      ),
     ),
   );
 
@@ -38,21 +52,37 @@ class AppTheme {
     colorScheme: ColorScheme.dark(
       primary: DarkColors.primaryColor,
       secondary: DarkColors.secondaryColor,
+      surface: DarkColors.secondaryBackgroundColor,
       brightness: Brightness.dark,
     ),
-    appBarTheme: AppBarTheme(
-      backgroundColor: DarkColors.backgroundColor,
-      iconTheme: IconThemeData(color: DarkColors.primaryColor),
-      titleTextStyle: TextStyle(
-        color: DarkColors.primaryColor,
-        fontSize: 20,
-        fontWeight: FontWeight.w600,
-      ),
-      elevation: 0,
-    ),
+
     textTheme: CustomTextTheme.baseTextTheme.apply(
       bodyColor: DarkColors.textColor,
       displayColor: DarkColors.textColor,
+    ),
+
+    chipTheme: ChipThemeData(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
+      side: BorderSide.none,
+      showCheckmark: false,
+      selectedColor: DarkColors.primaryColor,
+      backgroundColor: DarkColors.secondaryColor,
+      brightness: Brightness.dark,
+      selectedShadowColor: DarkColors.primaryColor,
+      labelStyle: TextStyle(
+        fontSize: 13,
+        fontWeight: FontWeight.w600,
+        fontFamily: 'OpenSans',
+        color: DarkColors.textColor,
+        
+      ),
+      surfaceTintColor: DarkColors.textColor,
+      secondaryLabelStyle: TextStyle(
+        fontSize: 13,
+        fontWeight: FontWeight.w600,
+        fontFamily: 'OpenSans',
+        color: DarkColors.textColor,
+      ),
     ),
   );
 }

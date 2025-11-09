@@ -17,15 +17,18 @@ class WelcomeScreen extends StatefulWidget {
 class _WelcomeScreenState extends State<WelcomeScreen>
     with SingleTickerProviderStateMixin {
   late AnimationController animationController;
+  late Animation<Offset> position;
 
   @override
   void initState() {
-    
     animationController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 2800),
+      duration: const Duration(milliseconds: 1100),
     );
-
+    position = Tween<Offset>(
+      begin: const Offset(0, 0.06),
+      end: Offset.zero,
+    ).animate(animationController);
     animationController.forward();
     super.initState();
   }
@@ -40,11 +43,14 @@ class _WelcomeScreenState extends State<WelcomeScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       key: const ValueKey('welcome-screen'),
-      body: FadeTransition(
-        key: const ValueKey('fade-transition'),
-        opacity: animationController,
-        child: const WelcomeAcutalScreen(
-          key: const ValueKey('welcome-acutal-screen'),
+      body: SlideTransition(
+        position: position,
+        child: FadeTransition(
+          key: const ValueKey('fade-transition'),
+          opacity: animationController,
+          child: const WelcomeAcutalScreen(
+            key: const ValueKey('welcome-acutal-screen'),
+          ),
         ),
       ),
     );
@@ -82,13 +88,8 @@ class _WelcomeAcutalScreenState extends State<WelcomeAcutalScreen> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-
-        /**
-         * FILE_PURPOSE: WELCOME SCREEN HOLDER
-         */
-
         PageView.builder(
-          physics: const AlwaysScrollableScrollPhysics(),
+          physics: const ClampingScrollPhysics(),
           key: const ValueKey('page-view'),
           controller: pageController,
           itemCount: 3,
@@ -107,7 +108,6 @@ class _WelcomeAcutalScreenState extends State<WelcomeAcutalScreen> {
         /**
          * FILE_PURPOSE: WELCOME INDICATOR
          */
-
         WelcomeIndicatorScreen(
           selectedIndex: selectedIndex,
           key: const ValueKey('welcome-indicator'),
@@ -116,7 +116,6 @@ class _WelcomeAcutalScreenState extends State<WelcomeAcutalScreen> {
         /**
          * FILE_PURPOSE: WELCOME GET STARTED BUTTON
          */
-
         WelcomeGetStartedButtonWidget(
           selectedIndex: selectedIndex,
           key: const ValueKey('welcome-get-started-button'),

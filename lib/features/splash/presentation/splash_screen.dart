@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todoapp/core/route/routes.dart';
+import 'package:todoapp/features/home/bloc/home_bloc_bloc.dart';
 import 'package:todoapp/features/splash/widget/splash_animation_widget.dart';
 import 'package:todoapp/features/splash/widget/splash_logo_widget.dart';
 
@@ -18,6 +20,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   void initState() {
+    context.read<HomeBlocBloc>().add(LoadCategoryEvent());
     changeTheme();
     super.initState();
   }
@@ -30,7 +33,7 @@ class _SplashScreenState extends State<SplashScreen> {
       Navigator.pushNamedAndRemoveUntil(
         context,
         Routes.welcomScreen,
-        (_) => false,
+        (_) => true,
       );
     }
   }
