@@ -11,4 +11,6 @@ class AppWords {
     "Stay Balanced! Track your workload and maintain a healthy stress level with ease.",
     "Your Journey Starts Here! Earn achievement badges as you conquer your tasks. Let’s get started!",
   ];
+
+  static const String categoryHintText = 'Enter category name';
 }

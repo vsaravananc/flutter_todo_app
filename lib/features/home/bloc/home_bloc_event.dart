@@ -9,3 +9,9 @@ class SelectCategoryEvent extends HomeBlocEvent {
   final CategoryModel categoryModel;
   SelectCategoryEvent({required this.categoryModel});
 }
+
+
+class AddCategoryEvent extends HomeBlocEvent {
+  final String categoryName;
+  AddCategoryEvent({required this.categoryName});
+}

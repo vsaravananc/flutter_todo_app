@@ -7,12 +7,18 @@ import 'package:todoapp/features/home/domain/home_domain.dart';
 part 'home_bloc_event.dart';
 part 'home_bloc_state.dart';
 
-class HomeBlocBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
+class HomeBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
   final HomeDomain selecteCategory;
   final HomeDomain loadCategory;
-  HomeBlocBloc({required this.selecteCategory, required this.loadCategory})
+  final HomeDomain addCategory;
+  HomeBloc( {required this.selecteCategory, required this.loadCategory,required this.addCategory})
     : super(InitialCategoryState()) {
-    on<SelectCategoryEvent>((event, emit) => selecteCategory.triggerEvent(event,emit,state));
-    on<LoadCategoryEvent>((event, emit) => loadCategory.triggerEvent(event,emit,state));
+    on<SelectCategoryEvent>(
+      (event, emit) => selecteCategory.triggerEvent(event, emit, state),
+    );
+    on<LoadCategoryEvent>(
+      (event, emit) => loadCategory.triggerEvent(event, emit, state),
+    );
+    on<AddCategoryEvent>((event, emit) => addCategory.triggerEvent(event, emit, state));
   }
 }

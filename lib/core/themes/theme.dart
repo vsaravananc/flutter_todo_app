@@ -12,12 +12,19 @@ class AppTheme {
       primary: LightColors.primaryColor,
       secondary: LightColors.secondaryColor,
       surface: LightColors.secondaryBackgroundColor,
+      tertiary:  LightColors.popMenuColor,
       brightness: Brightness.light,
     ),
 
     textTheme: CustomTextTheme.baseTextTheme.apply(
       bodyColor: LightColors.textColor,
       displayColor: LightColors.textColor,
+    ),
+
+    bottomSheetTheme: BottomSheetThemeData(
+      backgroundColor: LightColors.backgroundColor,
+      shadowColor: LightColors.shadowColor,
+      elevation: 0.5,
     ),
 
     chipTheme: ChipThemeData(
@@ -49,16 +56,24 @@ class AppTheme {
     brightness: Brightness.dark,
     primaryColor: DarkColors.primaryColor,
     scaffoldBackgroundColor: DarkColors.backgroundColor,
+    shadowColor: DarkColors.shadowColor,
     colorScheme: ColorScheme.dark(
       primary: DarkColors.primaryColor,
       secondary: DarkColors.secondaryColor,
       surface: DarkColors.secondaryBackgroundColor,
+      tertiary:  DarkColors.popMenuColor,
       brightness: Brightness.dark,
     ),
 
     textTheme: CustomTextTheme.baseTextTheme.apply(
       bodyColor: DarkColors.textColor,
       displayColor: DarkColors.textColor,
+    ),
+
+    bottomSheetTheme: BottomSheetThemeData(
+      backgroundColor: DarkColors.backgroundColor,
+      shadowColor: DarkColors.shadowColor,
+      elevation: 0.5,
     ),
 
     chipTheme: ChipThemeData(
@@ -74,7 +89,6 @@ class AppTheme {
         fontWeight: FontWeight.w600,
         fontFamily: 'OpenSans',
         color: DarkColors.textColor,
-        
       ),
       surfaceTintColor: DarkColors.textColor,
       secondaryLabelStyle: TextStyle(

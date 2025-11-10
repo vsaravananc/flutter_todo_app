@@ -90,6 +90,7 @@ class _WelcomeAcutalScreenState extends State<WelcomeAcutalScreen> {
       children: [
         PageView.builder(
           physics: const ClampingScrollPhysics(),
+          clipBehavior: Clip.none,
           key: const ValueKey('page-view'),
           controller: pageController,
           itemCount: 3,

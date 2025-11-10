@@ -48,3 +48,21 @@ class SelectCategoryDomain extends HomeDomain<SelectCategoryEvent> {
     }
   }
 }
+
+class AddCategoryDomain extends HomeDomain<AddCategoryEvent> {
+  final HomeDomain loadCategory;
+  final HomeDataInsert insertData;
+
+  AddCategoryDomain({required this.insertData, required this.loadCategory});
+  @override
+  Future<void> triggerEvent(
+    AddCategoryEvent event,
+    Emitter<HomeBlocState> emit,
+    HomeBlocState currentState,
+  ) async {
+    bool isInseted = await insertData.insertData(name: event.categoryName);
+    if (isInseted) {
+      await loadCategory.triggerEvent(LoadCategoryEvent(), emit, currentState);
+    }
+  }
+}

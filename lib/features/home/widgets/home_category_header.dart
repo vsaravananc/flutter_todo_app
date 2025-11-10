@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todoapp/features/home/bloc/home_bloc_bloc.dart';
+import 'package:todoapp/features/home/widgets/home_category_bottomsheet.dart';
 import 'package:todoapp/features/home/widgets/home_choice_chip.dart';
 
 ///
@@ -97,7 +98,7 @@ class HomeCategoryHeaderList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<HomeBlocBloc, HomeBlocState>(
+    return BlocConsumer<HomeBloc, HomeBlocState>(
       listener: (context, state) {
         if (state is ErrorOnLoadingCategoryState) {
           debugPrint("Error: ${state.message} : ErrorType: ${state.errorType}");
@@ -117,7 +118,7 @@ class HomeCategoryHeaderList extends StatelessWidget {
                   state.selectedCategories.id == state.categories[index].id,
               categoryModel: state.categories[index],
               onSelected: () {
-                context.read<HomeBlocBloc>().add(
+                context.read<HomeBloc>().add(
                   SelectCategoryEvent(categoryModel: state.categories[index]),
                 );
               },
@@ -144,7 +145,12 @@ class HomeCategoryHeaderAddIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return IconButton(
       onPressed: () {
-        context.read<HomeBlocBloc>().add(LoadCategoryEvent());
+        showBottomSheet(
+          context: context,
+          builder: (c) {
+            return const HomeCategoryBottomsheet();
+          },
+        );
       },
       icon: const Icon(Icons.add),
       key: const ValueKey('home-category-header-icon-button'),

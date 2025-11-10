@@ -30,18 +30,22 @@ class MyApp extends StatelessWidget {
   }
 }
 
-
 class DependencyInjection {
   static Future<Widget> injectBloc(Widget child) async {
     WidgetsFlutterBinding.ensureInitialized();
     final database = await CreateDataBase().database;
+    LoadCategoryDomain loadCategoryDomain = LoadCategoryDomain(
+      loadCategoryData: LoadCategoryData(database: database),
+    );
     return MultiBlocProvider(
       providers: [
-        BlocProvider<HomeBlocBloc>(
-          create: (context) => HomeBlocBloc(
+        BlocProvider<HomeBloc>(
+          create: (context) => HomeBloc(
             selecteCategory: SelectCategoryDomain(),
-            loadCategory: LoadCategoryDomain(
-              loadCategoryData: LoadCategoryData(database: database),
+            loadCategory: loadCategoryDomain,
+            addCategory: AddCategoryDomain(
+              insertData: AddCategoryData(database: database),
+              loadCategory: loadCategoryDomain,
             ),
           ),
         ),

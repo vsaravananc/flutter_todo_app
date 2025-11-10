@@ -20,7 +20,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   void initState() {
-    context.read<HomeBlocBloc>().add(LoadCategoryEvent());
+    context.read<HomeBloc>().add(LoadCategoryEvent());
     changeTheme();
     super.initState();
   }
@@ -37,7 +37,6 @@ class _SplashScreenState extends State<SplashScreen> {
       );
     }
   }
-
 
   @override
   void dispose() {

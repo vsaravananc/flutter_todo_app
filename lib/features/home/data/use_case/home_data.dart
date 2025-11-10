@@ -3,9 +3,19 @@ import 'package:sqflite/sqlite_api.dart';
 import 'package:todoapp/core/services/error_handeling_service.dart';
 import 'package:todoapp/features/home/data/model/category_model.dart';
 
-sealed class HomeData<T> {
+abstract class HomeDataReadeWrite {}
+
+abstract class HomeData<T> implements HomeDataReadeWrite {
   Future<T> getData();
 }
+
+abstract class HomeDataInsert<T> implements HomeDataReadeWrite{
+   Future<T> insertData({required String name});
+}
+
+///
+///  LOADCATEGORYDATA CLASS : IS FETCHING THE DATA FROM THE DATABASE
+///
 
 class LoadCategoryData extends HomeData<List<CategoryModel>> {
   final Database database;
@@ -55,4 +65,26 @@ class LoadCategoryData extends HomeData<List<CategoryModel>> {
 
 List<CategoryModel> _decodeCategoryModel(List<Map<String, dynamic>> data) {
   return data.map((e) => CategoryModel.fromJson(e)).toList();
+}
+
+///
+///
+///
+
+class AddCategoryData extends HomeDataInsert<bool> {
+  final Database database;
+
+  AddCategoryData({required this.database});
+ 
+  
+  @override
+  Future<bool> insertData({required String name}) async{
+     try {
+      await database.insert('categories', {'name': name});
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+  
 }
