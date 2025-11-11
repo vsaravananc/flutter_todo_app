@@ -12,7 +12,7 @@ class AppTheme {
       primary: LightColors.primaryColor,
       secondary: LightColors.secondaryColor,
       surface: LightColors.secondaryBackgroundColor,
-      tertiary:  LightColors.popMenuColor,
+      tertiary: LightColors.popMenuColor,
       brightness: Brightness.light,
     ),
 
@@ -61,7 +61,7 @@ class AppTheme {
       primary: DarkColors.primaryColor,
       secondary: DarkColors.secondaryColor,
       surface: DarkColors.secondaryBackgroundColor,
-      tertiary:  DarkColors.popMenuColor,
+      tertiary: DarkColors.popMenuColor,
       brightness: Brightness.dark,
     ),
 

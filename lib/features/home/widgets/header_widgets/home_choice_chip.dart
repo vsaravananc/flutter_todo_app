@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todoapp/core/themes/colors.dart';
-import 'package:todoapp/features/home/data/model/category_model.dart';
+import 'package:todoapp/controller/category_controller/data/model/category_model.dart';
 
 ///
 ///  FILE_PURPOSE: HOME CHOICE CHIP TO SELECT ANY CATEGORY

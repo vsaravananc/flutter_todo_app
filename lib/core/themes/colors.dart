@@ -15,7 +15,7 @@ class DarkColors {
   static Color primaryColor = const Color(0xFF007AFF);
   static Color secondaryColor = const Color(0xFF76B6FA);
   static Color backgroundColor = const Color(0xFF000000);
-  static Color secondaryBackgroundColor = const Color(0xFF0A0A0A);
+  static Color secondaryBackgroundColor = const Color(0xFF0B0B0B);
   static Color shadowColor = const Color(0xFF1A1A1A);
   static Color popMenuColor =  const Color(0xFF212121);
   static Color textColor = const Color(0xFFFFFFFF);

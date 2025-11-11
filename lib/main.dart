@@ -3,9 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todoapp/core/route/routes.dart';
 import 'package:todoapp/core/themes/theme.dart';
 import 'package:todoapp/database/create_db.dart';
-import 'package:todoapp/features/home/bloc/home_bloc_bloc.dart';
-import 'package:todoapp/features/home/data/use_case/home_data.dart';
-import 'package:todoapp/features/home/domain/home_domain.dart';
+import 'package:todoapp/controller/category_controller/bloc/home_bloc_bloc.dart';
+import 'package:todoapp/controller/category_controller/data/use_case/home_data.dart';
+import 'package:todoapp/controller/category_controller/domain/home_domain.dart';
 
 Future<void> main() async {
   runApp(await DependencyInjection.injectBloc(const MyApp()));

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:todoapp/features/home/widgets/home_category_header.dart';
+import 'package:todoapp/features/home/widgets/body_widgets/home_todo_list.dart';
+import 'package:todoapp/features/home/widgets/header_widgets/home_category_header.dart';
 
 ///
 ///  FILE_PURPOSE: HOME SCREEN
@@ -103,8 +104,10 @@ class HomeScreenContent extends StatelessWidget {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       key: const ValueKey('HOME-screen-content'),
-      appBar: const HomeCategoryHeader( key: const ValueKey('home-category-header')),
-      body: const Center(child: Text('HOME Screen')),
+      appBar: const HomeCategoryHeader(
+        key: const ValueKey('home-category-header'),
+      ),
+      body: const HomeTodoListWidget(key: const ValueKey('home-todo-list')),
     );
   }
 }

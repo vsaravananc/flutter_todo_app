@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:todoapp/features/home/widgets/home_category_textfield.dart';
-import 'package:todoapp/features/home/widgets/home_overlay_entry.dart';
+import 'package:todoapp/features/home/widgets/header_widgets/home_category_textfield.dart';
+import 'package:todoapp/features/home/widgets/header_widgets/home_overlay_entry.dart';
 
 ///
 ///  FILE_PURPOSE: HOME CATEGORY BOTTOM SHEET TO GET NEW CATEGORY
@@ -17,6 +17,7 @@ class HomeCategoryBottomsheet extends StatelessWidget {
       key: const ValueKey('home-category-bottomsheet-container'),
       height: 75,
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+      margin: EdgeInsets.only(bottom: MediaQuery.viewInsetsOf(context).bottom),
       width: double.infinity,
       child: const Row(
         children: [

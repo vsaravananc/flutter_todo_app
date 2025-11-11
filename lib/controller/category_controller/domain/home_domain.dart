@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:todoapp/core/services/error_handeling_service.dart';
-import 'package:todoapp/features/home/bloc/home_bloc_bloc.dart';
-import 'package:todoapp/features/home/data/model/category_model.dart';
-import 'package:todoapp/features/home/data/use_case/home_data.dart';
+import 'package:todoapp/controller/category_controller/bloc/home_bloc_bloc.dart';
+import 'package:todoapp/controller/category_controller/data/model/category_model.dart';
+import 'package:todoapp/controller/category_controller/data/use_case/home_data.dart';
 
 sealed class HomeDomain<T> {
   Future<void> triggerEvent(

@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:sqflite/sqlite_api.dart';
 import 'package:todoapp/core/services/error_handeling_service.dart';
-import 'package:todoapp/features/home/data/model/category_model.dart';
+import 'package:todoapp/controller/category_controller/data/model/category_model.dart';
 
 abstract class HomeDataReadeWrite {}
 

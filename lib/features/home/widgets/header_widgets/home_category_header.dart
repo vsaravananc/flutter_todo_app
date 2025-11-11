@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:todoapp/features/home/bloc/home_bloc_bloc.dart';
-import 'package:todoapp/features/home/widgets/home_category_bottomsheet.dart';
-import 'package:todoapp/features/home/widgets/home_choice_chip.dart';
+import 'package:todoapp/controller/category_controller/bloc/home_bloc_bloc.dart';
+import 'package:todoapp/features/home/widgets/header_widgets/home_category_bottomsheet.dart';
+import 'package:todoapp/features/home/widgets/header_widgets/home_choice_chip.dart';
 
 ///
 ///  FILE_PURPOSE: HOME CATEGORY HEADER TO SELECT ANY CATEGORY
@@ -145,7 +145,10 @@ class HomeCategoryHeaderAddIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return IconButton(
       onPressed: () {
-        showBottomSheet(
+        showModalBottomSheet(
+          barrierColor: Theme.of(context).colorScheme.surface.withValues(
+            alpha: Theme.of(context).brightness == Brightness.dark ? 0.8 : 0.4,
+          ),
           context: context,
           builder: (c) {
             return const HomeCategoryBottomsheet();
