@@ -1,0 +1,31 @@
+class TodoModel {
+  final String id;
+  final String title;
+  final String description;
+  final int categoryId;
+  final bool isDone;
+  final String createdAt;
+  final String closedAt;
+
+  const TodoModel({
+    required this.id,
+    required this.title,
+    required this.description,
+    required this.categoryId,
+    required this.isDone,
+    required this.createdAt,
+    required this.closedAt,
+  });
+
+  factory TodoModel.fromJson({required Map<String,dynamic> json}){
+    return TodoModel(
+      id: json['id'],
+      title: json['title'],
+      description: json['description'],
+      categoryId: json['categoryId'],
+      isDone: (json['isDone'] as int) == 1,
+      createdAt: json['createdAt'],
+      closedAt: json['closedAt'],
+    );
+  }
+}

@@ -14,6 +14,7 @@ class AppTheme {
       surface: LightColors.secondaryBackgroundColor,
       tertiary: LightColors.popMenuColor,
       brightness: Brightness.light,
+      error: LightColors.errorColor
     ),
 
     textTheme: CustomTextTheme.baseTextTheme.apply(
@@ -25,6 +26,15 @@ class AppTheme {
       backgroundColor: LightColors.backgroundColor,
       shadowColor: LightColors.shadowColor,
       elevation: 0.5,
+    ),
+    checkboxTheme: CheckboxThemeData(
+      shape: const CircleBorder(),
+      side: BorderSide(
+        width: 0.8,
+        color: LightColors.textColor,
+        style: BorderStyle.solid,
+      ),
+      splashRadius: 0.4,
     ),
 
     chipTheme: ChipThemeData(
@@ -63,6 +73,7 @@ class AppTheme {
       surface: DarkColors.secondaryBackgroundColor,
       tertiary: DarkColors.popMenuColor,
       brightness: Brightness.dark,
+      error: DarkColors.errorColor
     ),
 
     textTheme: CustomTextTheme.baseTextTheme.apply(
@@ -74,6 +85,16 @@ class AppTheme {
       backgroundColor: DarkColors.backgroundColor,
       shadowColor: DarkColors.shadowColor,
       elevation: 0.5,
+    ),
+
+    checkboxTheme: CheckboxThemeData(
+      shape: const CircleBorder(),
+      side: BorderSide(
+        width: 0.8,
+        color: DarkColors.textColor,
+        style: BorderStyle.solid,
+      ),
+      splashRadius: 0.4,
     ),
 
     chipTheme: ChipThemeData(

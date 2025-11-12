@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:todoapp/features/home/widgets/body_widgets/home_slidable_widget.dart';
+import 'package:todoapp/features/home/widgets/body_widgets/home_todo_card.dart';
 
 class HomeTodoListWidget extends StatefulWidget {
   const HomeTodoListWidget({super.key});
@@ -10,7 +12,6 @@ class HomeTodoListWidget extends StatefulWidget {
 
 class _HomeTodoListWidgetState extends State<HomeTodoListWidget>
     with SingleTickerProviderStateMixin {
-  final List<String> items = List.generate(10, (i) => 'Data $i');
   late AnimationController _controller;
   late Animation<double> _fadeAnimation;
   late Animation<Offset> _slideAnimation;
@@ -18,7 +19,10 @@ class _HomeTodoListWidgetState extends State<HomeTodoListWidget>
   @override
   void initState() {
     super.initState();
+    _initAnimation();
+  }
 
+  void _initAnimation() {
     _controller = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 600),
@@ -30,6 +34,7 @@ class _HomeTodoListWidgetState extends State<HomeTodoListWidget>
       begin: const Offset(0, 0.2),
       end: Offset.zero,
     ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut));
+
     Future.delayed(const Duration(milliseconds: 400), () {
       _controller.forward();
     });
@@ -47,104 +52,79 @@ class _HomeTodoListWidgetState extends State<HomeTodoListWidget>
       opacity: _fadeAnimation,
       child: SlideTransition(
         position: _slideAnimation,
-        child: SlidableAutoCloseBehavior(
-          closeWhenOpened: true,
-          child: ReorderableListView.builder(
-            key: const ValueKey('reorderable-listview'),
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            itemCount: items.length,
-            onReorder: (oldIndex, newIndex) {
-              setState(() {
-                if (newIndex > oldIndex) newIndex--;
-                final item = items.removeAt(oldIndex);
-                items.insert(newIndex, item);
-              });
-            },
-            proxyDecorator: (child, index, animation) {
-              final item = items[index];
-              return Material(
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.tertiary,
-                    borderRadius: BorderRadius.circular(8),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.white.withOpacity(0.1),
-                        blurRadius: 10,
-                        spreadRadius: 2
-                      ),
-                    ],
-                  ),
-                  child: ListTile(
-                    title: Text(
-                      item,
-                      style: const TextStyle(color: Colors.white),
-                    ),
-                    trailing: ReorderableDragStartListener(
-                      index: index,
-                      child: const Icon(Icons.more_vert_outlined),
-                    ),
-                  ),
-                ),
-              );
-            },
-            buildDefaultDragHandles: false,
-            itemBuilder: (context, index) {
-              final item = items[index];
-              return Padding(
-                key: ValueKey(index),
-                padding: const EdgeInsets.symmetric(vertical: 2),
-                child: Slidable(
-                  key: ValueKey(item),
-                  endActionPane: ActionPane(
-                    motion: const ScrollMotion(),
-                    extentRatio: 0.4,
-                    children: [
-                      SlidableAction(
-                        borderRadius: const BorderRadius.horizontal(
-                          left: Radius.circular(8),
-                        ),
-                        onPressed: (_) => debugPrint('Edit $item'),
-                        backgroundColor: Colors.blue,
-                        icon: Icons.edit,
-                        label: 'Edit',
-                      ),
-                      SlidableAction(
-                        borderRadius: const BorderRadius.horizontal(
-                          right: Radius.circular(8),
-                        ),
-                        onPressed: (_) {
-                          setState(() => items.removeAt(index));
-                        },
-                        backgroundColor: Colors.red,
-                        icon: Icons.delete,
-                        label: 'Delete',
-                      ),
-                    ],
-                  ),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.tertiary,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: ListTile(
-                      leading: const Radio(value: false),
-                      title: Text(
-                        item,
-                        style: const TextStyle(color: Colors.white),
-                      ),
-                      trailing: ReorderableDragStartListener(
-                        index: index,
-                        child: const Icon(Icons.more_vert_outlined),
-                      ),
-                    ),
-                  ),
-                ),
-              );
-            },
-          ),
+        child: const SlidableTapOutSideWidget(
+          key: const ValueKey('slidable-tap-outside-widget'),
         ),
       ),
+    );
+  }
+}
+
+///
+/// SLIDABLETAPOUTSIDEWIDGET CLASS: IT WILL ALOW THE USER TO TAP ANY WERE TO CLOSE THE CURRENT SLIDABLE OPTIONS
+///
+
+class SlidableTapOutSideWidget extends StatelessWidget {
+  const SlidableTapOutSideWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const SlidableAutoCloseBehavior(
+      closeWhenOpened: true,
+      child: ReOrderableStateChangerWidget(
+        key: const ValueKey('reorderable-state-changer-widget'),
+      ),
+    );
+  }
+}
+
+///
+/// REORDERABLESTATECHANGER CLASS: IT REPLACE THE LIST BY USER PREFERENCES
+///
+
+class ReOrderableStateChangerWidget extends StatelessWidget {
+  const ReOrderableStateChangerWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ReorderableListView.builder(
+      footer: const SizedBox(height: 10),
+      clipBehavior: Clip.none,
+      key: const ValueKey('reorderable-listview'),
+      padding: const EdgeInsets.symmetric(horizontal: 10),
+      itemCount: 20,
+      onReorder: (oldIndex, newIndex) {},
+      proxyDecorator: (child, index, animation) {
+        return ProxyDecorateWidget(index: index);
+      },
+      buildDefaultDragHandles: false,
+      itemBuilder: (context, index) {
+        return HomeSlidableWidget(index: index, key: ValueKey(index));
+      },
+    );
+  }
+}
+
+
+///
+/// PROXYDECORATEWIDGET CLASS: IT DECORATE EACH CARD WHEN THE USER DRAG THE CARD
+///
+
+class ProxyDecorateWidget extends StatelessWidget {
+  final int index;
+  const ProxyDecorateWidget({super.key, required this.index});
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      key: const ValueKey('proxy-decorate-widget'),
+      color: Colors.transparent,
+      elevation: 2,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadiusGeometry.circular(6),
+        side: const BorderSide(color: Colors.white12, width: 1.3),
+      ),
+      child: HomeTodoCardWidget(index: index),
     );
   }
 }

@@ -16,18 +16,22 @@ class HomeCategoryHeader extends StatelessWidget
     return PreferredSize(
       key: const ValueKey('home-category-header-category-holder'),
       preferredSize: preferredSize,
-      child: const SafeArea(
-        key: ValueKey('home-category-header-safe-area'),
-        child: Row(
-          key: ValueKey('home-category-header-row'),
-          children: [
-            HomeCategoryHeaderChipList(
-              key: ValueKey('home-category-header-chip-list'),
-            ),
-            HomeCategoryHeaderAddIcon(
-              key: ValueKey('home-category-header-add-icon'),
-            ),
-          ],
+
+      child: SafeArea(
+        key: const ValueKey('home-category-header-safe-area'),
+        child: Container(
+          color: Theme.of(context).colorScheme.surface,
+          child: const Row(
+            key: ValueKey('home-category-header-row'),
+            children: [
+              HomeCategoryHeaderChipList(
+                key: ValueKey('home-category-header-chip-list'),
+              ),
+              HomeCategoryHeaderAddIcon(
+                key: ValueKey('home-category-header-add-icon'),
+              ),
+            ],
+          ),
         ),
       ),
     );

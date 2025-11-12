@@ -9,6 +9,7 @@ class LightColors {
   static Color shadowColor = const Color(0xFFDCDCDC);
   static Color popMenuColor =  const Color.fromARGB(255, 239, 239, 239);
   static Color textColor = const Color(0xFF000000);
+  static Color errorColor = const Color(0xFFFC7F76);
 }
 
 class DarkColors {
@@ -19,4 +20,5 @@ class DarkColors {
   static Color shadowColor = const Color(0xFF1A1A1A);
   static Color popMenuColor =  const Color(0xFF212121);
   static Color textColor = const Color(0xFFFFFFFF);
+  static Color errorColor = const Color(0xFFBC473E);
 }
