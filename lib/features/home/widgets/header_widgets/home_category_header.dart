@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todoapp/controller/category_controller/bloc/home_bloc_bloc.dart';
+import 'package:todoapp/controller/category_controller/data/model/category_model.dart';
+import 'package:todoapp/controller/todo_controller/bloc/todo_bloc.dart';
 import 'package:todoapp/features/home/widgets/header_widgets/home_category_bottomsheet.dart';
 import 'package:todoapp/features/home/widgets/header_widgets/home_choice_chip.dart';
 
@@ -117,16 +119,21 @@ class HomeCategoryHeaderList extends StatelessWidget {
             addAutomaticKeepAlives: true,
             clipBehavior: Clip.hardEdge,
             addRepaintBoundaries: true,
-            itemBuilder: (context, index) => HomeChoiceChip(
-              isSelected:
-                  state.selectedCategories.id == state.categories[index].id,
-              categoryModel: state.categories[index],
-              onSelected: () {
-                context.read<HomeBloc>().add(
-                  SelectCategoryEvent(categoryModel: state.categories[index]),
-                );
-              },
-            ),
+            itemBuilder: (context, index) {
+              CategoryModel categoryModel = state.categories[index];
+              return HomeChoiceChip(
+                isSelected: state.selectedCategories.id == categoryModel.id,
+                categoryModel: categoryModel,
+                onSelected: () {
+                  context.read<HomeBloc>().add(
+                    SelectCategoryEvent(categoryModel: categoryModel),
+                  );
+                  context.read<TodoBloc>().add(
+                    FilterTodoEvent(categoryId: categoryModel.id),
+                  );
+                },
+              );
+            },
             scrollDirection: Axis.horizontal,
             itemCount: state.categories.length,
           );

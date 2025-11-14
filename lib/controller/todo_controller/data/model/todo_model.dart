@@ -1,5 +1,5 @@
 class TodoModel {
-  final String id;
+  final int id;
   final String title;
   final String description;
   final int categoryId;
@@ -21,11 +21,11 @@ class TodoModel {
     return TodoModel(
       id: json['id'],
       title: json['title'],
-      description: json['description'],
-      categoryId: json['categoryId'],
+      description: json['description'] ?? '',
+      categoryId: json['categoryId'] ?? 0,
       isDone: (json['isDone'] as int) == 1,
       createdAt: json['createdAt'],
-      closedAt: json['closedAt'],
+      closedAt: json['closedAt'] ?? '',
     );
   }
 }

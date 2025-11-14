@@ -8,3 +8,6 @@
  * create menu bar to indicate upcoming screens
 
  * want to create seprate bloc for fetching data and adding datas
+
+
+ avatar_glow: ^3.0.1

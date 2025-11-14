@@ -1,4 +1,4 @@
-enum ErrorType { formateException, typeErrorException , dataEmptyException }
+enum ErrorType { formateException, typeErrorException , dataEmptyException , someThingWentException }
 
 class ErrorHandelingService {
   final ErrorType errorType;

@@ -14,7 +14,7 @@ class AppTheme {
       surface: LightColors.secondaryBackgroundColor,
       tertiary: LightColors.popMenuColor,
       brightness: Brightness.light,
-      error: LightColors.errorColor
+      error: LightColors.errorColor,
     ),
 
     textTheme: CustomTextTheme.baseTextTheme.apply(
@@ -34,7 +34,8 @@ class AppTheme {
         color: LightColors.textColor,
         style: BorderStyle.solid,
       ),
-      splashRadius: 0.4,
+      checkColor: WidgetStatePropertyAll(LightColors.secondaryTextColor),
+      splashRadius: 2,
     ),
 
     chipTheme: ChipThemeData(
@@ -73,8 +74,10 @@ class AppTheme {
       surface: DarkColors.secondaryBackgroundColor,
       tertiary: DarkColors.popMenuColor,
       brightness: Brightness.dark,
-      error: DarkColors.errorColor
+      error: DarkColors.errorColor,
     ),
+
+    
 
     textTheme: CustomTextTheme.baseTextTheme.apply(
       bodyColor: DarkColors.textColor,
@@ -94,7 +97,8 @@ class AppTheme {
         color: DarkColors.textColor,
         style: BorderStyle.solid,
       ),
-      splashRadius: 0.4,
+      checkColor: WidgetStatePropertyAll(DarkColors.textColor),
+      splashRadius: 2,
     ),
 
     chipTheme: ChipThemeData(

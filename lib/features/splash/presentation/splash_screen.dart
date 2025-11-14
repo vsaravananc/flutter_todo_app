@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:todoapp/controller/todo_controller/bloc/todo_bloc.dart';
 import 'package:todoapp/core/route/routes.dart';
 import 'package:todoapp/controller/category_controller/bloc/home_bloc_bloc.dart';
 import 'package:todoapp/features/splash/widget/splash_animation_widget.dart';
@@ -23,6 +24,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     SystemChannels.textInput.invokeMethod('TextInput.hide');
     context.read<HomeBloc>().add(LoadCategoryEvent());
+    context.read<TodoBloc>().add(GetAllTodoEvent());
     changeTheme();
     super.initState();
   }

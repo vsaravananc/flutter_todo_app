@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:todoapp/controller/todo_controller/bloc/todo_bloc.dart';
+import 'package:todoapp/controller/todo_controller/data/model/todo_model.dart';
+import 'package:todoapp/core/images/images.dart';
+import 'package:todoapp/core/themes/colors.dart';
 import 'package:todoapp/features/home/widgets/body_widgets/home_slidable_widget.dart';
 import 'package:todoapp/features/home/widgets/body_widgets/home_todo_card.dart';
 
@@ -87,24 +92,37 @@ class ReOrderableStateChangerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ReorderableListView.builder(
-      footer: const SizedBox(height: 10),
-      clipBehavior: Clip.none,
-      key: const ValueKey('reorderable-listview'),
-      padding: const EdgeInsets.symmetric(horizontal: 10),
-      itemCount: 20,
-      onReorder: (oldIndex, newIndex) {},
-      proxyDecorator: (child, index, animation) {
-        return ProxyDecorateWidget(index: index);
+    return BlocConsumer<TodoBloc, TodoState>(
+      builder: (c, todos) {
+        if (todos is ErrorTodo) {
+          return Center(
+            child: Text(
+              todos.message,
+              style: Theme.of(context).textTheme.bodyMedium,
+              key: const ValueKey('reorderable-state-changer-widget-text'),
+            ),
+          );
+        } else {
+          return AnimatedSwitcher(
+            duration: const Duration(milliseconds: 450),
+            switchInCurve: Curves.easeInOut,
+            switchOutCurve: Curves.easeInOut,
+            transitionBuilder: (child, animation) {
+              return FadeTransition(
+                opacity: animation,
+                child: ScaleTransition(scale: animation, child: child),
+              );
+            },
+            child: (todos is TodoStateWithList && todos.todoList.isNotEmpty)
+                ? ReorderableStateCahgeWidget(todos: todos)
+                : const EmptListWidget(),
+          );
+        }
       },
-      buildDefaultDragHandles: false,
-      itemBuilder: (context, index) {
-        return HomeSlidableWidget(index: index, key: ValueKey(index));
-      },
+      listener: (c, state) {},
     );
   }
 }
-
 
 ///
 /// PROXYDECORATEWIDGET CLASS: IT DECORATE EACH CARD WHEN THE USER DRAG THE CARD
@@ -112,7 +130,12 @@ class ReOrderableStateChangerWidget extends StatelessWidget {
 
 class ProxyDecorateWidget extends StatelessWidget {
   final int index;
-  const ProxyDecorateWidget({super.key, required this.index});
+  final TodoModel todoModel;
+  const ProxyDecorateWidget({
+    super.key,
+    required this.index,
+    required this.todoModel,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -124,7 +147,75 @@ class ProxyDecorateWidget extends StatelessWidget {
         borderRadius: BorderRadiusGeometry.circular(6),
         side: const BorderSide(color: Colors.white12, width: 1.3),
       ),
-      child: HomeTodoCardWidget(index: index),
+      child: HomeTodoCardWidget(index: index, todo: todoModel),
+    );
+  }
+}
+
+///
+/// REORDERABLESTATECHANGERWIDGET CLASS: IT REPLACE THE LIST BY USER PREFERENCES
+///
+
+class ReorderableStateCahgeWidget extends StatelessWidget {
+  final TodoStateWithList todos;
+  const ReorderableStateCahgeWidget({super.key, required this.todos});
+
+  @override
+  Widget build(BuildContext context) {
+    return ReorderableListView.builder(
+      physics: const ClampingScrollPhysics(),
+      footer: const SizedBox(height: 10),
+      clipBehavior: Clip.none,
+      key: const ValueKey('reorderable-listview'),
+      padding: const EdgeInsets.symmetric(horizontal: 10),
+      itemCount: todos.todoList.length,
+      onReorder: (oldIndex, newIndex) {},
+      proxyDecorator: (child, index, animation) {
+        return ProxyDecorateWidget(
+          index: index,
+          todoModel: todos.todoList[index],
+        );
+      },
+      buildDefaultDragHandles: false,
+      itemBuilder: (context, index) {
+        return HomeSlidableWidget(
+          todo: todos.todoList[index],
+          index: index,
+          key: ValueKey(index),
+        );
+      },
+    );
+  }
+}
+
+///
+/// EMPTYLISTWIDGET CLASS: IF THE LIST IS EMPTY SHOW THIS WIDGET
+///
+
+class EmptListWidget extends StatelessWidget {
+  const EmptListWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    bool isDark = Theme.of(context).brightness == Brightness.dark;
+    return Center(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        spacing: 20,
+        children: [
+          Image.asset(
+            Images.noTask,
+            height: 150,
+            width: 150,
+            color: isDark ? DarkColors.textColor : LightColors.textColor,
+          ),
+          Text(
+            "No task in this Category\n Click + to create your task.",
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.titleMedium,
+          ),
+        ],
+      ),
     );
   }
 }

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:todoapp/controller/todo_controller/bloc/todo_bloc.dart';
+import 'package:todoapp/controller/todo_controller/data/use_case/todo_data.dart';
+import 'package:todoapp/controller/todo_controller/domain/todo_domain.dart';
 import 'package:todoapp/core/route/routes.dart';
 import 'package:todoapp/core/themes/theme.dart';
 import 'package:todoapp/database/create_db.dart';
@@ -37,6 +40,8 @@ class DependencyInjection {
     LoadCategoryDomain loadCategoryDomain = LoadCategoryDomain(
       loadCategoryData: LoadCategoryData(database: database),
     );
+
+    FetchAllTodoData fetchAllTodoData = FetchAllTodoData(database: database);
     return MultiBlocProvider(
       providers: [
         BlocProvider<HomeBloc>(
@@ -46,6 +51,21 @@ class DependencyInjection {
             addCategory: AddCategoryDomain(
               insertData: AddCategoryData(database: database),
               loadCategory: loadCategoryDomain,
+            ),
+          ),
+        ),
+        BlocProvider(
+          create: (_) => TodoBloc(
+            readAllListOfTodos: FetchAllTodoDomain(
+              fetchAllTodo: fetchAllTodoData,
+            ),
+
+            updateTodo: UpdateTodoDoDomain(
+              updateTodo: UpdateTodoData(database: database),
+            ),
+
+            fetchTodoList: FetchFilterTodoDomain(
+              fetchAllTodo: fetchAllTodoData,
             ),
           ),
         ),

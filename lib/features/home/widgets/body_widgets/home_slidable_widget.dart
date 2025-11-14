@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:todoapp/controller/todo_controller/data/model/todo_model.dart';
 import 'package:todoapp/core/themes/colors.dart';
 import 'package:todoapp/features/home/widgets/body_widgets/home_todo_card.dart';
 
 class HomeSlidableWidget extends StatelessWidget {
+  final TodoModel todo;
   final int index;
-  const HomeSlidableWidget({super.key, required this.index});
+  const HomeSlidableWidget({super.key, required this.todo, required this.index});
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +35,7 @@ class HomeSlidableWidget extends StatelessWidget {
           ],
         ),
         child: HomeTodoCardWidget(
+          todo: todo,
           index: index,
           key: const ValueKey('home-todo-card-widget-holder'),
         ),

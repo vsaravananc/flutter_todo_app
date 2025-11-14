@@ -44,7 +44,9 @@ class HomeChoiceChip extends StatelessWidget {
                   context,
                 ).textTheme.labelLarge?.copyWith(color: DarkColors.textColor)
               : Theme.of(context).textTheme.labelLarge?.copyWith(
-                  color: isDark ? LightColors.textColor : DarkColors.textColor,
+                  color: isDark
+                      ? DarkColors.secondaryTextColor
+                      : LightColors.secondaryTextColor,
                 ),
         ),
       ),
