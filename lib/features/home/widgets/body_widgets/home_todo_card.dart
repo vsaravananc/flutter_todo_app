@@ -19,7 +19,7 @@ class HomeTodoCardWidget extends StatelessWidget {
       index: index,
       key: ValueKey('reorderable-delayed-drag-start-listener$index'),
       child: Container(
-        key: UniqueKey(),
+        key: ValueKey('todo-item-${todo.id}'),
         decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.tertiary,
           borderRadius: BorderRadius.circular(6),
@@ -55,7 +55,8 @@ class CheckBoxHomeTodoCardWidget extends StatelessWidget {
   const CheckBoxHomeTodoCardWidget({
     super.key,
     required this.isChecked,
-    required this.id, required this.categoryId,
+    required this.id,
+    required this.categoryId,
   });
 
   @override
@@ -64,6 +65,7 @@ class CheckBoxHomeTodoCardWidget extends StatelessWidget {
       key: ValueKey('checkbox-home-todo-card-widget-checkbox-$isChecked'),
       value: isChecked,
       onChanged: (value) {
+        debugPrint("value: $value");
         Map<String, dynamic> data = BuilderService().markIsDone(value!).build;
         context.read<TodoBloc>().add(
           UpdateTodoEvent(todo: data, todoId: id, categoryId: categoryId),
@@ -94,4 +96,3 @@ class TitleHomeTodoCardWidget extends StatelessWidget {
     );
   }
 }
-

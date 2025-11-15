@@ -26,3 +26,4 @@ class UpdateTodoEvent extends TodoEvent {
     required this.categoryId,
   });
 }
+

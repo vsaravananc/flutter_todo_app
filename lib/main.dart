@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:todoapp/controller/select_category_cubit/selectcategory_cubit.dart';
 import 'package:todoapp/controller/todo_controller/bloc/todo_bloc.dart';
 import 'package:todoapp/controller/todo_controller/data/use_case/todo_data.dart';
 import 'package:todoapp/controller/todo_controller/domain/todo_domain.dart';
@@ -54,7 +55,7 @@ class DependencyInjection {
             ),
           ),
         ),
-        BlocProvider(
+        BlocProvider<TodoBloc>(
           create: (_) => TodoBloc(
             readAllListOfTodos: FetchAllTodoDomain(
               fetchAllTodo: fetchAllTodoData,
@@ -67,8 +68,12 @@ class DependencyInjection {
             fetchTodoList: FetchFilterTodoDomain(
               fetchAllTodo: fetchAllTodoData,
             ),
+            insertTodo: AddTodoDomain(
+              insertTodo: AddTodoData(database: database),
+            ),
           ),
         ),
+        BlocProvider<SelectcategoryCubit>(create: (_) => SelectcategoryCubit()),
       ],
       child: child,
     );

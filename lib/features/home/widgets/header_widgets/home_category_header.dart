@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todoapp/controller/category_controller/bloc/home_bloc_bloc.dart';
 import 'package:todoapp/controller/category_controller/data/model/category_model.dart';
+import 'package:todoapp/controller/select_category_cubit/selectcategory_cubit.dart';
 import 'package:todoapp/controller/todo_controller/bloc/todo_bloc.dart';
 import 'package:todoapp/features/home/widgets/header_widgets/home_category_bottomsheet.dart';
 import 'package:todoapp/features/home/widgets/header_widgets/home_choice_chip.dart';
@@ -128,6 +129,9 @@ class HomeCategoryHeaderList extends StatelessWidget {
                   context.read<HomeBloc>().add(
                     SelectCategoryEvent(categoryModel: categoryModel),
                   );
+                  context.read<SelectcategoryCubit>().selectCategory(
+                    categoryModel,
+                  );
                   context.read<TodoBloc>().add(
                     FilterTodoEvent(categoryId: categoryModel.id),
                   );
@@ -158,7 +162,7 @@ class HomeCategoryHeaderAddIcon extends StatelessWidget {
       onPressed: () {
         showModalBottomSheet(
           barrierColor: Theme.of(context).colorScheme.surface.withValues(
-            alpha: Theme.of(context).brightness == Brightness.dark ? 0.8 : 0.4,
+            alpha: Theme.of(context).brightness == Brightness.dark ? 0.6 : 0.4,
           ),
           context: context,
           builder: (c) {

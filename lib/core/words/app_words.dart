@@ -13,4 +13,5 @@ class AppWords {
   ];
 
   static const String categoryHintText = 'Enter category name';
+  static const String inputNewTaskHere = 'Input new task here';
 }

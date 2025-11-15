@@ -13,13 +13,17 @@ abstract class WriteTodoData implements TodoData {
   Future<bool> trigger(int todoId, Map<String, dynamic> data);
 }
 
+abstract class InsertTodoData<R, M> implements TodoData {
+  Future<R> trigger(M data);
+}
+
 class FetchAllTodoData extends ReadListOfTodoData<List<TodoModel>> {
   final Database database;
   FetchAllTodoData({required this.database});
   @override
   Future<List<TodoModel>> trigger(int? categoryId) async {
     try {
-      if (categoryId != null) {
+      if (categoryId != null && categoryId != 1) {
         final List<Map<String, dynamic>> result = await database.query(
           'todos',
           where: 'categoryId = ?',
@@ -71,6 +75,19 @@ class UpdateTodoData extends WriteTodoData {
   }
 }
 
+class AddTodoData extends InsertTodoData<bool, Map<String, dynamic>> {
+  final Database database;
+  AddTodoData({required this.database});
+  @override
+  Future<bool> trigger(Map<String, dynamic> data) async {
+    try {
+      await database.insert('todos', data);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+}
 
 List<TodoModel> _listOfTodoModel(List<Map<String, dynamic>> data) {
   return data.map((e) => TodoModel.fromJson(json: e)).toList();

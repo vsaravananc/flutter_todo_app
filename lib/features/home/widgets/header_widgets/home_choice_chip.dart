@@ -36,18 +36,24 @@ class HomeChoiceChip extends StatelessWidget {
               : Theme.of(context).colorScheme.secondary,
           borderRadius: BorderRadius.circular(50),
         ),
-        child: Text(
-          key: const ValueKey('home-choice-chip-text'),
-          categoryModel.name,
-          style: isSelected
-              ? Theme.of(
-                  context,
-                ).textTheme.labelLarge?.copyWith(color: DarkColors.textColor)
-              : Theme.of(context).textTheme.labelLarge?.copyWith(
-                  color: isDark
-                      ? DarkColors.secondaryTextColor
-                      : LightColors.secondaryTextColor,
-                ),
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(minWidth: 15, maxWidth: 90),
+          child: Text(
+            key: const ValueKey('home-choice-chip-text'),
+            categoryModel.name,
+            style: isSelected
+                ? Theme.of(
+                    context,
+                  ).textTheme.labelLarge?.copyWith(color: DarkColors.textColor)
+                : Theme.of(context).textTheme.labelLarge?.copyWith(
+                    color: isDark
+                        ? DarkColors.secondaryTextColor
+                        : LightColors.secondaryTextColor,
+                  ),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            textAlign: TextAlign.center,
+          ),
         ),
       ),
     );
