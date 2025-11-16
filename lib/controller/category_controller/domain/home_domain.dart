@@ -24,9 +24,21 @@ class LoadCategoryDomain extends HomeDomain<LoadCategoryEvent> {
   ) async {
     try {
       final List<CategoryModel> value = await loadCategoryData.getData();
-      emit(
-        LoadedCategoryState(categories: value, selectedCategories: value.first),
-      );
+      if (currentState is LoadedCategoryState) {
+        emit(
+          LoadedCategoryState(
+            categories: value,
+            selectedCategories: currentState.selectedCategories,
+          ),
+        );
+      } else {
+        emit(
+          LoadedCategoryState(
+            categories: value,
+            selectedCategories: value.first,
+          ),
+        );
+      }
     } on ErrorHandelingService catch (e) {
       emit(
         ErrorOnLoadingCategoryState(errorType: e.errorType, message: e.message),

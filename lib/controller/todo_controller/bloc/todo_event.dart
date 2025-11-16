@@ -13,7 +13,12 @@ class FilterTodoEvent extends TodoEvent {
 class AddTodoEvent extends TodoEvent {
   final String todo;
   final int categoryId;
-  AddTodoEvent({required this.todo, required this.categoryId});
+  final int filterBy;
+  AddTodoEvent({
+    required this.todo,
+    required this.categoryId,
+    required this.filterBy,
+  });
 }
 
 class UpdateTodoEvent extends TodoEvent {
@@ -26,4 +31,3 @@ class UpdateTodoEvent extends TodoEvent {
     required this.categoryId,
   });
 }
-

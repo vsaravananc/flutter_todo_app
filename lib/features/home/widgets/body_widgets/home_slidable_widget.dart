@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:todoapp/controller/category_controller/bloc/home_bloc_bloc.dart';
 import 'package:todoapp/controller/todo_controller/data/model/todo_model.dart';
 import 'package:todoapp/core/themes/colors.dart';
 import 'package:todoapp/features/home/widgets/body_widgets/home_todo_card.dart';
@@ -27,7 +29,10 @@ class HomeSlidableWidget extends StatelessWidget {
             ),
 
             SlideableActionWidget(
-              onPressed: (_) {},
+              onPressed: (_) {
+                int id = (context.read<HomeBloc>().state as LoadedCategoryState).selectedCategories.id;
+                debugPrint("Id: $id");
+              },
               label: "Delete",
               icon: Icons.delete,
               backgroundColor: Theme.of(context).colorScheme.error,

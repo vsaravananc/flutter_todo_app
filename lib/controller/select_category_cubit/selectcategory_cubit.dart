@@ -10,5 +10,9 @@ class SelectcategoryCubit extends Cubit<CategoryModel> {
   void selectCategory(CategoryModel categoryModel) {
     emit(categoryModel);
   }
+
+  int id(){
+    return state.id;
+  }
   
 }

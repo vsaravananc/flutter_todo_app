@@ -26,7 +26,7 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
     
     on<UpdateTodoEvent>((event, emit) async {
       bool isUpdated = await updateTodo.trigger(event, emit, state);
-      _fetchTheList(isUpdated, event.categoryId);
+      _fetchTheList(isUpdated, event.categoryId );
     });
    
     on<FilterTodoEvent>(
@@ -35,16 +35,14 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
    
     on<AddTodoEvent>((event, emit) async {
       bool isUpdated = await insertTodo.trigger(event, emit, state);
-      _fetchTheList(isUpdated, event.categoryId);
+      _fetchTheList(isUpdated, event.filterBy);
     });
   }
 
   void _fetchTheList(bool isUpdated, int categoryId) {
-    debugPrint(isUpdated.toString());
-    debugPrint(categoryId.toString());
-    if (isUpdated && categoryId == 0) {
+    if (isUpdated && categoryId == 1) {
       add(GetAllTodoEvent());
-    } else if (isUpdated && categoryId != 0) {
+    } else if (isUpdated && categoryId != 1) {
       add(FilterTodoEvent(categoryId: categoryId));
     }
   }
