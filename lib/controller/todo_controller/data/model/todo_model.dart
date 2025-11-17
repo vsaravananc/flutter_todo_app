@@ -6,6 +6,7 @@ class TodoModel {
   final bool isDone;
   final String createdAt;
   final String closedAt;
+  final int sortOrder;
 
   const TodoModel({
     required this.id,
@@ -15,6 +16,7 @@ class TodoModel {
     required this.isDone,
     required this.createdAt,
     required this.closedAt,
+    required this.sortOrder,
   });
 
   factory TodoModel.fromJson({required Map<String,dynamic> json}){
@@ -26,6 +28,7 @@ class TodoModel {
       isDone: (json['isDone'] as int) == 1,
       createdAt: json['createdAt'],
       closedAt: json['closedAt'] ?? '',
+      sortOrder: json['sortOrder'] ?? 0
     );
   }
 }

@@ -13,11 +13,15 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
   final ReadListDomain fetchTodoList;
   final UpdateTodoDoDomain updateTodo;
   final AddTodoDomain insertTodo;
+  final DeleteTodoDomain deleteTodoDomain;
+  final ReOrderTodoDomain reOrderTodoDomain;
   TodoBloc({
     required this.readAllListOfTodos,
     required this.updateTodo,
     required this.fetchTodoList,
     required this.insertTodo,
+    required this.deleteTodoDomain,
+    required this.reOrderTodoDomain,
   }) : super(TodoInitial(todoList: const [])) { 
 
     on<GetAllTodoEvent>(
@@ -37,6 +41,14 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
       bool isUpdated = await insertTodo.trigger(event, emit, state);
       _fetchTheList(isUpdated, event.filterBy);
     });
+   
+    on<DeleteTodoEvent>((event,emit) async{
+      bool isDeleted = await deleteTodoDomain.trigger(event, emit, state);
+      _fetchTheList(isDeleted, event.filterBy);
+    });
+  
+    on<ReOrderTodoList>((event,emit) => reOrderTodoDomain.trigger(event, emit, state));
+
   }
 
   void _fetchTheList(bool isUpdated, int categoryId) {
@@ -46,4 +58,5 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
       add(FilterTodoEvent(categoryId: categoryId));
     }
   }
+
 }

@@ -51,6 +51,7 @@ class CreateDataBase {
         categoryId INTEGER,
         createdAt TEXT NOT NULL,
         closedAt TEXT,
+        sortOrder INTEGER DEFAULT 0,
         FOREIGN KEY (categoryId) REFERENCES categories(id)
       );
     ''');

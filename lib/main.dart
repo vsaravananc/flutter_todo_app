@@ -68,8 +68,17 @@ class DependencyInjection {
             fetchTodoList: FetchFilterTodoDomain(
               fetchAllTodo: fetchAllTodoData,
             ),
+
             insertTodo: AddTodoDomain(
               insertTodo: AddTodoData(database: database),
+            ),
+
+            deleteTodoDomain: DeleteTodoDomain(
+              deleteTodo: DeleteTodoData(database: database),
+            ),
+
+            reOrderTodoDomain: ReOrderTodoDomain(
+              reOrder: ReOrderTodoData(database: database),
             ),
           ),
         ),

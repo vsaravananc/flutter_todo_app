@@ -91,3 +91,21 @@ class AddTodoDomain extends InsertTodoDomain<AddTodoEvent, bool> {
     }
   }
 }
+
+class DeleteTodoDomain extends WriteTodoDomain<DeleteTodoEvent> {
+  final DeleteTodoData deleteTodo;
+  DeleteTodoDomain({required this.deleteTodo});
+  @override
+  Future<bool> trigger(event, Emitter<TodoState> emit, TodoState state) async {
+    return await deleteTodo.trigger(event.todoId, null);
+  }
+}
+
+class  ReOrderTodoDomain extends InsertTodoDomain<ReOrderTodoList,void>{
+  final ReOrderTodoData reOrder;
+  ReOrderTodoDomain({required this.reOrder});
+  @override
+  Future<void> trigger(ReOrderTodoList event, Emitter<TodoState> emit, TodoState state) async{
+    await reOrder.trigger(0, event.todoList);
+  }
+}

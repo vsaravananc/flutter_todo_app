@@ -25,7 +25,7 @@ class HomeChoiceChip extends StatelessWidget {
       onTap: onSelected,
       child: AnimatedContainer(
         alignment: Alignment.center,
-        duration: const Duration(milliseconds: 500),
+        duration: const Duration(milliseconds: 300),
         curve: Curves.linear,
         key: const ValueKey('home-choice-chip'),
         margin: const EdgeInsets.only(left: 10, bottom: 10, top: 10),

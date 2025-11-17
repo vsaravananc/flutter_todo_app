@@ -31,3 +31,17 @@ class UpdateTodoEvent extends TodoEvent {
     required this.categoryId,
   });
 }
+
+class DeleteTodoEvent extends TodoEvent {
+  final int todoId;
+  final int filterBy;
+  DeleteTodoEvent({
+    required this.todoId,
+    required this.filterBy,
+  });
+}
+
+class ReOrderTodoList extends TodoEvent{
+  final List<TodoModel> todoList;
+  ReOrderTodoList({required this.todoList});
+}

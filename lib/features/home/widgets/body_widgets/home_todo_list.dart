@@ -104,7 +104,7 @@ class ReOrderableStateChangerWidget extends StatelessWidget {
           );
         } else {
           return AnimatedSwitcher(
-            duration: const Duration(milliseconds: 450),
+            duration: const Duration(milliseconds: 300),
             switchInCurve: Curves.easeInOut,
             switchOutCurve: Curves.easeInOut,
             transitionBuilder: (child, animation) {
@@ -169,11 +169,20 @@ class ReorderableStateCahgeWidget extends StatelessWidget {
       key: const ValueKey('reorderable-listview'),
       padding: const EdgeInsets.symmetric(horizontal: 10),
       itemCount: todos.todoList.length,
-      onReorder: (oldIndex, newIndex) {},
+      onReorder: (oldIndex, newIndex) {
+        if (oldIndex < newIndex) newIndex -= 1;
+        final item = todos.todoList.removeAt(oldIndex);
+        todos.todoList.insert(newIndex, item);
+        context.read<TodoBloc>().add(ReOrderTodoList(todoList: todos.todoList));
+      },
       proxyDecorator: (child, index, animation) {
-        return ProxyDecorateWidget(
-          index: index,
-          todoModel: todos.todoList[index],
+        return Transform.rotate(
+          angle: 0.025,
+          child: ProxyDecorateWidget(
+            index: index,
+            todoModel: todos.todoList[index],
+            key: ValueKey(index),
+          ),
         );
       },
       buildDefaultDragHandles: false,
