@@ -65,7 +65,7 @@ class CreateDataBase {
       "All",
       "Work",
       "Personal",
-      "Other",
+      "Shopping",
     ];
 
     for (final category in defaultcategoriesList) {

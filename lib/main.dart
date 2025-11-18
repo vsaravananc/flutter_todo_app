@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todoapp/controller/select_category_cubit/selectcategory_cubit.dart';
@@ -37,6 +39,10 @@ class MyApp extends StatelessWidget {
 class DependencyInjection {
   static Future<Widget> injectBloc(Widget child) async {
     WidgetsFlutterBinding.ensureInitialized();
+    FlutterError.onError = (FlutterErrorDetails details) {
+      FlutterError.presentError(details);
+      debugPrint("Errors: ${details.exception}");
+    };
     final database = await CreateDataBase().database;
     LoadCategoryDomain loadCategoryDomain = LoadCategoryDomain(
       loadCategoryData: LoadCategoryData(database: database),
@@ -84,7 +90,9 @@ class DependencyInjection {
         ),
         BlocProvider<SelectcategoryCubit>(create: (_) => SelectcategoryCubit()),
       ],
-      child: child,
+      child: runZonedGuarded(() => child, (object, stack) {
+        debugPrint("Error: $object");
+      })!,
     );
   }
 }

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -10,7 +11,11 @@ import 'package:todoapp/features/home/widgets/body_widgets/home_todo_card.dart';
 class HomeSlidableWidget extends StatelessWidget {
   final TodoModel todo;
   final int index;
-  const HomeSlidableWidget({super.key, required this.todo, required this.index});
+  const HomeSlidableWidget({
+    super.key,
+    required this.todo,
+    required this.index,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +28,38 @@ class HomeSlidableWidget extends StatelessWidget {
           extentRatio: 0.4,
           children: [
             SlideableActionWidget(
-              onPressed: (_) {},
+              onPressed: (_) {
+                showGeneralDialog(
+                  context: context,
+                  fullscreenDialog: false,
+                  barrierDismissible: true,
+                  barrierLabel: 'n',
+                  barrierColor: Colors.black.withOpacity(0.4),
+                  transitionDuration: const Duration(milliseconds: 400),
+                  transitionBuilder:
+                      (context, animation, secondaryAnimation, child) {
+                        return FadeTransition(
+                          opacity: animation,
+                          child: ScaleTransition(
+                            scale: animation,
+                            child: child,
+                          ),
+                        );
+                      },
+                  pageBuilder: (c, a, sa) {
+                    return Center(
+                      child: Container(
+                        height: 250,
+                        width: 300,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                    );
+                  },
+                );
+              },
               label: "Edit",
               icon: Icons.edit,
               backgroundColor: Theme.of(context).colorScheme.secondary,
@@ -31,7 +67,9 @@ class HomeSlidableWidget extends StatelessWidget {
 
             SlideableActionWidget(
               onPressed: (_) {
-                int id = (context.read<HomeBloc>().state as LoadedCategoryState).selectedCategories.id;
+                int id = (context.read<HomeBloc>().state as LoadedCategoryState)
+                    .selectedCategories
+                    .id;
                 debugPrint("Id: $id");
                 context.read<TodoBloc>().add(
                   DeleteTodoEvent(todoId: todo.id, filterBy: id),

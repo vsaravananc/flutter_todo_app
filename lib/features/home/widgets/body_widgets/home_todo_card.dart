@@ -23,9 +23,9 @@ class HomeTodoCardWidget extends StatelessWidget {
         key: ValueKey('todo-item-${todo.id}'),
         decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.tertiary,
-          borderRadius: BorderRadius.circular(6),
+          borderRadius: BorderRadius.circular(8),
         ),
-        height: 50,
+        height: 55,
         child: Row(
           children: [
             CheckBoxHomeTodoCardWidget(

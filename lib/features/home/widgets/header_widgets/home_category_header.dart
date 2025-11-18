@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todoapp/controller/category_controller/bloc/home_bloc_bloc.dart';
@@ -160,13 +161,14 @@ class HomeCategoryHeaderAddIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return IconButton(
       onPressed: () {
-        showModalBottomSheet(
-          barrierColor: Theme.of(context).colorScheme.surface.withValues(
-            alpha: Theme.of(context).brightness == Brightness.dark ? 0.6 : 0.4,
-          ),
+        showCupertinoSheet(
           context: context,
+          enableDrag: true,
           builder: (c) {
-            return const HomeCategoryBottomsheet();
+            return const Wrap(
+              runAlignment: WrapAlignment.end,
+              children: [HomeCategoryBottomsheet()],
+            );
           },
         );
       },

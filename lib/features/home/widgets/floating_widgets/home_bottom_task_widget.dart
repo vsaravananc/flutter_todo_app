@@ -65,7 +65,9 @@ class _TextHolderWidgetState extends State<TextHolderWidget> {
 
   void _insetTodo() {
     if (_textEditingController.text.trim().isEmpty) return;
-    int categoryId = (context.read<HomeBloc>().state as LoadedCategoryState).selectedCategories.id;
+    int categoryId = (context.read<HomeBloc>().state as LoadedCategoryState)
+        .selectedCategories
+        .id;
     context.read<TodoBloc>().add(
       AddTodoEvent(
         todo: _textEditingController.text.trim(),
@@ -79,21 +81,24 @@ class _TextHolderWidgetState extends State<TextHolderWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      controller: _textEditingController,
-      autofocus: true,
-      onSubmitted: (_) => _insetTodo(),
-      decoration: InputDecoration(
-        fillColor: Theme.of(context).colorScheme.surface,
-        filled: true,
-        hintText: AppWords.inputNewTaskHere,
-        suffixIcon: IconButton(
-          onPressed: _insetTodo,
-          icon: const Icon(Icons.add),
-        ),
-        border: OutlineInputBorder(
-          borderSide: BorderSide.none,
-          borderRadius: BorderRadius.circular(20),
+    return Material(
+      borderRadius: BorderRadius.circular(20),
+      child: TextField(
+        controller: _textEditingController,
+        autofocus: true,
+        onSubmitted: (_) => _insetTodo(),
+        decoration: InputDecoration(
+          fillColor: Theme.of(context).colorScheme.surface,
+          filled: true,
+          hintText: AppWords.inputNewTaskHere,
+          suffixIcon: IconButton(
+            onPressed: _insetTodo,
+            icon: const Icon(Icons.add),
+          ),
+          border: OutlineInputBorder(
+            borderSide: BorderSide.none,
+            borderRadius: BorderRadius.circular(20),
+          ),
         ),
       ),
     );

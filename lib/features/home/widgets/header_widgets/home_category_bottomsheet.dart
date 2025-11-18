@@ -17,13 +17,21 @@ class HomeCategoryBottomsheet extends StatelessWidget {
       key: const ValueKey('home-category-bottomsheet-container'),
       height: 75,
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-      margin: EdgeInsets.only(bottom: MediaQuery.viewInsetsOf(context).bottom),
+      margin: EdgeInsets.only(
+        bottom: MediaQuery.viewInsetsOf(context).bottom,
+      ),
+      decoration: BoxDecoration(
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
+        color: Theme.of(context).scaffoldBackgroundColor,
+      ),
       width: double.infinity,
       child: const Row(
         children: [
           HomeCategoryTextfield(),
           HomeCategoryVerticalMore(
-            key: ValueKey('home-category-bottomsheet-kick-start-overlay-entry'),
+            key: ValueKey(
+              'home-category-bottomsheet-kick-start-overlay-entry',
+            ),
           ),
         ],
       ),

@@ -1,4 +1,5 @@
 import 'package:avatar_glow/avatar_glow.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:todoapp/core/themes/colors.dart';
 import 'package:todoapp/features/home/widgets/floating_widgets/home_bottom_task_widget.dart';
@@ -26,14 +27,12 @@ class HomeFloatingWidget extends StatelessWidget {
           splashColor: Theme.of(context).colorScheme.secondary,
           elevation: 2,
           shape: const CircleBorder(),
-          onPressed: () => showModalBottomSheet(
-            barrierColor: Theme.of(context).colorScheme.surface.withValues(
-              alpha: Theme.of(context).brightness == Brightness.dark
-                  ? 0.6
-                  : 0.4,
-            ),
+          onPressed: () => showCupertinoSheet(
             context: context,
-            builder: (_) => const TaskTodoBottomsheet(),
+            builder: (_) => const Wrap(
+              runAlignment: WrapAlignment.end,
+              children: [TaskTodoBottomsheet()],
+            ),
           ),
           child: Icon(
             Icons.add,
@@ -61,6 +60,10 @@ class TaskTodoBottomsheet extends StatelessWidget {
       padding: const EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 5),
       margin: EdgeInsets.only(bottom: MediaQuery.viewInsetsOf(context).bottom),
       width: double.infinity,
+      decoration: BoxDecoration(
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
+        color: Theme.of(context).scaffoldBackgroundColor,
+      ),
       child: const HomeFloatingBottomTaskWidget(
         key: ValueKey('home-floating-bottom-task-widget-layer'),
       ),
