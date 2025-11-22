@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:todoapp/controller/select_category_cubit/busines_login/data.dart';
+import 'package:todoapp/controller/select_category_cubit/busines_login/domain.dart';
 import 'package:todoapp/controller/select_category_cubit/selectcategory_cubit.dart';
 import 'package:todoapp/controller/todo_controller/bloc/todo_bloc.dart';
 import 'package:todoapp/controller/todo_controller/data/use_case/todo_data.dart';
@@ -48,6 +50,10 @@ class DependencyInjection {
       loadCategoryData: LoadCategoryData(database: database),
     );
 
+    final SelectCategoryReadDomain fetchCategory = SelectCategoryReadDomain(
+      fetchData: SelectCategoryReadData(database: database),
+    );
+
     FetchAllTodoData fetchAllTodoData = FetchAllTodoData(database: database);
     return MultiBlocProvider(
       providers: [
@@ -88,7 +94,9 @@ class DependencyInjection {
             ),
           ),
         ),
-        BlocProvider<SelectcategoryCubit>(create: (_) => SelectcategoryCubit()),
+        BlocProvider<SelectcategoryCubit>(
+          create: (_) => SelectcategoryCubit(fetchData: fetchCategory),
+        ),
       ],
       child: runZonedGuarded(() => child, (object, stack) {
         debugPrint("Error: $object");

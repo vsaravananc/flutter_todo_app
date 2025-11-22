@@ -11,6 +11,7 @@ class LightColors {
   static Color textColor = const Color(0xFF000000);
   static Color secondaryTextColor =  const Color(0xFFFFFFFF);
   static Color errorColor = const Color(0xFFFC7F76);
+  static Color hintColor = const  Color(0xDE9E9E9E);
 }
 
 class DarkColors {
@@ -23,4 +24,5 @@ class DarkColors {
   static Color textColor = const Color(0xFFFFFFFF);
   static Color errorColor = const Color(0xFFBC473E);
    static Color secondaryTextColor =  const Color(0xFF000000);
+  static Color hintColor = const Color.fromARGB(181, 205, 205, 205);
 }

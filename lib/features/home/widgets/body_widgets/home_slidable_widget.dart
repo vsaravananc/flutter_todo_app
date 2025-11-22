@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:todoapp/controller/category_controller/bloc/home_bloc_bloc.dart';
+import 'package:todoapp/controller/select_category_cubit/selectcategory_cubit.dart';
 import 'package:todoapp/controller/todo_controller/bloc/todo_bloc.dart';
 import 'package:todoapp/controller/todo_controller/data/model/todo_model.dart';
 import 'package:todoapp/core/themes/colors.dart';
+import 'package:todoapp/features/edit/presentation/todo_edit_screen.dart';
 import 'package:todoapp/features/home/widgets/body_widgets/home_todo_card.dart';
 
 class HomeSlidableWidget extends StatelessWidget {
@@ -29,35 +31,16 @@ class HomeSlidableWidget extends StatelessWidget {
           children: [
             SlideableActionWidget(
               onPressed: (_) {
-                showGeneralDialog(
+                /// ?? WANT TO IMPLEMENT HERE CARTEGORY SELECTION PROCESS
+                context.read<SelectcategoryCubit>().selectCategoryById(
+                  todo.categoryId,
+                );
+                showCupertinoSheet(
                   context: context,
-                  fullscreenDialog: false,
-                  barrierDismissible: true,
-                  barrierLabel: 'n',
-                  barrierColor: Colors.black.withOpacity(0.4),
-                  transitionDuration: const Duration(milliseconds: 400),
-                  transitionBuilder:
-                      (context, animation, secondaryAnimation, child) {
-                        return FadeTransition(
-                          opacity: animation,
-                          child: ScaleTransition(
-                            scale: animation,
-                            child: child,
-                          ),
-                        );
-                      },
-                  pageBuilder: (c, a, sa) {
-                    return Center(
-                      child: Container(
-                        height: 250,
-                        width: 300,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                    );
-                  },
+                  builder: (_) => TodoEditScreen(
+                    todoModel: todo,
+                    key: const ValueKey("todo_edit_screen_holder"),
+                  ),
                 );
               },
               label: "Edit",
