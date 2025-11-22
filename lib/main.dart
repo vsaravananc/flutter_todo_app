@@ -8,6 +8,9 @@ import 'package:todoapp/controller/select_category_cubit/selectcategory_cubit.da
 import 'package:todoapp/controller/todo_controller/bloc/todo_bloc.dart';
 import 'package:todoapp/controller/todo_controller/data/use_case/todo_data.dart';
 import 'package:todoapp/controller/todo_controller/domain/todo_domain.dart';
+import 'package:todoapp/controller/todo_edit_logic/controller/todo_edit_controller.dart';
+import 'package:todoapp/controller/todo_edit_logic/data/todo_edit_data.dart';
+import 'package:todoapp/controller/todo_edit_logic/domain/todo_edit_domain.dart';
 import 'package:todoapp/core/route/routes.dart';
 import 'package:todoapp/core/themes/theme.dart';
 import 'package:todoapp/database/create_db.dart';
@@ -52,6 +55,12 @@ class DependencyInjection {
 
     final SelectCategoryReadDomain fetchCategory = SelectCategoryReadDomain(
       fetchData: SelectCategoryReadData(database: database),
+    );
+
+    TodoEditController.init(
+      todoEditDomain: TodoEditDomain(
+        todoEditData: TodoEditData(database: database),
+      ),
     );
 
     FetchAllTodoData fetchAllTodoData = FetchAllTodoData(database: database);
