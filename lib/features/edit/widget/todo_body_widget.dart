@@ -6,27 +6,47 @@ import 'package:todoapp/controller/select_category_cubit/selectcategory_cubit.da
 import 'package:todoapp/controller/todo_controller/data/model/todo_model.dart';
 import 'package:todoapp/core/extension/category_model_extension.dart';
 import 'package:todoapp/core/themes/colors.dart';
+import 'package:todoapp/widgets/custom_pop_widget.dart';
 
-class TodoBodyWidget extends StatelessWidget {
+class TodoBodyWidget extends StatefulWidget {
   final TodoModel todoModel;
   const TodoBodyWidget({super.key, required this.todoModel});
+
+  @override
+  State<TodoBodyWidget> createState() => _TodoBodyWidgetState();
+}
+
+class _TodoBodyWidgetState extends State<TodoBodyWidget> {
+  late TextEditingController _textEditingController;
+
+  @override
+  void initState() {
+    _textEditingController = TextEditingController(
+      text: widget.todoModel.title,
+    );
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _textEditingController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsetsGeometry.symmetric(horizontal: 8),
-      child: BlocBuilder<SelectcategoryCubit, CategoryModel>(
-        builder: (c, s) => Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const CustomDropDownWidget(),
-            const SizedBox(height: 10),
-            CustomTextWidgetHolder(
-              todoModel: todoModel,
-              controller: TextEditingController(text: todoModel.title),
-            ),
-          ],
-        ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const CustomDropDownWidget(),
+          const SizedBox(height: 10),
+          CustomTextWidgetHolder(
+            todoModel: widget.todoModel,
+            controller: _textEditingController,
+          ),
+        ],
       ),
     );
   }
@@ -124,12 +144,7 @@ class CustomDropDownOptionWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Positioned.fill(
-          child: GestureDetector(
-            onTap: toggle,
-            behavior: HitTestBehavior.translucent,
-          ),
-        ),
+        CustomPopWidget(onTap: toggle),
         Positioned(
           width: 140,
           child: CompositedTransformFollower(

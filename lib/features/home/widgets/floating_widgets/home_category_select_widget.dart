@@ -5,6 +5,7 @@ import 'package:todoapp/controller/category_controller/data/model/category_model
 import 'package:todoapp/controller/select_category_cubit/selectcategory_cubit.dart';
 import 'package:todoapp/core/extension/category_model_extension.dart';
 import 'package:todoapp/core/themes/colors.dart';
+import 'package:todoapp/widgets/custom_pop_widget.dart';
 
 class HomeCategorySelectWidget extends StatefulWidget {
   const HomeCategorySelectWidget({super.key});
@@ -98,12 +99,7 @@ class OverLayFlowerWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Positioned.fill(
-          child: GestureDetector(
-            behavior: HitTestBehavior.translucent,
-            onTap: onTap,
-          ),
-        ),
+        CustomPopWidget(onTap: onTap),
         Positioned(
           width: 170,
           child: CompositedTransformFollower(

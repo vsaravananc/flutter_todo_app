@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:todoapp/core/themes/colors.dart';
 import 'package:todoapp/core/words/app_words.dart';
 import 'package:todoapp/controller/category_controller/bloc/home_bloc_bloc.dart';
 

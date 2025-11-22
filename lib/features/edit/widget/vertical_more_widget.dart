@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todoapp/widgets/custom_pop_widget.dart';
 
 class VerticalMoreWidget extends StatefulWidget {
   const VerticalMoreWidget({super.key});
@@ -59,12 +60,7 @@ class VerticalMoreOptionWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Positioned.fill(
-          child: GestureDetector(
-            onTap: onTap,
-            behavior: HitTestBehavior.translucent,
-          ),
-        ),
+        CustomPopWidget(onTap: onTap),
         Positioned(
           width: 120,
           child: CompositedTransformFollower(

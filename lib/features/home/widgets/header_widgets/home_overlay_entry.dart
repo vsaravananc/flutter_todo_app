@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todoapp/core/dimensions/dimension.dart';
+import 'package:todoapp/widgets/custom_pop_widget.dart';
 
 ///
 /// FILE_PURPOSE: HOME CATEGORY OVERLAY ENTRY
@@ -85,13 +86,7 @@ class HomecategoryBottomOverLayEntry extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Positioned.fill(
-          child: GestureDetector(
-            onTap: onTap,
-            behavior: HitTestBehavior.translucent,
-            child: const SizedBox.expand(),
-          ),
-        ),
+        CustomPopWidget(onTap: onTap),
         Positioned(
           bottom: 0,
           right: 0,
