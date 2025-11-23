@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:todoapp/controller/select_category_cubit/selectcategory_cubit.dart';
+import 'package:todoapp/controller/category_controller/bloc/home_bloc_bloc.dart';
 import 'package:todoapp/controller/todo_controller/bloc/todo_bloc.dart';
 import 'package:todoapp/controller/todo_controller/data/model/todo_model.dart';
 import 'package:todoapp/core/services/builder_service.dart';
@@ -66,8 +66,9 @@ class CheckBoxHomeTodoCardWidget extends StatelessWidget {
       key: ValueKey('checkbox-home-todo-card-widget-checkbox-$isChecked'),
       value: isChecked,
       onChanged: (value) {
-        debugPrint("value: $value");
-        int categoryId = context.read<SelectcategoryCubit>().id();
+        int categoryId = (context.read<HomeBloc>().state as LoadedCategoryState)
+            .selectedCategories
+            .id;
         Map<String, dynamic> data = BuilderService().markIsDone(value!).build;
         context.read<TodoBloc>().add(
           UpdateTodoEvent(todo: data, todoId: id, categoryId: categoryId),

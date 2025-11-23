@@ -16,7 +16,10 @@ class TodoEditScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const TodoEditHeader(key: ValueKey("todo_header_holder")),
+              TodoEditHeader(
+                key: const ValueKey("todo_header_holder"),
+                todo: todoModel,
+              ),
               TodoBodyWidget(
                 key: const ValueKey("todo_body_widget_holder"),
                 todoModel: todoModel,
@@ -35,7 +38,8 @@ class TodoEditScreen extends StatelessWidget {
 ///
 
 class TodoEditHeader extends StatelessWidget {
-  const TodoEditHeader({super.key});
+  final TodoModel todo;
+  const TodoEditHeader({super.key, required this.todo});
 
   @override
   Widget build(BuildContext context) {
@@ -48,9 +52,9 @@ class TodoEditHeader extends StatelessWidget {
             onPressed: () => Navigator.of(context).pop(),
             icon: const Icon(Icons.keyboard_arrow_down_rounded),
           ),
-
-          const VerticalMoreWidget(
-            key: ValueKey('todo_edit_header_vertical_more'),
+          VerticalMoreWidget(
+            todo: todo,
+            key: const ValueKey('todo_edit_header_vertical_more'),
           ),
         ],
       ),
