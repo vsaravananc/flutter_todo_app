@@ -107,7 +107,21 @@ class VerticalMoreOptionWidget extends StatelessWidget {
                       onTap();
                     },
                   ),
-                  OpptionCardWidget(title: "Delete", onTap: () {}),
+                  OpptionCardWidget(
+                    title: "Delete",
+                    onTap: () {
+                      int id =
+                          (context.read<HomeBloc>().state
+                                  as LoadedCategoryState)
+                              .selectedCategories
+                              .id;
+                      debugPrint("Id: $id");
+                      context.read<TodoBloc>().add(
+                        DeleteTodoEvent(todoId: todo.id, filterBy: id),
+                      );
+                      onTap();
+                    },
+                  ),
                 ],
               ),
             ),

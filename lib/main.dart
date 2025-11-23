@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todoapp/controller/select_category_cubit/busines_login/data.dart';
@@ -20,16 +21,37 @@ import 'package:todoapp/controller/category_controller/domain/home_domain.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
 Future<void> main() async {
-  await SentryFlutter.init(
-    (options) {
-      options.dsn =
-          'https://ff712c9132906bd2a58b5f5acbb456e1@o4510412501876736.ingest.de.sentry.io/4510412506792016';
-      options.tracesSampleRate = 1.0;
-    },
-    appRunner: () async => runApp(
-      SentryWidget(child: await DependencyInjection.injectBloc(const MyApp())),
-    ),
-  );
+  if (kReleaseMode == true) {
+    await SentryFlutter.init(
+      (options) {
+        options.dsn =
+            'https://ff712c9132906bd2a58b5f5acbb456e1@o4510412501876736.ingest.de.sentry.io/4510412506792016';
+        options.tracesSampleRate = 1.0;
+      },
+      appRunner: () {
+        FlutterError.onError = (FlutterErrorDetails details) {
+          Sentry.captureException(
+            details.exception,
+            stackTrace: details.stack,
+            message: SentryMessage("UI issues"),
+          );
+        };
+        runZonedGuarded(
+          () async =>
+              runApp(await DependencyInjection.injectBloc(const MyApp())),
+          (e, s) {
+            Sentry.captureException(
+              e,
+              stackTrace: s,
+              message: SentryMessage("Zoned issues"),
+            );
+          },
+        );
+      },
+    );
+  } else {
+    runApp(await DependencyInjection.injectBloc(const MyApp()));
+  }
 }
 
 class MyApp extends StatelessWidget {
