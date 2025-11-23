@@ -2,7 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:todoapp/controller/select_category_cubit/busines_login/data.dart';
 import 'package:todoapp/controller/select_category_cubit/busines_login/domain.dart';
 import 'package:todoapp/controller/select_category_cubit/selectcategory_cubit.dart';
@@ -13,6 +15,7 @@ import 'package:todoapp/controller/todo_edit_logic/controller/todo_edit_controll
 import 'package:todoapp/controller/todo_edit_logic/data/todo_edit_data.dart';
 import 'package:todoapp/controller/todo_edit_logic/domain/todo_edit_domain.dart';
 import 'package:todoapp/core/route/routes.dart';
+import 'package:todoapp/core/services/shared_preference_services.dart';
 import 'package:todoapp/core/themes/theme.dart';
 import 'package:todoapp/database/create_db.dart';
 import 'package:todoapp/controller/category_controller/bloc/home_bloc_bloc.dart';
@@ -76,6 +79,10 @@ class MyApp extends StatelessWidget {
 class DependencyInjection {
   static Future<Widget> injectBloc(Widget child) async {
     WidgetsFlutterBinding.ensureInitialized();
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+    SharedPreferenceServices.init(
+      preferences: await SharedPreferences.getInstance(),
+    );
     FlutterError.onError = (FlutterErrorDetails details) {
       FlutterError.presentError(details);
       debugPrint("Errors: ${details.exception}");

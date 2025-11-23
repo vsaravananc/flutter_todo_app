@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "275643301370",
+    "project_id": "publish-the-apps",
+    "storage_bucket": "publish-the-apps.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:275643301370:android:d80014e75b38c34b6e3843",
+        "android_client_info": {
+          "package_name": "com.sara.todomaker"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCzlyBL9CiTbWr1dytbX6CnGQYAK9Hm0XM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

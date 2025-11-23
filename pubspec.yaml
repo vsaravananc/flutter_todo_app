@@ -39,7 +39,7 @@ dependencies:
   bloc: ^9.1.0
   flutter_bloc: ^9.1.1
   flutter_intro: ^3.4.0
-  flex_color_picker: ^3.7.2
+  flex_color_picker: ^3.7.2 
   path: ^1.9.1
   flutter_slidable: ^4.0.3
   avatar_glow: ^3.0.1

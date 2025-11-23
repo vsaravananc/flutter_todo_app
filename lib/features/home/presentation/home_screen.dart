@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todoapp/core/services/shared_preference_services.dart';
 import 'package:todoapp/features/home/widgets/body_widgets/home_todo_list.dart';
 import 'package:todoapp/features/home/widgets/floating_widgets/home_floating_widget.dart';
 import 'package:todoapp/features/home/widgets/header_widgets/home_category_header.dart';
@@ -50,6 +51,10 @@ class _HomeScreenAnimationState extends State<HomeScreenAnimation>
   @override
   void initState() {
     super.initState();
+    SharedPreferenceServices.instance.setValue(
+      key: "IS_LOGED_IN",
+      value: true
+    );
     animationController = AnimationController(
       animationBehavior: AnimationBehavior.normal,
       vsync: this,

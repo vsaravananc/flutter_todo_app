@@ -89,6 +89,7 @@ class _WelcomeAcutalScreenState extends State<WelcomeAcutalScreen> {
     return Stack(
       children: [
         PageView.builder(
+          allowImplicitScrolling: true,
           physics: const ClampingScrollPhysics(),
           clipBehavior: Clip.none,
           key: const ValueKey('page-view'),

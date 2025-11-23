@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todoapp/controller/todo_controller/bloc/todo_bloc.dart';
 import 'package:todoapp/core/route/routes.dart';
 import 'package:todoapp/controller/category_controller/bloc/home_bloc_bloc.dart';
+import 'package:todoapp/core/services/shared_preference_services.dart';
 import 'package:todoapp/features/splash/widget/splash_animation_widget.dart';
 import 'package:todoapp/features/splash/widget/splash_logo_widget.dart';
 
@@ -30,14 +31,16 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Future<void> changeTheme() async {
+    bool isLoged = SharedPreferenceServices.instance.isLogedIN(
+      key: "IS_LOGED_IN",
+    );
     await Future.delayed(const Duration(seconds: 2));
     isDark.value = !isDark.value;
     await Future.delayed(const Duration(seconds: 1));
     if (mounted) {
       Navigator.pushNamedAndRemoveUntil(
         context,
-        // Routes.homeScreen,
-        Routes.welcomScreen,
+        isLoged ? Routes.homeScreen : Routes.welcomScreen,
         (_) => true,
       );
     }
