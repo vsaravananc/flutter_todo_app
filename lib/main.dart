@@ -17,9 +17,19 @@ import 'package:todoapp/database/create_db.dart';
 import 'package:todoapp/controller/category_controller/bloc/home_bloc_bloc.dart';
 import 'package:todoapp/controller/category_controller/data/use_case/home_data.dart';
 import 'package:todoapp/controller/category_controller/domain/home_domain.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 
 Future<void> main() async {
-  runApp(await DependencyInjection.injectBloc(const MyApp()));
+  await SentryFlutter.init(
+    (options) {
+      options.dsn =
+          'https://ff712c9132906bd2a58b5f5acbb456e1@o4510412501876736.ingest.de.sentry.io/4510412506792016';
+      options.tracesSampleRate = 1.0;
+    },
+    appRunner: () async => runApp(
+      SentryWidget(child: await DependencyInjection.injectBloc(const MyApp())),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
