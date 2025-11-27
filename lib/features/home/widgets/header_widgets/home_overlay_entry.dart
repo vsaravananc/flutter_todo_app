@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:todoapp/core/dimensions/dimension.dart';
+import 'package:todoapp/features/edit/presentation/category_edit_screen.dart';
 import 'package:todoapp/widgets/custom_pop_widget.dart';
 
 ///
@@ -106,8 +108,12 @@ class HomecategoryBottomOverLayEntry extends StatelessWidget {
                       "home-category-overlay-entry-menu-edit",
                     ),
                     onTap: () {
-                      debugPrint("Edit clicked");
                       onTap!();
+                      Navigator.pop(context);
+                      showCupertinoSheet(
+                        context: context,
+                        builder: (_) => const CategoryEditScreen(),
+                      );
                     },
                     data: "Manage Category",
                     icon: Icons.settings,

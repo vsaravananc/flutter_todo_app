@@ -51,10 +51,7 @@ class _HomeScreenAnimationState extends State<HomeScreenAnimation>
   @override
   void initState() {
     super.initState();
-    SharedPreferenceServices.instance.setValue(
-      key: "IS_LOGED_IN",
-      value: true
-    );
+    SharedPreferenceServices.instance.setValue(key: "IS_LOGED_IN", value: true);
     animationController = AnimationController(
       animationBehavior: AnimationBehavior.normal,
       vsync: this,
