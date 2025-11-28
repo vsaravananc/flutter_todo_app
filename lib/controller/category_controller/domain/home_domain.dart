@@ -78,3 +78,45 @@ class AddCategoryDomain extends HomeDomain<AddCategoryEvent> {
     }
   }
 }
+
+class EditCategoryDomain extends HomeDomain<UpdateCategoryEvent> {
+  final EditCategoryData editCategoryData;
+  final HomeDomain loadCategory;
+
+  EditCategoryDomain({required this.editCategoryData, required this.loadCategory});
+  @override
+  Future<void> triggerEvent(
+    UpdateCategoryEvent event,
+    Emitter<HomeBlocState> emit,
+    HomeBlocState currentState,
+  ) async {
+    final isUpdated = await editCategoryData.editData(id: event.categoryId, category: event.categoryName);
+    if(isUpdated){
+      loadCategory.triggerEvent(LoadCategoryEvent(), emit, currentState);
+    }
+  }
+}
+
+class DeleteCategoryDomain extends HomeDomain<DeleteCategoryEvent> {
+  final DeleteCategoryData deleteCategoryData;
+  final HomeDomain loadedCategory;
+  DeleteCategoryDomain({
+    required this.deleteCategoryData,
+    required this.loadedCategory,
+  });
+  @override
+  Future<void> triggerEvent(
+    DeleteCategoryEvent event,
+    Emitter<HomeBlocState> emit,
+    HomeBlocState currentState,
+  ) async {
+    bool isDeleted = await deleteCategoryData.deleteData(id: event.categoryId);
+    if (isDeleted) {
+      await loadedCategory.triggerEvent(
+        LoadCategoryEvent(),
+        emit,
+        currentState,
+      );
+    }
+  }
+}

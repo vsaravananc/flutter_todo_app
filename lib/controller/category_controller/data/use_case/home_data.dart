@@ -9,8 +9,16 @@ abstract class HomeData<T> implements HomeDataReadeWrite {
   Future<T> getData();
 }
 
-abstract class HomeDataInsert<T> implements HomeDataReadeWrite{
-   Future<T> insertData({required String name});
+abstract class HomeDataInsert<T> implements HomeDataReadeWrite {
+  Future<T> insertData({required String name});
+}
+
+abstract class DeleteData<T> implements HomeDataReadeWrite {
+  Future<T> deleteData({required int id});
+}
+
+abstract class EditData<R> implements HomeDataReadeWrite {
+  Future<R> editData({required int id, required String category});
 }
 
 ///
@@ -75,16 +83,47 @@ class AddCategoryData extends HomeDataInsert<bool> {
   final Database database;
 
   AddCategoryData({required this.database});
- 
-  
+
   @override
-  Future<bool> insertData({required String name}) async{
-     try {
+  Future<bool> insertData({required String name}) async {
+    try {
       await database.insert('categories', {'name': name});
       return true;
     } catch (e) {
       return false;
     }
   }
-  
+}
+
+class DeleteCategoryData extends DeleteData<bool> {
+  final Database database;
+  DeleteCategoryData({required this.database});
+  @override
+  Future<bool> deleteData({required int id}) async {
+    try {
+      final result = await database.delete(
+        'categories',
+        where: 'id = ?',
+        whereArgs: [id],
+      );
+      return result == 1;
+    } catch (e) {
+      return false;
+    }
+  }
+}
+
+class EditCategoryData extends EditData<bool> {
+  final Database database;
+  EditCategoryData({required this.database});
+  @override
+  Future<bool> editData({required int id, required String category}) async {
+    int result = await database.update(
+      'categories',
+      {'name': category},
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+    return result == 1;
+  }
 }

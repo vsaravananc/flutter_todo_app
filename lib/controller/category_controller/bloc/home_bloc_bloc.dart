@@ -11,14 +11,30 @@ class HomeBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
   final HomeDomain selecteCategory;
   final HomeDomain loadCategory;
   final HomeDomain addCategory;
-  HomeBloc( {required this.selecteCategory, required this.loadCategory,required this.addCategory})
-    : super(InitialCategoryState()) {
+  final HomeDomain deletedCategory;
+  final HomeDomain editCategory;
+  HomeBloc({
+    required this.selecteCategory,
+    required this.loadCategory,
+    required this.addCategory,
+    required this.deletedCategory,
+    required this.editCategory,
+  }) : super(InitialCategoryState()) {
     on<SelectCategoryEvent>(
       (event, emit) => selecteCategory.triggerEvent(event, emit, state),
     );
     on<LoadCategoryEvent>(
       (event, emit) => loadCategory.triggerEvent(event, emit, state),
     );
-    on<AddCategoryEvent>((event, emit) => addCategory.triggerEvent(event, emit, state));
+    on<AddCategoryEvent>(
+      (event, emit) => addCategory.triggerEvent(event, emit, state),
+    );
+
+    on<UpdateCategoryEvent>(
+      (event, emit) => editCategory.triggerEvent(event, emit, state),
+    );
+    on<DeleteCategoryEvent>(
+      (event, emit) => deletedCategory.triggerEvent(event, emit, state),
+    );
   }
 }

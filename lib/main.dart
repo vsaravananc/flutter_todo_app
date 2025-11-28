@@ -113,6 +113,14 @@ class DependencyInjection {
               insertData: AddCategoryData(database: database),
               loadCategory: loadCategoryDomain,
             ),
+            deletedCategory: DeleteCategoryDomain(
+              deleteCategoryData: DeleteCategoryData(database: database),
+              loadedCategory: loadCategoryDomain,
+            ),
+            editCategory: EditCategoryDomain(
+              editCategoryData: EditCategoryData(database: database),
+              loadCategory: loadCategoryDomain,
+            ),
           ),
         ),
         BlocProvider<TodoBloc>(
