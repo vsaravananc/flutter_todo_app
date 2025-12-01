@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todoapp/controller/category_controller/bloc/home_bloc_bloc.dart';
-import 'package:todoapp/features/edit/widget/category_edit_card.dart';
+import 'package:todoapp/features/edit/widget/category/card/category_edit_card.dart';
 
 class CategoryEditBody extends StatelessWidget {
   const CategoryEditBody({super.key});

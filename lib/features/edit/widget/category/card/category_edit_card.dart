@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todoapp/controller/category_controller/data/model/category_model.dart';
 import 'package:todoapp/core/extension/category_model_extension.dart';
-import 'package:todoapp/features/edit/widget/category_edit_overlay.dart';
+import 'package:todoapp/features/edit/widget/category/card/category_edit_overlay.dart';
 
 class CategoryEditCard extends StatelessWidget {
   final CategoryModel categoryModel;

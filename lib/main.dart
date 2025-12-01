@@ -66,7 +66,7 @@ class MyApp extends StatelessWidget {
       key: const ValueKey('material-app'),
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
-      themeMode: ThemeMode.system,
+      themeMode: ThemeMode.light,
       routes: Routes.routed,
       title: 'Todo-App',
       theme: AppTheme.lightTheme,

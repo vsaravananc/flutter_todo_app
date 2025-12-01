@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todoapp/controller/todo_controller/data/model/todo_model.dart';
-import 'package:todoapp/features/edit/widget/todo_body_widget.dart';
-import 'package:todoapp/features/edit/widget/vertical_more_widget.dart';
+import 'package:todoapp/features/edit/widget/todo/todo_body_widget.dart';
+import 'package:todoapp/features/edit/widget/category/card/vertical_more_widget.dart';
 
 class TodoEditScreen extends StatelessWidget {
   final TodoModel todoModel;

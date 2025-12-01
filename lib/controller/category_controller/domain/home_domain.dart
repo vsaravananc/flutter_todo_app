@@ -83,16 +83,22 @@ class EditCategoryDomain extends HomeDomain<UpdateCategoryEvent> {
   final EditCategoryData editCategoryData;
   final HomeDomain loadCategory;
 
-  EditCategoryDomain({required this.editCategoryData, required this.loadCategory});
+  EditCategoryDomain({
+    required this.editCategoryData,
+    required this.loadCategory,
+  });
   @override
   Future<void> triggerEvent(
     UpdateCategoryEvent event,
     Emitter<HomeBlocState> emit,
     HomeBlocState currentState,
   ) async {
-    final isUpdated = await editCategoryData.editData(id: event.categoryId, category: event.categoryName);
-    if(isUpdated){
-      loadCategory.triggerEvent(LoadCategoryEvent(), emit, currentState);
+    final isUpdated = await editCategoryData.editData(
+      id: event.categoryId,
+      category: event.categoryName,
+    );
+    if (isUpdated) {
+      await loadCategory.triggerEvent(LoadCategoryEvent(), emit, currentState);
     }
   }
 }

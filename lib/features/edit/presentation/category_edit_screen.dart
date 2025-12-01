@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:todoapp/features/edit/widget/category_body.dart';
-import 'package:todoapp/features/edit/widget/category_edit_header.dart';
+import 'package:todoapp/features/edit/widget/category/category_body.dart';
+import 'package:todoapp/features/edit/widget/category/category_edit_header.dart';
 
 class CategoryEditScreen extends StatelessWidget {
   const CategoryEditScreen({super.key});

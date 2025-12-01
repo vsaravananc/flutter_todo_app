@@ -95,7 +95,12 @@ class CategoryEditOverlayFlower extends StatelessWidget {
                     Expanded(
                       child: GestureDetector(
                         onTap: () {
-                          // context.read<HomeBloc>().add(event);
+                          toggle();
+                          showDialog(
+                            context: context,
+                            builder: (_) =>
+                                CategoryEditTitle(categoryModel: categoryModel),
+                          );
                         },
                         child: const SizedBox(
                           width: double.infinity,
@@ -123,6 +128,106 @@ class CategoryEditOverlayFlower extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+}
+
+class CategoryEditTitle extends StatefulWidget {
+  final CategoryModel categoryModel;
+  const CategoryEditTitle({super.key, required this.categoryModel});
+
+  @override
+  State<CategoryEditTitle> createState() => _CategoryEditTitleState();
+}
+
+class _CategoryEditTitleState extends State<CategoryEditTitle> {
+  late TextEditingController controller;
+  @override
+  void initState() {
+    controller = TextEditingController(text: widget.categoryModel.name);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+      child: Container(
+        height: 120,
+        padding: const EdgeInsets.all(8),
+        decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.tertiary,
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Column(
+          children: [
+            TextField(
+              key: const ValueKey('category-edittitle-widget'),
+              controller: controller,
+              autofocus: true,
+              decoration: InputDecoration(
+                fillColor: Theme.of(context).colorScheme.surface,
+                filled: true,
+                hintText: widget.categoryModel.name,
+                border: OutlineInputBorder(
+                  borderSide: BorderSide.none,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+              ),
+            ),
+            const Spacer(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                TextButton(
+                  style: const ButtonStyle(
+                    padding: WidgetStatePropertyAll(EdgeInsets.zero),
+                  ),
+                  key: const ValueKey('category-edit-title-button'),
+                  child: Text(
+                    'Cancel',
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                      fontWeight: FontWeight.w600,
+                      color: Theme.of(context).colorScheme.error,
+                    ),
+                  ),
+                  onPressed: () => Navigator.of(context).pop(),
+                ),
+                const SizedBox(width: 10),
+                TextButton(
+                  style: const ButtonStyle(
+                    padding: WidgetStatePropertyAll(EdgeInsets.zero),
+                  ),
+                  key: const ValueKey('category-edit-title-button-2'),
+                  child: Text(
+                    'Save',
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                      fontWeight: FontWeight.w600,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                  ),
+                  onPressed: () {
+                    context.read<HomeBloc>().add(
+                      UpdateCategoryEvent(
+                        categoryId: widget.categoryModel.id,
+                        categoryName: controller.text.trim(),
+                      ),
+                    );
+                    Navigator.pop(context);
+                  },
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
