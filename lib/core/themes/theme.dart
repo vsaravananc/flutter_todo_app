@@ -13,6 +13,7 @@ class AppTheme {
       secondary: LightColors.secondaryColor,
       surface: LightColors.secondaryBackgroundColor,
       tertiary: LightColors.popMenuColor,
+      onTertiary: LightColors.tertiaryBackgroundColor,
       brightness: Brightness.light,
       error: LightColors.errorColor,
     ),
@@ -23,7 +24,7 @@ class AppTheme {
     ),
 
     bottomSheetTheme: BottomSheetThemeData(
-      backgroundColor: LightColors.backgroundColor,
+      backgroundColor: LightColors.tertiaryBackgroundColor,
       shadowColor: LightColors.shadowColor,
       elevation: 0.5,
     ),
@@ -76,8 +77,6 @@ class AppTheme {
       brightness: Brightness.dark,
       error: DarkColors.errorColor,
     ),
-
-    
 
     textTheme: CustomTextTheme.baseTextTheme.apply(
       bodyColor: DarkColors.textColor,

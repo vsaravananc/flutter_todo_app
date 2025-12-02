@@ -97,6 +97,7 @@ class CategoryEditOverlayFlower extends StatelessWidget {
                         onTap: () {
                           toggle();
                           showDialog(
+                            
                             context: context,
                             builder: (_) =>
                                 CategoryEditTitle(categoryModel: categoryModel),
@@ -164,7 +165,7 @@ class _CategoryEditTitleState extends State<CategoryEditTitle> {
         padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.tertiary,
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(14),
         ),
         child: Column(
           children: [
@@ -173,12 +174,12 @@ class _CategoryEditTitleState extends State<CategoryEditTitle> {
               controller: controller,
               autofocus: true,
               decoration: InputDecoration(
-                fillColor: Theme.of(context).colorScheme.surface,
+                fillColor: Theme.of(context).scaffoldBackgroundColor,
                 filled: true,
                 hintText: widget.categoryModel.name,
                 border: OutlineInputBorder(
                   borderSide: BorderSide.none,
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: BorderRadius.circular(10),
                 ),
               ),
             ),

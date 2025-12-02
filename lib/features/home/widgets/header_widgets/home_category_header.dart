@@ -5,6 +5,7 @@ import 'package:todoapp/controller/category_controller/bloc/home_bloc_bloc.dart'
 import 'package:todoapp/controller/category_controller/data/model/category_model.dart';
 import 'package:todoapp/controller/select_category_cubit/selectcategory_cubit.dart';
 import 'package:todoapp/controller/todo_controller/bloc/todo_bloc.dart';
+import 'package:todoapp/core/platform/device_verion.dart';
 import 'package:todoapp/features/home/widgets/header_widgets/home_category_bottomsheet.dart';
 import 'package:todoapp/features/home/widgets/header_widgets/home_choice_chip.dart';
 
@@ -161,19 +162,33 @@ class HomeCategoryHeaderAddIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return IconButton(
       onPressed: () {
-        showCupertinoSheet(
-          context: context,
-          enableDrag: true,
-          builder: (c) {
-            return const Wrap(
-              runAlignment: WrapAlignment.end,
-              children: [HomeCategoryBottomsheet()],
-            );
-          },
-        );
+        triggerBottomSheet(context);
       },
       icon: const Icon(Icons.add),
       key: const ValueKey('home-category-header-icon-button'),
     );
+  }
+
+  void triggerBottomSheet(BuildContext context) {
+    if (DeviceProvider.of(context)) {
+      showModalBottomSheet(
+        context: context,
+        builder: (_) => const HomeCategoryBottomsheet(
+          key: const ValueKey("home_category_bottomsheet-android11"),
+        ),
+      );
+    } else {
+      showCupertinoSheet(
+        context: context,
+        builder: (_) => const Wrap(
+          runAlignment: WrapAlignment.end,
+          children: [
+            HomeCategoryBottomsheet(
+              key: const ValueKey("home_category_bottomsheet"),
+            ),
+          ],
+        ),
+      );
+    }
   }
 }

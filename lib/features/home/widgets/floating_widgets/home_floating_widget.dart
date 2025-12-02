@@ -1,6 +1,7 @@
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:todoapp/core/platform/device_verion.dart';
 import 'package:todoapp/core/themes/colors.dart';
 import 'package:todoapp/features/home/widgets/floating_widgets/home_bottom_task_widget.dart';
 
@@ -27,13 +28,9 @@ class HomeFloatingWidget extends StatelessWidget {
           splashColor: Theme.of(context).colorScheme.secondary,
           elevation: 2,
           shape: const CircleBorder(),
-          onPressed: () => showCupertinoSheet(
-            context: context,
-            builder: (_) => const Wrap(
-              runAlignment: WrapAlignment.end,
-              children: [TaskTodoBottomsheet()],
-            ),
-          ),
+          onPressed: () {
+            triggerBottomSheet(context);
+          },
           child: Icon(
             Icons.add,
             color: LightColors.secondaryTextColor,
@@ -42,6 +39,28 @@ class HomeFloatingWidget extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void triggerBottomSheet(BuildContext context) {
+    debugPrint("triggerBottomSheet :${DeviceProvider.of(context)}");
+    if (DeviceProvider.of(context)) {
+      showModalBottomSheet(
+        context: context,
+        builder: (_) => const TaskTodoBottomsheet(
+          key: const ValueKey("todo_edit_screen_holder-android11"),
+        ),
+      );
+    } else {
+      showCupertinoSheet(
+        context: context,
+        builder: (_) => const Wrap(
+          runAlignment: WrapAlignment.end,
+          children: [
+            TaskTodoBottomsheet(key: const ValueKey("todo_edit_screen_holder")),
+          ],
+        ),
+      );
+    }
   }
 }
 
@@ -62,7 +81,7 @@ class TaskTodoBottomsheet extends StatelessWidget {
       width: double.infinity,
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
-        color: Theme.of(context).scaffoldBackgroundColor,
+        color: Theme.of(context).colorScheme.onTertiary,
       ),
       child: const HomeFloatingBottomTaskWidget(
         key: ValueKey('home-floating-bottom-task-widget-layer'),

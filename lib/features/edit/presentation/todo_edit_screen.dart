@@ -10,6 +10,7 @@ class TodoEditScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
+      color: Theme.of(context).colorScheme.onTertiary,
       child: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 10),
@@ -26,6 +27,43 @@ class TodoEditScreen extends StatelessWidget {
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+///
+/// TODOEDITSCREEN CLASS: for android 11 below
+///
+class TodoEditScreenAndroid11 extends StatelessWidget {
+  final TodoModel todoModel;
+  final ScrollController controller;
+  const TodoEditScreenAndroid11({
+    super.key,
+    required this.todoModel,
+    required this.controller,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      padding: const EdgeInsets.all(0),
+      controller: controller,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 13,vertical: 10),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            TodoEditHeader(
+              key: const ValueKey("todo_header_holder-android11"),
+              todo: todoModel,
+            ),
+            TodoBodyWidget(
+              key: const ValueKey("todo_body_widget_holder-android11"),
+              todoModel: todoModel,
+            ),
+          ],
         ),
       ),
     );

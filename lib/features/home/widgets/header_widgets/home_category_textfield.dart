@@ -46,7 +46,7 @@ class _HomeCategoryTextfieldState extends State<HomeCategoryTextfield> {
           autofocus: true,
           onSubmitted: (_) => addCategory(),
           decoration: InputDecoration(
-            fillColor: Theme.of(context).colorScheme.surface,
+            fillColor: Theme.of(context).scaffoldBackgroundColor,
             filled: true,
             hintText: AppWords.categoryHintText,
             suffixIcon: IconButton(

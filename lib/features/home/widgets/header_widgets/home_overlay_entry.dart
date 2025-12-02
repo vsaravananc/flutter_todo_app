@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:todoapp/core/dimensions/dimension.dart';
+import 'package:todoapp/core/platform/device_verion.dart';
 import 'package:todoapp/features/edit/presentation/category_edit_screen.dart';
 import 'package:todoapp/widgets/custom_pop_widget.dart';
 
@@ -11,6 +12,7 @@ import 'package:todoapp/widgets/custom_pop_widget.dart';
 ///
 /// HOMECATEGORYVERTICALMORE CLASS: THIS CLASS WILL TRIGGER THE OVERLAY ENTRY AND MANAGE IT
 ///
+
 class HomeCategoryVerticalMore extends StatefulWidget {
   const HomeCategoryVerticalMore({super.key});
 
@@ -110,10 +112,7 @@ class HomecategoryBottomOverLayEntry extends StatelessWidget {
                     onTap: () {
                       onTap!();
                       Navigator.pop(context);
-                      showCupertinoSheet(
-                        context: context,
-                        builder: (_) => const CategoryEditScreen(),
-                      );
+                      triggerBottomSheet(context);
                     },
                     data: "Manage Category",
                     icon: Icons.settings,
@@ -125,6 +124,37 @@ class HomecategoryBottomOverLayEntry extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  void triggerBottomSheet(BuildContext context) {
+    if (DeviceProvider.of(context)) {
+      showModalBottomSheet(
+        context: context,
+        isScrollControlled: true,
+        builder: (_) => DraggableScrollableSheet(
+          initialChildSize: 0.9,
+          maxChildSize: 1,
+          minChildSize: 0.9,
+          expand: false,
+          builder: (_, controller) => CategoryEditScreenAndroid11(
+            controller: controller,
+            key: const ValueKey("category_edit_screen_holder-android11"),
+          ),
+        ),
+      );
+    } else {
+      showCupertinoSheet(
+        context: context,
+        builder: (_) => const Wrap(
+          runAlignment: WrapAlignment.end,
+          children: [
+            CategoryEditScreen(
+              key: const ValueKey("category_edit_screen_holder"),
+            ),
+          ],
+        ),
+      );
+    }
   }
 }
 

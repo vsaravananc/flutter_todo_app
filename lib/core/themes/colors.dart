@@ -6,6 +6,7 @@ class LightColors {
   static Color secondaryColor = const Color(0xFF76B6FA);
   static Color backgroundColor = const Color(0xFFFFFFFF);
   static Color secondaryBackgroundColor = const Color(0xFFF6F5F5);
+  static Color tertiaryBackgroundColor = const Color(0xFFF8F8FF);
   static Color shadowColor = const Color(0xFFDCDCDC);
   static Color popMenuColor =  const Color.fromARGB(255, 239, 239, 239);
   static Color textColor = const Color(0xFF000000);

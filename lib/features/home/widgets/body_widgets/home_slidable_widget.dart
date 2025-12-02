@@ -6,6 +6,7 @@ import 'package:todoapp/controller/category_controller/bloc/home_bloc_bloc.dart'
 import 'package:todoapp/controller/select_category_cubit/selectcategory_cubit.dart';
 import 'package:todoapp/controller/todo_controller/bloc/todo_bloc.dart';
 import 'package:todoapp/controller/todo_controller/data/model/todo_model.dart';
+import 'package:todoapp/core/platform/device_verion.dart';
 import 'package:todoapp/core/themes/colors.dart';
 import 'package:todoapp/features/edit/presentation/todo_edit_screen.dart';
 import 'package:todoapp/features/home/widgets/body_widgets/home_todo_card.dart';
@@ -35,13 +36,7 @@ class HomeSlidableWidget extends StatelessWidget {
                 context.read<SelectcategoryCubit>().selectCategoryById(
                   todo.categoryId,
                 );
-                showCupertinoSheet(
-                  context: context,
-                  builder: (_) => TodoEditScreen(
-                    todoModel: todo,
-                    key: const ValueKey("todo_edit_screen_holder"),
-                  ),
-                );
+                triggerBottomSheet(context);
               },
               label: "Edit",
               icon: Icons.edit,
@@ -71,6 +66,34 @@ class HomeSlidableWidget extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void triggerBottomSheet(BuildContext context) {
+    if (DeviceProvider.of(context)) {
+      showModalBottomSheet(
+        context: context,
+        isScrollControlled: true,
+        builder: (_) => DraggableScrollableSheet(
+          initialChildSize: 0.9,
+          maxChildSize: 1,
+          minChildSize: 0.9,
+          expand: false,
+          builder: (context, scrollController) => TodoEditScreenAndroid11(
+            controller: scrollController,
+            todoModel: todo,
+            key: const ValueKey("todo_edit_screen_holder-android11"),
+          ),
+        ),
+      );
+    } else {
+      showCupertinoSheet(
+        context: context,
+        builder: (_) => TodoEditScreen(
+          todoModel: todo,
+          key: const ValueKey("todo_edit_screen_holder"),
+        ),
+      );
+    }
   }
 }
 

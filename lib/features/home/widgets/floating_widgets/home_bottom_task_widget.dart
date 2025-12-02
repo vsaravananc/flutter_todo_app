@@ -88,7 +88,7 @@ class _TextHolderWidgetState extends State<TextHolderWidget> {
         autofocus: true,
         onSubmitted: (_) => _insetTodo(),
         decoration: InputDecoration(
-          fillColor: Theme.of(context).colorScheme.surface,
+          fillColor: Theme.of(context).scaffoldBackgroundColor,
           filled: true,
           hintText: AppWords.inputNewTaskHere,
           suffixIcon: IconButton(

@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -14,6 +15,7 @@ import 'package:todoapp/controller/todo_controller/domain/todo_domain.dart';
 import 'package:todoapp/controller/todo_edit_logic/controller/todo_edit_controller.dart';
 import 'package:todoapp/controller/todo_edit_logic/data/todo_edit_data.dart';
 import 'package:todoapp/controller/todo_edit_logic/domain/todo_edit_domain.dart';
+import 'package:todoapp/core/platform/device_verion.dart';
 import 'package:todoapp/core/route/routes.dart';
 import 'package:todoapp/core/services/shared_preference_services.dart';
 import 'package:todoapp/core/themes/theme.dart';
@@ -78,8 +80,10 @@ class MyApp extends StatelessWidget {
 
 class DependencyInjection {
   static Future<Widget> injectBloc(Widget child) async {
+    final DeviceInfoPlugin infoPlugin = DeviceInfoPlugin();
     WidgetsFlutterBinding.ensureInitialized();
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+    DeviceInfoImpl info = DeviceInfoImpl.init(deviceInfoPlugin: infoPlugin);
     SharedPreferenceServices.init(
       preferences: await SharedPreferences.getInstance(),
     );
@@ -103,6 +107,8 @@ class DependencyInjection {
     );
 
     FetchAllTodoData fetchAllTodoData = FetchAllTodoData(database: database);
+    ValueNotifier<bool> deviceInfo = ValueNotifier(false);
+    deviceInfo.value = await info.isAndroid11;
     return MultiBlocProvider(
       providers: [
         BlocProvider<HomeBloc>(
@@ -154,9 +160,12 @@ class DependencyInjection {
           create: (_) => SelectcategoryCubit(fetchData: fetchCategory),
         ),
       ],
-      child: runZonedGuarded(() => child, (object, stack) {
-        debugPrint("Error: $object");
-      })!,
+      child: runZonedGuarded(
+        () => DeviceProvider(notifier: deviceInfo, child: child),
+        (object, stack) {
+          debugPrint("Error: $object");
+        },
+      )!,
     );
   }
 }
