@@ -160,12 +160,7 @@ class DependencyInjection {
           create: (_) => SelectcategoryCubit(fetchData: fetchCategory),
         ),
       ],
-      child: runZonedGuarded(
-        () => DeviceProvider(notifier: deviceInfo, child: child),
-        (object, stack) {
-          debugPrint("Error: $object");
-        },
-      )!,
+      child: DeviceProvider(notifier: deviceInfo, child: child),
     );
   }
 }

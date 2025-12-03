@@ -1,8 +1,10 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todoapp/controller/category_controller/bloc/home_bloc_bloc.dart';
 import 'package:todoapp/controller/todo_controller/bloc/todo_bloc.dart';
 import 'package:todoapp/controller/todo_controller/data/model/todo_model.dart';
+import 'package:todoapp/core/images/images.dart';
 import 'package:todoapp/core/services/builder_service.dart';
 
 class HomeTodoCardWidget extends StatelessWidget {
@@ -49,7 +51,7 @@ class HomeTodoCardWidget extends StatelessWidget {
 /// CHECKBOXHOMETODOCARDWIDGET CLASS: TO MAKE THE TODO IS COMPLETED
 ///
 
-class CheckBoxHomeTodoCardWidget extends StatelessWidget {
+class CheckBoxHomeTodoCardWidget extends StatefulWidget {
   final bool isChecked;
   final int id;
   final int categoryId;
@@ -61,20 +63,48 @@ class CheckBoxHomeTodoCardWidget extends StatelessWidget {
   });
 
   @override
+  State<CheckBoxHomeTodoCardWidget> createState() =>
+      _CheckBoxHomeTodoCardWidgetState();
+}
+
+class _CheckBoxHomeTodoCardWidgetState
+    extends State<CheckBoxHomeTodoCardWidget> {
+  late AudioPlayer player;
+
+  @override
+  void initState() {
+    player = AudioPlayer();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Checkbox(
-      key: ValueKey('checkbox-home-todo-card-widget-checkbox-$isChecked'),
-      value: isChecked,
+      key: ValueKey(
+        'checkbox-home-todo-card-widget-checkbox-${widget.isChecked}',
+      ),
+      value: widget.isChecked,
       onChanged: (value) {
+        if (value!) player.play(AssetSource(Images.onTapSound));
         int categoryId = (context.read<HomeBloc>().state as LoadedCategoryState)
             .selectedCategories
             .id;
         Map<String, dynamic> data = BuilderService().markIsDone(value!).build;
         context.read<TodoBloc>().add(
-          UpdateTodoEvent(todo: data, todoId: id, categoryId: categoryId),
+          UpdateTodoEvent(
+            todo: data,
+            todoId: widget.id,
+            categoryId: categoryId,
+          ),
         );
       },
     );
+  }
+
+  @override
+  void dispose() {
+    player.dispose();
+    super.dispose();
   }
 }
 
