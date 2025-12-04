@@ -37,7 +37,7 @@ class HomeFloatingBottomTaskWidget extends StatelessWidget {
 }
 
 ///
-/// TEXTHOLDERWIDGET CLASS: TO ADD TODO INTO DB
+/// TEXTHOLDERWIDGET CLASS: TO ADD TODOINTODB
 ///
 
 class TextHolderWidget extends StatefulWidget {

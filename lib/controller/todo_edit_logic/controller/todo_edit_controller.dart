@@ -19,9 +19,16 @@ class TodoEditController {
     required String key,
     required BuildContext context,
   }) async {
-    await editDomain
-        .updateTodo(id: id, key: key, value: value)
-        .then((_) => fetchRelatedStufs(context));
+    /***
+     * 
+     * here i have change the function form .then to seprate function 
+     * using context.mounted if it true the i calling fetchRelatedstufs
+     * 
+     */
+    await editDomain.updateTodo(id: id, key: key, value: value);
+    if (context.mounted) {
+      fetchRelatedStufs(context);
+    }
   }
 
   void fetchRelatedStufs(BuildContext context) {

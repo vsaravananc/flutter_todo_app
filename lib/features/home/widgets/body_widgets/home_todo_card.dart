@@ -50,7 +50,7 @@ class HomeTodoCardWidget extends StatelessWidget {
 }
 
 ///
-/// CHECKBOXHOMETODOCARDWIDGET CLASS: TO MAKE THE TODO IS COMPLETED
+/// CHECKBOXHOMETODOCARDWIDGET CLASS: TO MAKE THE TODOISCOMPLETED
 ///
 
 class CheckBoxHomeTodoCardWidget extends StatefulWidget {
@@ -99,7 +99,7 @@ class _CheckBoxHomeTodoCardWidgetState
               (context.read<HomeBloc>().state as LoadedCategoryState)
                   .selectedCategories
                   .id;
-          Map<String, dynamic> data = BuilderService().markIsDone(value!).build;
+          Map<String, dynamic> data = BuilderService().markIsDone(value).build;
           context.read<TodoBloc>().add(
             UpdateTodoEvent(
               todo: data,
