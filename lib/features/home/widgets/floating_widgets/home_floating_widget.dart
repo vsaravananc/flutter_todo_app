@@ -1,7 +1,9 @@
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:showcaseview/showcaseview.dart';
 import 'package:todoapp/core/platform/device_verion.dart';
+import 'package:todoapp/core/services/app_show_case.dart';
 import 'package:todoapp/core/themes/colors.dart';
 import 'package:todoapp/features/home/widgets/floating_widgets/home_bottom_task_widget.dart';
 
@@ -23,18 +25,25 @@ class HomeFloatingWidget extends StatelessWidget {
         repeat: true,
         animate: true,
         startDelay: const Duration(milliseconds: 2000),
-        child: FloatingActionButton(
-          key: const ValueKey('home-floating-action-button-add-todo'),
-          splashColor: Theme.of(context).colorScheme.secondary,
-          elevation: 2,
-          shape: const CircleBorder(),
-          onPressed: () {
-            triggerBottomSheet(context);
-          },
-          child: Icon(
-            Icons.add,
-            color: LightColors.secondaryTextColor,
-            size: 30,
+        child: Showcase(
+          key: AppShowCase.addTask,
+          descriptionTextAlign: TextAlign.center,
+          title: "Add New Task",
+          description:
+              "Create your own task to get things done and stay organized.",
+          child: FloatingActionButton(
+            key: const ValueKey('home-floating-action-button-add-todo'),
+            splashColor: Theme.of(context).colorScheme.secondary,
+            elevation: 2,
+            shape: const CircleBorder(),
+            onPressed: () {
+              triggerBottomSheet(context);
+            },
+            child: Icon(
+              Icons.add,
+              color: LightColors.secondaryTextColor,
+              size: 30,
+            ),
           ),
         ),
       ),

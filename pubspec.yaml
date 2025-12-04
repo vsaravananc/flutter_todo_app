@@ -47,6 +47,7 @@ dependencies:
   permission_handler: ^12.0.1
   device_info_plus: ^12.3.0
   audioplayers: ^6.5.1
+  showcaseview: ^5.0.1
 
 dev_dependencies:
   sentry_dart_plugin: ^3.2.0

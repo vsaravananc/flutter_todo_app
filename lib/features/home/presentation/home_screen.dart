@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todoapp/core/services/app_show_case.dart';
 import 'package:todoapp/core/services/shared_preference_services.dart';
 import 'package:todoapp/features/home/widgets/body_widgets/home_todo_list.dart';
 import 'package:todoapp/features/home/widgets/floating_widgets/home_floating_widget.dart';
@@ -58,6 +59,16 @@ class _HomeScreenAnimationState extends State<HomeScreenAnimation>
       duration: const Duration(milliseconds: 1500),
     );
     animationController.forward();
+    if (!SharedPreferenceServices.instance.getValue(key: "SHOW_CASE")) {
+      _startShowCase();
+    }
+  }
+
+  void _startShowCase() {
+    Future.delayed(const Duration(milliseconds: 1550), () {
+      AppShowCase.startShowCaseing();
+    });
+    SharedPreferenceServices.instance.setValue(key: "SHOW_CASE", value: true);
   }
 
   @override

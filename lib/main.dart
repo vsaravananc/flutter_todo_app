@@ -17,6 +17,7 @@ import 'package:todoapp/controller/todo_edit_logic/data/todo_edit_data.dart';
 import 'package:todoapp/controller/todo_edit_logic/domain/todo_edit_domain.dart';
 import 'package:todoapp/core/platform/device_verion.dart';
 import 'package:todoapp/core/route/routes.dart';
+import 'package:todoapp/core/services/app_show_case.dart';
 import 'package:todoapp/core/services/shared_preference_services.dart';
 import 'package:todoapp/core/themes/theme.dart';
 import 'package:todoapp/database/create_db.dart';
@@ -84,6 +85,7 @@ class DependencyInjection {
     WidgetsFlutterBinding.ensureInitialized();
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     DeviceInfoImpl info = DeviceInfoImpl.init(deviceInfoPlugin: infoPlugin);
+    AppShowCase.registerShowCase();
     SharedPreferenceServices.init(
       preferences: await SharedPreferences.getInstance(),
     );

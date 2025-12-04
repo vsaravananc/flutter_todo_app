@@ -1,11 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:showcaseview/showcaseview.dart';
 import 'package:todoapp/controller/category_controller/bloc/home_bloc_bloc.dart';
 import 'package:todoapp/controller/category_controller/data/model/category_model.dart';
 import 'package:todoapp/controller/select_category_cubit/selectcategory_cubit.dart';
 import 'package:todoapp/controller/todo_controller/bloc/todo_bloc.dart';
 import 'package:todoapp/core/platform/device_verion.dart';
+import 'package:todoapp/core/services/app_show_case.dart';
 import 'package:todoapp/features/home/widgets/header_widgets/home_category_bottomsheet.dart';
 import 'package:todoapp/features/home/widgets/header_widgets/home_choice_chip.dart';
 
@@ -90,8 +92,16 @@ class _HomeCategoryHeaderChipListState extends State<HomeCategoryHeaderChipList>
           begin: const Offset(1, 0),
           end: Offset.zero,
         ).animate(animationController),
-        child: const HomeCategoryHeaderList(
-          key: const ValueKey('home-category-header-list'),
+        child: Showcase(
+          key: AppShowCase.appBar,
+          descriptionTextAlign: TextAlign.center,
+          title: "Organize Your Tasks Easily",
+          description:
+              "View categories designed to keep your tasks clean, sorted, and clutter-free.",
+
+          child: const HomeCategoryHeaderList(
+            key: const ValueKey('home-category-header-list'),
+          ),
         ),
       ),
     );
@@ -160,12 +170,19 @@ class HomeCategoryHeaderAddIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return IconButton(
-      onPressed: () {
-        triggerBottomSheet(context);
-      },
-      icon: const Icon(Icons.add),
-      key: const ValueKey('home-category-header-icon-button'),
+    return Showcase(
+      key: AppShowCase.addCategory,
+      title: "Add New Category",
+      descriptionTextAlign: TextAlign.center,
+      description:
+          "Create your own category to organize tasks the way you like.",
+      child: IconButton(
+        onPressed: () {
+          triggerBottomSheet(context);
+        },
+        icon: const Icon(Icons.add),
+        key: const ValueKey('home-category-header-icon-button'),
+      ),
     );
   }
 

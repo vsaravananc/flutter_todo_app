@@ -2,11 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:showcaseview/showcaseview.dart';
 import 'package:todoapp/controller/category_controller/bloc/home_bloc_bloc.dart';
 import 'package:todoapp/controller/select_category_cubit/selectcategory_cubit.dart';
 import 'package:todoapp/controller/todo_controller/bloc/todo_bloc.dart';
 import 'package:todoapp/controller/todo_controller/data/model/todo_model.dart';
 import 'package:todoapp/core/platform/device_verion.dart';
+import 'package:todoapp/core/services/app_show_case.dart';
 import 'package:todoapp/core/themes/colors.dart';
 import 'package:todoapp/features/edit/presentation/todo_edit_screen.dart';
 import 'package:todoapp/features/home/widgets/body_widgets/home_todo_card.dart';
@@ -22,47 +24,62 @@ class HomeSlidableWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 2),
-      child: Slidable(
-        key: const ValueKey('slidable-widget-holder'),
-        endActionPane: ActionPane(
-          motion: const ScrollMotion(),
-          extentRatio: 0.4,
-          children: [
-            SlideableActionWidget(
-              onPressed: (_) {
-                /// ?? WANT TO IMPLEMENT HERE CARTEGORY SELECTION PROCESS
-                context.read<SelectcategoryCubit>().selectCategoryById(
-                  todo.categoryId,
-                );
-                triggerBottomSheet(context);
-              },
-              label: "Edit",
-              icon: Icons.edit,
-              backgroundColor: Theme.of(context).colorScheme.secondary,
-            ),
+    return Showcase(
+      key: AppShowCase.todoList,
+      title: "All Tasks in One Place",
+      descriptionTextAlign: TextAlign.center,
+      description:
+          "Browse your tasks instantly and stay updated on what needs attention.",
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 2),
+        child: Slidable(
+          key: const ValueKey('slidable-widget-holder'),
+          endActionPane: ActionPane(
+            motion: const ScrollMotion(),
+            extentRatio: 0.4,
+            children: [
+              SlideableActionWidget(
+                onPressed: (_) {
+                  /// ?? WANT TO IMPLEMENT HERE CARTEGORY SELECTION PROCESS
+                  context.read<SelectcategoryCubit>().selectCategoryById(
+                    todo.categoryId,
+                  );
+                  triggerBottomSheet(context);
+                },
+                label: "Edit",
+                icon: Icons.edit,
+                backgroundColor: Theme.of(context).colorScheme.secondary,
+              ),
 
-            SlideableActionWidget(
-              onPressed: (_) {
-                int id = (context.read<HomeBloc>().state as LoadedCategoryState)
-                    .selectedCategories
-                    .id;
-                debugPrint("Id: $id");
-                context.read<TodoBloc>().add(
-                  DeleteTodoEvent(todoId: todo.id, filterBy: id),
-                );
-              },
-              label: "Delete",
-              icon: Icons.delete,
-              backgroundColor: Theme.of(context).colorScheme.error,
+              SlideableActionWidget(
+                onPressed: (_) {
+                  int id =
+                      (context.read<HomeBloc>().state as LoadedCategoryState)
+                          .selectedCategories
+                          .id;
+                  debugPrint("Id: $id");
+                  context.read<TodoBloc>().add(
+                    DeleteTodoEvent(todoId: todo.id, filterBy: id),
+                  );
+                },
+                label: "Delete",
+                icon: Icons.delete,
+                backgroundColor: Theme.of(context).colorScheme.error,
+              ),
+            ],
+          ),
+          child: Showcase(
+            key: AppShowCase.edit,
+            descriptionTextAlign: TextAlign.center,
+            title: "Slide for More Actions",
+            description:
+                "Swipe right to left on any task to quickly Edit or Delete it. Fast and easy.",
+            child: HomeTodoCardWidget(
+              todo: todo,
+              index: index,
+              key: const ValueKey('home-todo-card-widget-holder'),
             ),
-          ],
-        ),
-        child: HomeTodoCardWidget(
-          todo: todo,
-          index: index,
-          key: const ValueKey('home-todo-card-widget-holder'),
+          ),
         ),
       ),
     );
