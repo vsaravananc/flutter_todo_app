@@ -181,7 +181,7 @@ showcaseview: ^5.0.1
 1. **Clone the repository**
 
    ```bash
-   git clone <your-repo-url>
+   git clone https://github.com/vsaravananc/flutter_todo_app.git
    cd do-it
    ```
 
@@ -201,7 +201,7 @@ showcaseview: ^5.0.1
 
 ## 📱 Screenshots
 
-*(Add your app screenshots here)*
+<img src="assets/screenshots/home.png" width="300" />
 
 ```
 assets/screenshots/
