@@ -222,8 +222,3 @@ assets/app_images/
 **Saravanan**
 
 ---
-
-## 📄 License
-
-This project currently has **no license**.
-(You can add MIT / Apache / GPL later if required.)
