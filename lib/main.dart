@@ -71,7 +71,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       themeMode: ThemeMode.light,
       routes: Routes.routed,
-      title: 'Todo-App',
+      title: 'Do it now',
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       onGenerateRoute: (s) => Routes.onGenerateRoute(s),

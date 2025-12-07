@@ -1,5 +1,5 @@
 class AppWords {
-  static const String appName = 'Todo App';
+  static const String appName = 'Do-it';
   static const List<String> welcomeTitle = [
     "Welcome to $appName",
     "Manage Stress Effectively",
