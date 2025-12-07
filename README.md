@@ -201,7 +201,9 @@ showcaseview: ^5.0.1
 
 ## 📱 Screenshots
 
-<img src="assets/screenshots/home.png" width="300" />
+<img src="assets/app_images/screen.png" width="300" />
+<img src="assets/app_images/screen_1.png" width="300" />
+<img src="assets/app_images/screen_2.png" width="300" />
 
 ```
 assets/screenshots/
