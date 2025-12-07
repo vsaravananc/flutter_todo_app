@@ -201,15 +201,18 @@ showcaseview: ^5.0.1
 
 ## 📱 Screenshots
 
-<img src="assets/app_images/screen.png" width="300" />
-<img src="assets/app_images/screen_1.png" width="300" />
-<img src="assets/app_images/screen_2.png" width="300" />
+<div style="display: flex; flex-direction: row;">
+<img src="assets/app_images/screen.png" width="250" />
+<img src="assets/app_images/screen_1.png" width="250" />
+<img src="assets/app_images/screen_2.png" width="250" />
+</div>
+
 
 ```
-assets/screenshots/
-  home.png
-  add_todo.png
-  edit_todo.png
+assets/app_images/
+  screen.png
+  screen_1.png
+  screen_2.png
 ```
 
 ---
