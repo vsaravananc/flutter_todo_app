@@ -6,6 +6,7 @@ import 'package:todoapp/controller/select_category_cubit/selectcategory_cubit.da
 import 'package:todoapp/controller/todo_controller/bloc/todo_bloc.dart';
 import 'package:todoapp/core/words/app_words.dart';
 import 'package:todoapp/features/home/widgets/floating_widgets/home_category_select_widget.dart';
+import 'package:todoapp/features/home/widgets/floating_widgets/home_date_select_widget.dart';
 
 class HomeFloatingBottomTaskWidget extends StatelessWidget {
   const HomeFloatingBottomTaskWidget({super.key});
@@ -23,10 +24,13 @@ class HomeFloatingBottomTaskWidget extends StatelessWidget {
             ),
             const Spacer(),
             const Row(
+              spacing: 12,
               children: [
                 HomeCategorySelectWidget(
                   key: ValueKey('home-category-select-widget'),
                 ),
+
+                HomeDateSelectWidget(key: ValueKey('home_date_select_widget')),
               ],
             ),
           ],
@@ -82,22 +86,28 @@ class _TextHolderWidgetState extends State<TextHolderWidget> {
   @override
   Widget build(BuildContext context) {
     return Material(
-      borderRadius: BorderRadius.circular(20),
+      borderRadius: BorderRadius.circular(18),
       child: TextField(
         controller: _textEditingController,
         autofocus: true,
         onSubmitted: (_) => _insetTodo(),
+        style: const TextStyle(fontSize: 20),
         decoration: InputDecoration(
+          constraints: const BoxConstraints(maxHeight: 85, minHeight: 85),
           fillColor: Theme.of(context).scaffoldBackgroundColor,
           filled: true,
           hintText: AppWords.inputNewTaskHere,
+          contentPadding: const EdgeInsets.fromLTRB(8, 25, 0, 25),
           suffixIcon: IconButton(
             onPressed: _insetTodo,
-            icon: const Icon(Icons.add),
+            icon: Icon(
+              Icons.send,
+              color: Theme.of(context).colorScheme.secondary,
+            ),
           ),
           border: OutlineInputBorder(
             borderSide: BorderSide.none,
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(18),
           ),
         ),
       ),

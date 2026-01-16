@@ -48,6 +48,8 @@ dependencies:
   device_info_plus: ^12.3.0
   audioplayers: ^6.5.1
   showcaseview: ^5.0.1
+  flutter_local_notifications: ^19.5.0
+  syncfusion_flutter_datepicker: ^32.1.21
 
 dev_dependencies:
   sentry_dart_plugin: ^3.2.0

@@ -84,7 +84,7 @@ class TaskTodoBottomsheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       key: const ValueKey('Task-todo-bottomsheet-container'),
-      height: 100,
+      height: 130,
       padding: const EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 5),
       margin: EdgeInsets.only(bottom: MediaQuery.viewInsetsOf(context).bottom),
       width: double.infinity,
