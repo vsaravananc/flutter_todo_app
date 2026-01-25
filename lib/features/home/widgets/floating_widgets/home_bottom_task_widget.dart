@@ -6,7 +6,6 @@ import 'package:todoapp/controller/select_category_cubit/selectcategory_cubit.da
 import 'package:todoapp/controller/todo_controller/bloc/todo_bloc.dart';
 import 'package:todoapp/core/words/app_words.dart';
 import 'package:todoapp/features/home/widgets/floating_widgets/home_category_select_widget.dart';
-import 'package:todoapp/features/home/widgets/floating_widgets/home_date_select_widget.dart';
 
 class HomeFloatingBottomTaskWidget extends StatelessWidget {
   const HomeFloatingBottomTaskWidget({super.key});
@@ -16,21 +15,26 @@ class HomeFloatingBottomTaskWidget extends StatelessWidget {
     return BlocBuilder<SelectcategoryCubit, CategoryModel>(
       builder: (_, model) {
         return Column(
+          spacing: 12,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TextHolderWidget(
               key: const ValueKey('home-text-holder-widget'),
               id: model.id,
             ),
-            const Spacer(),
             const Row(
               spacing: 12,
               children: [
                 HomeCategorySelectWidget(
                   key: ValueKey('home-category-select-widget'),
                 ),
-
-                HomeDateSelectWidget(key: ValueKey('home_date_select_widget')),
+                /**
+                 * 
+                 *  WANT TO WORK :: FEATURE TO IMPLEMENT THIS TO CAPTURE 
+                 *  SELECT DATE
+                 * 
+                 */
+                // HomeDateSelectWidget(key: ValueKey('home_date_select_widget')),
               ],
             ),
           ],

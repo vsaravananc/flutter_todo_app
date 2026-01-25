@@ -6,17 +6,19 @@ class HomeDateSelectWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      key: const ValueKey('date_icon'),
-      onTap: () async {
-        await delayforSecond();
-        if (context.mounted) triggerDilog(context);
-      },
-      child: Icon(
-        key: const ValueKey('date_icon_holder'),
-        Icons.calendar_today_sharp,
-        size: 20,
-        color: Theme.of(context).colorScheme.secondary,
+    return Material(
+      child: InkWell(
+        key: const ValueKey('date_icon'),
+        onTap: () async {
+          await delayforSecond();
+          if (context.mounted) triggerDilog(context);
+        },
+        child: Icon(
+          key: const ValueKey('date_icon_holder'),
+          Icons.calendar_today_sharp,
+          size: 20,
+          color: Theme.of(context).colorScheme.secondary,
+        ),
       ),
     );
   }

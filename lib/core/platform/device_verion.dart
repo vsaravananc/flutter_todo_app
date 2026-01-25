@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 
@@ -19,6 +21,7 @@ class DeviceInfoImpl implements DeviceInfo {
   Future<bool> get isAndroid11 async => await _getInfo();
 
   Future<bool> _getInfo() async {
+    if (Platform.isIOS) return false;
     AndroidDeviceInfo androidInfo = await _deviceInfo.androidInfo;
     return androidInfo.version.sdkInt < 31;
   }
