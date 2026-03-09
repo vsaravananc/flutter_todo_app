@@ -14,6 +14,7 @@ import 'package:todoapp/controller/todo_controller/domain/todo_domain.dart';
 import 'package:todoapp/controller/todo_edit_logic/controller/todo_edit_controller.dart';
 import 'package:todoapp/controller/todo_edit_logic/data/todo_edit_data.dart';
 import 'package:todoapp/controller/todo_edit_logic/domain/todo_edit_domain.dart';
+import 'package:todoapp/core/permissions/notification_permission.dart';
 import 'package:todoapp/core/platform/device_verion.dart';
 import 'package:todoapp/core/route/routes.dart';
 import 'package:todoapp/core/services/app_show_case.dart';
@@ -83,9 +84,14 @@ class DependencyInjection {
     final DeviceInfoPlugin infoPlugin = DeviceInfoPlugin();
     WidgetsFlutterBinding.ensureInitialized();
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+      statusBarBrightness: Brightness.dark,
+      systemNavigationBarIconBrightness: Brightness.dark,
+      systemNavigationBarColor: Colors.black
+    ));
     DeviceInfoImpl info = DeviceInfoImpl.init(deviceInfoPlugin: infoPlugin);
     AppShowCase.registerShowCase();
-    // NotificationPermission.initializNotification();
+    NotificationPermission.initializeNotification();
     SharedPreferenceServices.init(
       preferences: await SharedPreferences.getInstance(),
     );

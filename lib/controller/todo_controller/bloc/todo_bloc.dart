@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/widgets.dart';
 import 'package:todoapp/controller/todo_controller/data/model/todo_model.dart';
 import 'package:todoapp/controller/todo_controller/domain/todo_domain.dart';
+import 'package:todoapp/core/permissions/notification_permission.dart';
 import 'package:todoapp/core/services/error_handeling_service.dart';
 
 part 'todo_event.dart';
@@ -38,6 +39,7 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
    
     on<AddTodoEvent>((event, emit) async {
       bool isUpdated = await insertTodo.trigger(event, emit, state);
+      NotificationPermission.showNotification(id: event.categoryId, title: "Add Task", body: event.todo);
       _fetchTheList(isUpdated, event.filterBy);
     });
    

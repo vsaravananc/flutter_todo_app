@@ -76,6 +76,7 @@ class _TextHolderWidgetState extends State<TextHolderWidget> {
     int categoryId = (context.read<HomeBloc>().state as LoadedCategoryState)
         .selectedCategories
         .id;
+
     context.read<TodoBloc>().add(
       AddTodoEvent(
         todo: _textEditingController.text.trim(),
