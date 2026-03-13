@@ -1,0 +1,3 @@
+Welcome to the first official release!
+We’ve built this app to give you the best experience.
+Stay tuned for upcoming features and improvements.

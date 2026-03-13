@@ -59,25 +59,29 @@ class _TriggerDilogState extends State<TriggerDilog> {
               showNavigationArrow: true,
               initialDisplayDate: DateTime.now(),
               initialSelectedDate: DateTime.now(),
+             
               headerStyle: DateRangePickerHeaderStyle(
                 backgroundColor: Theme.of(context).cardColor,
                 textAlign: TextAlign.center,
               ),
+              monthViewSettings: DateRangePickerMonthViewSettings(
+                viewHeaderStyle: DateRangePickerViewHeaderStyle(
+                  backgroundColor: Theme.of(context).cardColor,
+                ),
+              ),
+
               backgroundColor: Theme.of(context).cardColor,
-              viewSpacing: 10,
-              showTodayButton: true,
-              showActionButtons: true,
-            ),
-            const Wrap(
-              spacing: 10,
-              crossAxisAlignment: WrapCrossAlignment.start,
-              children: [
-                Text("No Date"),
-                Text("Today"),
-                Text("Tomorrow"),
-                Text('3 Days Later'),
-                Text("This Sunday"),
-              ],
+              minDate: DateTime.now(),
+              maxDate: DateTime.now().add(const Duration(days: 365)),
+              selectionColor: Theme.of(context).colorScheme.primary,
+              showTodayButton: false,
+              showActionButtons: false,
+              
+              confirmText: "SELECT",
+              onCancel: () => Navigator.pop(context),
+              view: DateRangePickerView.month,
+
+
             ),
           ],
         ),

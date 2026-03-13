@@ -3,7 +3,7 @@ import 'package:permission_handler/permission_handler.dart';
 
 abstract final class NotificationPermission {
   static const notificationalChannelID = "0001";
-  static const notificationChannelName = "Todo_application";
+  static const notificationChannelName = "Default Channel";
 
   static final FlutterLocalNotificationsPlugin
   _flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
@@ -13,6 +13,8 @@ abstract final class NotificationPermission {
       AndroidNotificationChannel(
         notificationalChannelID,
         notificationChannelName,
+        importance: Importance.max,
+        playSound: true,
       );
 
   static Future<void> initializeNotification() async {
@@ -22,11 +24,12 @@ abstract final class NotificationPermission {
 
     await _flutterLocalNotificationsPlugin.initialize(initializationSettings);
 
-    await _flutterLocalNotificationsPlugin
+    final androidNotification = _flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<
           AndroidFlutterLocalNotificationsPlugin
-        >()
-        ?.createNotificationChannel(_androidNotificationChannel);
+        >();
+
+    androidNotification?.createNotificationChannel(_androidNotificationChannel);
   }
 
   static Future<void> showNotification({
