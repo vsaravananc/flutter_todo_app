@@ -20,8 +20,11 @@ class CreateDataBase {
   }
 
   Future<Database> _initDB() async {
+
     final dbPath = await getDatabasesPath();
+
     final path = join(dbPath, 'todo.db');
+
     return await openDatabase(
       path,
       version: 1,
@@ -35,6 +38,7 @@ class CreateDataBase {
   }
 
   Future _createDB(Database db, int version) async {
+
     await db.execute('''
       CREATE TABLE categories (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -55,10 +59,12 @@ class CreateDataBase {
         FOREIGN KEY (categoryId) REFERENCES categories(id)
       );
     ''');
+
     await _preLoadCategoryData(db);
   }
 
   Future<void> _preLoadCategoryData(Database database) async {
+    
     final batch = database.batch();
 
     final List<String> defaultcategoriesList = <String>[

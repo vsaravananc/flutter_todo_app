@@ -71,9 +71,12 @@ class _HomeCategoryHeaderChipListState extends State<HomeCategoryHeaderChipList>
       vsync: this,
       duration: const Duration(milliseconds: 400),
     );
-    Future.delayed(const Duration(milliseconds: 400), () {
-      animationController.forward();
-    });
+    // Future.delayed(const Duration(milliseconds: 400), () {
+    //   if(animationController.isCompleted) return;
+    //   animationController.forward();
+    // });
+
+    animationController.forward();
     super.initState();
   }
 
@@ -89,7 +92,7 @@ class _HomeCategoryHeaderChipListState extends State<HomeCategoryHeaderChipList>
       key: const ValueKey('home-category-header-expanded'),
       child: SlideTransition(
         position: Tween<Offset>(
-          begin: const Offset(1, 0),
+          begin: const Offset(0.5, 0),
           end: Offset.zero,
         ).animate(animationController),
         child: Showcase(

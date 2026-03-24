@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:todoapp/controller/analystic_bloc/bloc/analystic_bloc.dart';
 import 'package:todoapp/controller/category_controller/bloc/home_bloc_bloc.dart';
 import 'package:todoapp/controller/category_controller/data/model/category_model.dart';
 import 'package:todoapp/controller/select_category_cubit/selectcategory_cubit.dart';
@@ -35,7 +36,7 @@ class HomeFloatingBottomTaskWidget extends StatelessWidget {
                  *  SELECT DATE
                  * 
                  */
-                 HomeDateSelectWidget(key: ValueKey('home_date_select_widget')),
+                HomeDateSelectWidget(key: ValueKey('home_date_select_widget')),
               ],
             ),
           ],
@@ -74,6 +75,7 @@ class _TextHolderWidgetState extends State<TextHolderWidget> {
 
   void _insetTodo() {
     if (_textEditingController.text.trim().isEmpty) return;
+
     int categoryId = (context.read<HomeBloc>().state as LoadedCategoryState)
         .selectedCategories
         .id;

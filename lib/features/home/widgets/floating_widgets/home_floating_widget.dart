@@ -1,7 +1,11 @@
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:showcaseview/showcaseview.dart';
+import 'package:todoapp/controller/analystic_bloc/bloc/analystic_bloc.dart';
+import 'package:todoapp/controller/todo_controller/bloc/todo_bloc.dart';
 import 'package:todoapp/core/platform/device_verion.dart';
 import 'package:todoapp/core/services/app_show_case.dart';
 import 'package:todoapp/core/themes/colors.dart';
@@ -31,18 +35,23 @@ class HomeFloatingWidget extends StatelessWidget {
           title: "Add New Task",
           description:
               "Create your own task to get things done and stay organized.",
-          child: FloatingActionButton(
-            key: const ValueKey('home-floating-action-button-add-todo'),
-            splashColor: Theme.of(context).colorScheme.secondary,
-            elevation: 2,
-            shape: const CircleBorder(),
-            onPressed: () {
-              triggerBottomSheet(context);
+          child: BlocListener<TodoBloc, TodoState>(
+            listener: (context, state) {
+              context.read<AnalysticBloc>().add(AnalysticGetData());
             },
-            child: Icon(
-              Icons.add,
-              color: LightColors.secondaryTextColor,
-              size: 30,
+            child: FloatingActionButton(
+              key: const ValueKey('home-floating-action-button-add-todo'),
+              splashColor: Theme.of(context).colorScheme.secondary,
+              elevation: 2,
+              shape: const CircleBorder(),
+              onPressed: () {
+                triggerBottomSheet(context);
+              },
+              child: Icon(
+                Icons.add,
+                color: LightColors.secondaryTextColor,
+                size: 30,
+              ),
             ),
           ),
         ),
@@ -58,7 +67,14 @@ class HomeFloatingWidget extends StatelessWidget {
         builder: (_) => const TaskTodoBottomsheet(
           key: const ValueKey("todo_edit_screen_holder-android11"),
         ),
-      );
+      ).then((_) {
+        SystemChrome.setSystemUIOverlayStyle(
+          SystemUiOverlayStyle(
+            statusBarIconBrightness: Brightness.dark,
+            systemNavigationBarColor: LightColors.tertiaryBackgroundColor,
+          ),
+        );
+      });
     } else {
       showCupertinoSheet(
         context: context,
@@ -68,7 +84,14 @@ class HomeFloatingWidget extends StatelessWidget {
             TaskTodoBottomsheet(key: const ValueKey("todo_edit_screen_holder")),
           ],
         ),
-      );
+      ).then((_) {
+        SystemChrome.setSystemUIOverlayStyle(
+          SystemUiOverlayStyle(
+            statusBarIconBrightness: Brightness.dark,
+            systemNavigationBarColor: LightColors.tertiaryBackgroundColor,
+          ),
+        );
+      });
     }
   }
 }
@@ -84,7 +107,7 @@ class TaskTodoBottomsheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       key: const ValueKey('Task-todo-bottomsheet-container'),
-      constraints:const BoxConstraints(minHeight: 135,maxHeight: 155),
+      constraints: const BoxConstraints(minHeight: 135, maxHeight: 155),
       padding: const EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 5),
       margin: EdgeInsets.only(bottom: MediaQuery.viewInsetsOf(context).bottom),
       width: double.infinity,

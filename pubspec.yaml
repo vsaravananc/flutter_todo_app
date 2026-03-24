@@ -51,6 +51,10 @@ dependencies:
   flutter_local_notifications: ^19.5.0
   syncfusion_flutter_datepicker: ^32.1.21
   vibration: ^3.1.8
+  hugeicons: ^1.1.5
+  pie_chart: ^5.4.0
+  equatable: ^2.0.8
+  either_dart: ^1.0.0
 
 dev_dependencies:
   sentry_dart_plugin: ^3.2.0

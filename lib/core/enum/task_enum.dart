@@ -1,0 +1,5 @@
+
+enum TaskEnum {
+  Completed,
+  Pending
+}

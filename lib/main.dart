@@ -5,6 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:todoapp/controller/analystic_bloc/bloc/analystic_bloc.dart';
+import 'package:todoapp/controller/analystic_bloc/usecase/get_analystic.dart';
+import 'package:todoapp/controller/dashboard_controller_cubit/dashboard_cubit.dart';
 import 'package:todoapp/controller/select_category_cubit/busines_login/data.dart';
 import 'package:todoapp/controller/select_category_cubit/busines_login/domain.dart';
 import 'package:todoapp/controller/select_category_cubit/selectcategory_cubit.dart';
@@ -14,7 +17,7 @@ import 'package:todoapp/controller/todo_controller/domain/todo_domain.dart';
 import 'package:todoapp/controller/todo_edit_logic/controller/todo_edit_controller.dart';
 import 'package:todoapp/controller/todo_edit_logic/data/todo_edit_data.dart';
 import 'package:todoapp/controller/todo_edit_logic/domain/todo_edit_domain.dart';
-import 'package:todoapp/core/permissions/notification_permission.dart';
+// import 'package:todoapp/core/permissions/notification_permission.dart';
 import 'package:todoapp/core/platform/device_verion.dart';
 import 'package:todoapp/core/route/routes.dart';
 import 'package:todoapp/core/services/app_show_case.dart';
@@ -84,14 +87,16 @@ class DependencyInjection {
     final DeviceInfoPlugin infoPlugin = DeviceInfoPlugin();
     WidgetsFlutterBinding.ensureInitialized();
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-      statusBarBrightness: Brightness.dark,
-      systemNavigationBarIconBrightness: Brightness.dark,
-      systemNavigationBarColor: Colors.black
-    ));
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        statusBarBrightness: Brightness.dark,
+        systemNavigationBarIconBrightness: Brightness.dark,
+        systemNavigationBarColor: Colors.black,
+      ),
+    );
     DeviceInfoImpl info = DeviceInfoImpl.init(deviceInfoPlugin: infoPlugin);
     AppShowCase.registerShowCase();
-    NotificationPermission.initializeNotification();
+    // NotificationPermission.initializeNotification();
     SharedPreferenceServices.init(
       preferences: await SharedPreferences.getInstance(),
     );
@@ -166,6 +171,10 @@ class DependencyInjection {
         ),
         BlocProvider<SelectcategoryCubit>(
           create: (_) => SelectcategoryCubit(fetchData: fetchCategory),
+        ),
+        BlocProvider<DashboardCubit>(create: (_) => DashboardCubit()),
+        BlocProvider<AnalysticBloc>(
+          create: (_) => AnalysticBloc(GetAnalysticUseCase(database: database)),
         ),
       ],
       child: DeviceProvider(notifier: deviceInfo, child: child),

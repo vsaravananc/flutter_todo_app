@@ -61,6 +61,24 @@ class AppTheme {
         color: LightColors.textColor,
       ),
     ),
+  
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      backgroundColor: LightColors.tertiaryBackgroundColor,
+      selectedItemColor: LightColors.primaryColor,
+      unselectedItemColor: LightColors.textColor,
+      selectedLabelStyle: TextStyle(
+        fontSize: 12,
+        fontWeight: FontWeight.w500,
+        fontFamily: 'OpenSans',
+        color: LightColors.primaryColor,
+      ),
+      unselectedLabelStyle: TextStyle(
+        fontSize: 12,
+        fontWeight: FontWeight.w500,
+        fontFamily: 'OpenSans',
+        color: LightColors.textColor,
+      ),
+    ),
   );
 
   static ThemeData darkTheme = ThemeData(
