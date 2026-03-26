@@ -8,6 +8,7 @@ import 'package:todoapp/controller/select_category_cubit/selectcategory_cubit.da
 import 'package:todoapp/controller/todo_controller/bloc/todo_bloc.dart';
 import 'package:todoapp/core/platform/device_verion.dart';
 import 'package:todoapp/core/services/app_show_case.dart';
+import 'package:todoapp/core/services/shared_preference_services.dart';
 import 'package:todoapp/features/home/widgets/header_widgets/home_category_bottomsheet.dart';
 import 'package:todoapp/features/home/widgets/header_widgets/home_choice_chip.dart';
 
@@ -71,13 +72,20 @@ class _HomeCategoryHeaderChipListState extends State<HomeCategoryHeaderChipList>
       vsync: this,
       duration: const Duration(milliseconds: 400),
     );
-    // Future.delayed(const Duration(milliseconds: 400), () {
-    //   if(animationController.isCompleted) return;
-    //   animationController.forward();
-    // });
 
     animationController.forward();
+    if (!SharedPreferenceServices.instance.getValue(key: "SHOW_CASE")) {
+      _startShowCase();
+    }
     super.initState();
+  }
+
+  void _startShowCase() {
+    Future.delayed(const Duration(milliseconds: 1350), () {
+      AppShowCase.startShowCaseing();
+    });
+    SharedPreferenceServices.instance.setValue(key: "SHOW_CASE", value: true);
+    SharedPreferenceServices.instance.setValue(key: "IS_LOGED_IN", value: true);
   }
 
   @override

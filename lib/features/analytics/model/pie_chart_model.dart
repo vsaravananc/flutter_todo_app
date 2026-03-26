@@ -16,4 +16,14 @@ class PieChartValueModel extends Equatable {
   List<Object?> get props => [
     label,value
   ];
+
+  factory PieChartValueModel.fromJson(Map<String,dynamic>json) {
+    return PieChartValueModel(label: json['label'], value: json['value']);
+  }
+
+  Map<String,double> toJson(){
+    return {
+      label : double.parse("$value")
+    };
+  }
 }

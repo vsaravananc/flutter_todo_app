@@ -8,6 +8,7 @@ class AppShowCase {
   static final GlobalKey _markasdone = GlobalKey();
   static final GlobalKey _edit = GlobalKey();
   static final GlobalKey _addTask = GlobalKey();
+  static final GlobalKey _analystic = GlobalKey();
   static void registerShowCase() => ShowcaseView.register();
   static GlobalKey get appBar => _appBar;
   static GlobalKey get addCategory => _addCategory;
@@ -15,6 +16,7 @@ class AppShowCase {
   static GlobalKey get markasdone => _markasdone;
   static GlobalKey get edit => _edit;
   static GlobalKey get addTask => _addTask;
+  static GlobalKey get analystic => _analystic;
   static void startShowCaseing() => ShowcaseView.get().startShowCase([
     _appBar,
     _addCategory,
@@ -22,5 +24,6 @@ class AppShowCase {
     _markasdone,
     _edit,
     _addTask,
+    _analystic,
   ]);
 }

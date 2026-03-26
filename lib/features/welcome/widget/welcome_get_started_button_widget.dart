@@ -34,7 +34,7 @@ class WelcomeGetStartedButtonWidget extends StatelessWidget {
                   onPressed: isEnd
                       ? () {
                           Navigator.of(context).pushNamedAndRemoveUntil(
-                            Routes.homeScreen,
+                            Routes.dashboardScreen,
                             (route) => false,
                           );
                         }

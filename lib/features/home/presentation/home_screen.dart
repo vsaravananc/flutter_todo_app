@@ -59,17 +59,10 @@ class _HomeScreenAnimationState extends State<HomeScreenAnimation>
       duration: const Duration(milliseconds: 1500),
     );
     animationController.forward();
-    if (!SharedPreferenceServices.instance.getValue(key: "SHOW_CASE")) {
-      _startShowCase();
-    }
+    
   }
 
-  void _startShowCase() {
-    Future.delayed(const Duration(milliseconds: 1550), () {
-      AppShowCase.startShowCaseing();
-    });
-    SharedPreferenceServices.instance.setValue(key: "SHOW_CASE", value: true);
-  }
+ 
 
   @override
   void dispose() {

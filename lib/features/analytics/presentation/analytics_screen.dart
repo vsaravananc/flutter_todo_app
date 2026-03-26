@@ -8,25 +8,17 @@ class AnalyticsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: SafeArea(
         child: Column(
           children: [
-            const TaskOverviewWidget(),
-            Container(
-              margin: const EdgeInsets.fromLTRB(12.0, 8.0, 12.0, 0),
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
-              decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.tertiary,
-                borderRadius: BorderRadius.circular(16),
-              ),
-              child: const PiChartWidget(),
-            ),
+             TaskOverviewWidget(),
+             PiChartWidget(),
           ],
         ),
       ),
-      floatingActionButton: const HomeFloatingWidget(
-        key: const ValueKey('home-floating-action-button-analytics'),
+      floatingActionButton:  HomeFloatingWidget(
+        key:  ValueKey('home-floating-action-button-analytics'),
       ),
     );
   }

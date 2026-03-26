@@ -17,17 +17,39 @@ class GetAnalysticUseCase implements GetAnalysticRepo {
   @override
   Getanalysticdata getanalysticdata() async {
     try {
+      List<Map<String, dynamic>> listOfTask = [];
+
       final result = await database.transaction<AnalysticModel>((txn) async {
         final totalTask = await txn.query('todos');
+        final categories = await txn.query("categories");
         final completeTask = await txn.query(
           'todos',
           where: 'isDone = ?',
           whereArgs: [1],
         );
+
+        for (Map<String, dynamic> category in categories) {
+          final categoryBasedList = await txn.query(
+            'todos',
+            where: 'categoryId = ?',
+            whereArgs: [category['id']],
+          );
+          if (categoryBasedList.isNotEmpty) {
+            listOfTask.add({
+              "label": category['name'],
+              "value": categoryBasedList.length,
+            });
+          }
+        }
+
         return AnalysticModel(
           completedTask: completeTask.length,
           pendingTask: totalTask.length - completeTask.length,
-          pieChartModel: const PieChartModel(listOfPieChartValue: []),
+          pieChartModel: PieChartModel(
+            listOfPieChartValue: listOfTask
+                .map((e) => PieChartValueModel.fromJson(e))
+                .toList(),
+          ),
         );
       });
       return Left(result);

@@ -46,6 +46,9 @@ class HomeFloatingWidget extends StatelessWidget {
               shape: const CircleBorder(),
               onPressed: () {
                 triggerBottomSheet(context);
+                // SystemChrome.setSystemUIOverlayStyle(
+
+                // );
               },
               child: Icon(
                 Icons.add,
@@ -60,6 +63,12 @@ class HomeFloatingWidget extends StatelessWidget {
   }
 
   void triggerBottomSheet(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(
+        systemNavigationBarColor: Theme.of(context).colorScheme.onTertiary,
+        systemNavigationBarIconBrightness: Brightness.dark,
+      ),
+    );
     debugPrint("triggerBottomSheet :${DeviceProvider.of(context)}");
     if (DeviceProvider.of(context)) {
       showModalBottomSheet(
@@ -67,31 +76,26 @@ class HomeFloatingWidget extends StatelessWidget {
         builder: (_) => const TaskTodoBottomsheet(
           key: const ValueKey("todo_edit_screen_holder-android11"),
         ),
-      ).then((_) {
-        SystemChrome.setSystemUIOverlayStyle(
-          SystemUiOverlayStyle(
-            statusBarIconBrightness: Brightness.dark,
-            systemNavigationBarColor: LightColors.tertiaryBackgroundColor,
-          ),
-        );
-      });
+      );
     } else {
       showCupertinoSheet(
         context: context,
         builder: (_) => const Wrap(
           runAlignment: WrapAlignment.end,
           children: [
-            TaskTodoBottomsheet(key: const ValueKey("todo_edit_screen_holder")),
+            AnnotatedRegion<SystemUiOverlayStyle>(
+              value: SystemUiOverlayStyle(
+                statusBarIconBrightness: Brightness.dark
+              ),
+              child: SafeArea(
+                child: TaskTodoBottomsheet(
+                  key: const ValueKey("todo_edit_screen_holder"),
+                ),
+              ),
+            ),
           ],
         ),
-      ).then((_) {
-        SystemChrome.setSystemUIOverlayStyle(
-          SystemUiOverlayStyle(
-            statusBarIconBrightness: Brightness.dark,
-            systemNavigationBarColor: LightColors.tertiaryBackgroundColor,
-          ),
-        );
-      });
+      );
     }
   }
 }
