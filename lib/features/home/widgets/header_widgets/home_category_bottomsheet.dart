@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todoapp/core/platform/device_bottom.dart';
 import 'package:todoapp/features/home/widgets/header_widgets/home_category_textfield.dart';
 import 'package:todoapp/features/home/widgets/header_widgets/home_overlay_entry.dart';
 
@@ -13,10 +14,11 @@ class HomeCategoryBottomsheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bottomValue = DeviceBottom.of(context);
     return Container(
       key: const ValueKey('home-category-bottomsheet-container'),
-      height: 75,
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+      height: 75 + bottomValue,
+      padding:  EdgeInsets.only(left: 10,right : 10, top: 10,bottom:  10 + bottomValue),
       margin: EdgeInsets.only(bottom: MediaQuery.viewInsetsOf(context).bottom),
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),

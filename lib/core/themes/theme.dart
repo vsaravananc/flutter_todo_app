@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:todoapp/core/themes/colors.dart';
 import 'package:todoapp/core/themes/text_theme.dart';
 
@@ -16,6 +17,13 @@ class AppTheme {
       onTertiary: LightColors.tertiaryBackgroundColor,
       brightness: Brightness.light,
       error: LightColors.errorColor,
+    ),
+
+    appBarTheme: const AppBarTheme(
+      systemOverlayStyle: const SystemUiOverlayStyle(
+        statusBarIconBrightness: Brightness.dark,
+        statusBarBrightness: Brightness.light,
+      ),
     ),
 
     textTheme: CustomTextTheme.baseTextTheme.apply(
@@ -61,7 +69,7 @@ class AppTheme {
         color: LightColors.textColor,
       ),
     ),
-  
+
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       backgroundColor: LightColors.tertiaryBackgroundColor,
       selectedItemColor: LightColors.primaryColor,

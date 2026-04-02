@@ -37,6 +37,7 @@ abstract final class NotificationPermission {
     required String title,
     required String body,
   }) async {
+    if(!await requestNotification()) return;
     AndroidNotificationDetails androidNotificationDetailsionDetails =
         const AndroidNotificationDetails(
           notificationalChannelID,

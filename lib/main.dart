@@ -17,6 +17,8 @@ import 'package:todoapp/controller/todo_controller/domain/todo_domain.dart';
 import 'package:todoapp/controller/todo_edit_logic/controller/todo_edit_controller.dart';
 import 'package:todoapp/controller/todo_edit_logic/data/todo_edit_data.dart';
 import 'package:todoapp/controller/todo_edit_logic/domain/todo_edit_domain.dart';
+import 'package:todoapp/core/permissions/notification_permission.dart';
+import 'package:todoapp/core/platform/device_bottom.dart';
 // import 'package:todoapp/core/permissions/notification_permission.dart';
 import 'package:todoapp/core/platform/device_verion.dart';
 import 'package:todoapp/core/route/routes.dart';
@@ -68,16 +70,24 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      key: const ValueKey('material-app'),
-      debugShowCheckedModeBanner: false,
-      initialRoute: '/',
-      themeMode: ThemeMode.light,
-      routes: Routes.routed,
-      title: 'Do it now',
-      theme: AppTheme.lightTheme,
-      darkTheme: AppTheme.darkTheme,
-      onGenerateRoute: (s) => Routes.onGenerateRoute(s),
+    ValueNotifier<double> deviceBottom = ValueNotifier(
+      MediaQuery.of(context).systemGestureInsets.bottom,
+    );
+
+    return DeviceBottom(
+      notifier: deviceBottom,
+      child: MaterialApp(
+        
+        key: const ValueKey('material-app'),
+        debugShowCheckedModeBanner: false,
+        initialRoute: '/',
+        themeMode: ThemeMode.light,
+        routes: Routes.routed,
+        title: 'Do it now',
+        theme: AppTheme.lightTheme,
+        darkTheme: AppTheme.darkTheme,
+        onGenerateRoute: (s) => Routes.onGenerateRoute(s),
+      ),
     );
   }
 }
@@ -96,7 +106,7 @@ class DependencyInjection {
     );
     DeviceInfoImpl info = DeviceInfoImpl.init(deviceInfoPlugin: infoPlugin);
     AppShowCase.registerShowCase();
-    // NotificationPermission.initializeNotification();
+    NotificationPermission.initializeNotification();
     SharedPreferenceServices.init(
       preferences: await SharedPreferences.getInstance(),
     );

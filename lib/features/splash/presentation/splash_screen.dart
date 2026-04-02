@@ -49,7 +49,7 @@ class _SplashScreenState extends State<SplashScreen> {
       Navigator.pushNamedAndRemoveUntil(
         context,
         isLoged ? Routes.dashboardScreen : Routes.welcomScreen,
-        (_) => true,
+        (_) => false,
       );
     }
   }

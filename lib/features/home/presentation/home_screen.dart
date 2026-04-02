@@ -105,17 +105,18 @@ class _HomeScreenAnimationState extends State<HomeScreenAnimation>
 ///
 
 class HomeScreenContent extends StatelessWidget {
-  const HomeScreenContent({super.key});
+    final bool isTablet;
+
+  const HomeScreenContent({super.key,  this.isTablet = false});
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.surface,
+    return  Scaffold(
       key: const ValueKey('HOME-screen-content'),
       appBar: const HomeCategoryHeader(
         key: const ValueKey('home-category-header'),
       ),
       body: const HomeTodoListWidget(key: const ValueKey('home-todo-list')),
-      floatingActionButton: const HomeFloatingWidget(
+      floatingActionButton: isTablet ? null : const HomeFloatingWidget(
         key: const ValueKey('home-floating-action-button'),
       ),
     );

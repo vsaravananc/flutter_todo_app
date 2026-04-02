@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
-
     <!--
      Required to query activities that can process text, see:
          https://developer.android.com/training/package-visibility and
@@ -12,17 +11,31 @@
     <queries>
         <intent>
             <action android:name="android.intent.action.PROCESS_TEXT" />
+
             <data android:mimeType="text/plain" />
         </intent>
     </queries>
 
-    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
         android:label="Do-it">
-        <!-- <receiver
+        <receiver
+            android:name=".TaskAdd"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/task_add_info" />
+        </receiver>
+
+        <!--
+         <receiver
             android:name=".NewAppWidget"
             android:exported="false">
             <intent-filter>
@@ -32,8 +45,8 @@
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/new_app_widget_info" />
-        </receiver> -->
-
+        </receiver>
+        -->
         <activity
             android:name=".MainActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"

@@ -1,3 +1,3 @@
-Welcome to the first official release!
-We’ve built this app to give you the best experience.
-Stay tuned for upcoming features and improvements.
+Added checklist tracking in the Analytics tab to monitor task progress more clearly.
+Users can now view checklist insights and activity directly from Analytics.
+Improved visibility of checklist completion to help track productivity.

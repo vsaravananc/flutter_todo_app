@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:showcaseview/showcaseview.dart';
 import 'package:todoapp/controller/analystic_bloc/bloc/analystic_bloc.dart';
 import 'package:todoapp/controller/todo_controller/bloc/todo_bloc.dart';
+import 'package:todoapp/core/platform/device_bottom.dart';
 import 'package:todoapp/core/platform/device_verion.dart';
 import 'package:todoapp/core/services/app_show_case.dart';
 import 'package:todoapp/core/themes/colors.dart';
@@ -69,7 +70,6 @@ class HomeFloatingWidget extends StatelessWidget {
         systemNavigationBarIconBrightness: Brightness.dark,
       ),
     );
-    debugPrint("triggerBottomSheet :${DeviceProvider.of(context)}");
     if (DeviceProvider.of(context)) {
       showModalBottomSheet(
         context: context,
@@ -85,12 +85,10 @@ class HomeFloatingWidget extends StatelessWidget {
           children: [
             AnnotatedRegion<SystemUiOverlayStyle>(
               value: SystemUiOverlayStyle(
-                statusBarIconBrightness: Brightness.dark
+                statusBarIconBrightness: Brightness.dark,
               ),
-              child: SafeArea(
-                child: TaskTodoBottomsheet(
-                  key: const ValueKey("todo_edit_screen_holder"),
-                ),
+              child: TaskTodoBottomsheet(
+                key: const ValueKey("todo_edit_screen_holder"),
               ),
             ),
           ],
@@ -109,10 +107,12 @@ class TaskTodoBottomsheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bottomValue = DeviceBottom.of(context);
+
     return Container(
       key: const ValueKey('Task-todo-bottomsheet-container'),
-      constraints: const BoxConstraints(minHeight: 135, maxHeight: 155),
-      padding: const EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 5),
+      constraints:  BoxConstraints(minHeight: 135 + bottomValue, maxHeight: 155 + bottomValue),
+      padding:  EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 5 + bottomValue),
       margin: EdgeInsets.only(bottom: MediaQuery.viewInsetsOf(context).bottom),
       width: double.infinity,
       decoration: BoxDecoration(
