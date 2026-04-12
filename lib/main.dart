@@ -77,7 +77,6 @@ class MyApp extends StatelessWidget {
     return DeviceBottom(
       notifier: deviceBottom,
       child: MaterialApp(
-        
         key: const ValueKey('material-app'),
         debugShowCheckedModeBanner: false,
         initialRoute: '/',

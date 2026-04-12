@@ -17,13 +17,18 @@ class AppShowCase {
   static GlobalKey get edit => _edit;
   static GlobalKey get addTask => _addTask;
   static GlobalKey get analystic => _analystic;
-  static void startShowCaseing() => ShowcaseView.get().startShowCase([
-    _appBar,
-    _addCategory,
-    _todoList,
-    _markasdone,
-    _edit,
-    _addTask,
-    _analystic,
-  ]);
+  static void startShowCaseing(bool isTab) {
+    List<GlobalKey> showCaseList = [
+      _appBar,
+      _addCategory,
+      _todoList,
+      _markasdone,
+      _edit,
+      _addTask,
+    ];
+    if (!isTab) {
+      showCaseList.add(_analystic);
+    }
+    ShowcaseView.get().startShowCase(showCaseList);
+  }
 }

@@ -1,3 +1,4 @@
+import 'dart:ui';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,28 +24,101 @@ class HomeTodoCardWidget extends StatelessWidget {
     return ReorderableDelayedDragStartListener(
       index: index,
       key: ValueKey('reorderable-delayed-drag-start-listener$index'),
-      child: Container(
-        key: ValueKey('todo-item-${todo.id}'),
-        decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.tertiary,
+      child: Material(
+        color: Theme.of(context).colorScheme.tertiary,
+        borderRadius: BorderRadius.circular(8),
+        child: InkWell(
           borderRadius: BorderRadius.circular(8),
-        ),
-        height: 55,
-        child: Row(
-          children: [
-            CheckBoxHomeTodoCardWidget(
-              isChecked: todo.isDone,
-              id: todo.id,
-              categoryId: todo.categoryId,
-              key: const ValueKey('checkbox-home-todo-card-widget'),
+          splashColor: Theme.of(
+            context,
+          ).colorScheme.secondary.withValues(alpha: 0.2),
+          onTap: () {
+            final widgetinfo = widgetInfo(context);
+
+            showDialog(context, widgetinfo.$1, widgetinfo.$2);
+          },
+          child: SizedBox(
+            key: ValueKey('todo-item-${todo.id}'),
+            height: 55,
+            child: Row(
+              children: [
+                CheckBoxHomeTodoCardWidget(
+                  isChecked: todo.isDone,
+                  id: todo.id,
+                  categoryId: todo.categoryId,
+                  key: const ValueKey('checkbox-home-todo-card-widget'),
+                ),
+                TitleHomeTodoCardWidget(
+                  title: todo.title,
+                  key: const ValueKey('title-home-todo-card-widget'),
+                ),
+              ],
             ),
-            TitleHomeTodoCardWidget(
-              title: todo.title,
-              key: const ValueKey('title-home-todo-card-widget'),
-            ),
-          ],
+          ),
         ),
       ),
+    );
+  }
+
+  (Offset, Size) widgetInfo(BuildContext context) {
+    final renderBox = context.findRenderObject() as RenderBox;
+    final size = renderBox.size;
+
+    final tapPosition = renderBox.localToGlobal(Offset.zero);
+    final centerPosition = Offset(
+      MediaQuery.sizeOf(context).width / 2,
+      MediaQuery.sizeOf(context).height / 2,
+    );
+    final position = tapPosition + Offset(size.width / 2, size.height / 2);
+    final delta = position - centerPosition;
+    return (delta, size);
+  }
+
+  void showDialog(BuildContext context, Offset delta, Size size) {
+    showGeneralDialog(
+      barrierDismissible: true,
+      barrierLabel: "",
+      barrierColor: Colors.black12,
+      context: context,
+      pageBuilder: (_, __, ___) => const SizedBox.shrink(),
+      transitionBuilder: (context, animation, secondaryAnimation, child) {
+        final t = animation.value;
+        final screenSize = MediaQuery.sizeOf(context);
+        final offset = Offset(delta.dx * (1 - t), delta.dy * (1 - t));
+        final left = lerpDouble(45, 12, t);
+        final height = lerpDouble(size.height, 200, t);
+        final width = lerpDouble(
+          size.width,
+          (screenSize.width > 600)
+              ? screenSize.width / 2
+              : screenSize.width - 24,
+          t,
+        );
+        return Transform.translate(
+          offset: offset,
+          child: Center(
+            child: Container(
+              height: height,
+              constraints: const BoxConstraints(maxHeight: 200),
+              padding: EdgeInsets.only(
+                left: left!,
+                right: 12,
+                bottom: 12,
+                top: 12,
+              ),
+              width: width,
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.tertiary,
+                borderRadius: BorderRadius.circular(lerpDouble(8, 12, t)!),
+              ),
+              child: Text(
+                todo.title,
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 }

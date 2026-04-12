@@ -3,7 +3,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todoapp/controller/analystic_bloc/bloc/analystic_bloc.dart';
 import 'package:todoapp/controller/dashboard_controller_cubit/dashboard_cubit.dart';
+import 'package:todoapp/core/services/app_show_case.dart';
 import 'package:todoapp/core/services/app_update.dart';
+import 'package:todoapp/core/services/shared_preference_services.dart';
 import 'package:todoapp/features/analytics/presentation/analytics_screen.dart';
 import 'package:todoapp/features/dashboard/widgets/bottom_navigation_widget.dart';
 import 'package:todoapp/features/home/presentation/home_screen.dart';
@@ -20,6 +22,19 @@ class _DashboardScreenState extends State<DashboardScreen> {
   void initState() {
     super.initState();
     AppUpdate.checkAndUpdate();
+    if (!SharedPreferenceServices.instance.getValue(key: "SHOW_CASE")) {
+      _startShowCase();
+    }
+  }
+
+   void _startShowCase() {
+    Future.delayed(const Duration(milliseconds: 1350), () {
+      if(mounted) {
+        AppShowCase.startShowCaseing(MediaQuery.sizeOf( context).width > 600);
+      }
+    });
+    SharedPreferenceServices.instance.setValue(key: "SHOW_CASE", value: true);
+    SharedPreferenceServices.instance.setValue(key: "IS_LOGED_IN", value: true);
   }
 
   @override
@@ -36,6 +51,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     return LayoutBuilder(
       builder: (context, constraint) {
         if (constraint.maxWidth > 600) {
+
           return const TableView();
         }
         return BlocBuilder<DashboardCubit, int>(

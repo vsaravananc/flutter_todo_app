@@ -35,7 +35,7 @@ class HomeSlidableWidget extends StatelessWidget {
         child: Slidable(
           key: const ValueKey('slidable-widget-holder'),
           endActionPane: ActionPane(
-            motion: const ScrollMotion(),
+            motion: const BehindMotion(),
             extentRatio: 0.4,
             children: [
               SlideableActionWidget(

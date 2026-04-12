@@ -71,19 +71,11 @@ class _HomeCategoryHeaderChipListState extends State<HomeCategoryHeaderChipList>
     );
 
     animationController.forward();
-    if (!SharedPreferenceServices.instance.getValue(key: "SHOW_CASE")) {
-      _startShowCase();
-    }
+    
     super.initState();
   }
 
-  void _startShowCase() {
-    Future.delayed(const Duration(milliseconds: 1350), () {
-      AppShowCase.startShowCaseing();
-    });
-    SharedPreferenceServices.instance.setValue(key: "SHOW_CASE", value: true);
-    SharedPreferenceServices.instance.setValue(key: "IS_LOGED_IN", value: true);
-  }
+ 
 
   @override
   void dispose() {
