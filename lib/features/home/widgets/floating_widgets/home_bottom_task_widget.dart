@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:todoapp/controller/analystic_bloc/bloc/analystic_bloc.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:todoapp/controller/category_controller/bloc/home_bloc_bloc.dart';
 import 'package:todoapp/controller/category_controller/data/model/category_model.dart';
 import 'package:todoapp/controller/select_category_cubit/selectcategory_cubit.dart';
@@ -20,14 +20,17 @@ class HomeFloatingBottomTaskWidget extends StatelessWidget {
           spacing: 12,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            TextHolderWidget(
-              key: const ValueKey('home-text-holder-widget'),
-              id: model.id,
+            Expanded(
+              child: TextHolderWidget(
+                key: const ValueKey('home-text-holder-widget'),
+                id: model.id,
+              ),
             ),
-            const Row(
+             Row(
               spacing: 12,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                HomeCategorySelectWidget(
+               const HomeCategorySelectWidget(
                   key: ValueKey('home-category-select-widget'),
                 ),
                 /**
@@ -36,7 +39,18 @@ class HomeFloatingBottomTaskWidget extends StatelessWidget {
                  *  SELECT DATE
                  * 
                  */
-                // HomeDateSelectWidget(key: ValueKey('home_date_select_widget')),
+               const HomeDateSelectWidget(key: ValueKey('home_date_select_widget')),
+               const  Spacer(),
+                GestureDetector(
+                  onTap: (){
+
+                  },
+                  child: HugeIcon(
+                      icon:HugeIcons.strokeRoundedSent,
+                      color: Theme.of(context).colorScheme.primary,
+                      size: 30,
+                    ),
+                ),
               ],
             ),
           ],
@@ -100,19 +114,16 @@ class _TextHolderWidgetState extends State<TextHolderWidget> {
         autofocus: true,
         onSubmitted: (_) => _insetTodo(),
         style: const TextStyle(fontSize: 20),
+        maxLines: null,
+        minLines: null,
+        expands: true,
+        textAlignVertical: TextAlignVertical.top,
         decoration: InputDecoration(
-          constraints: const BoxConstraints(maxHeight: 85, minHeight: 85),
           fillColor: Theme.of(context).scaffoldBackgroundColor,
           filled: true,
           hintText: AppWords.inputNewTaskHere,
-          contentPadding: const EdgeInsets.fromLTRB(8, 25, 0, 25),
-          suffixIcon: IconButton(
-            onPressed: _insetTodo,
-            icon: Icon(
-              Icons.send,
-              color: Theme.of(context).colorScheme.secondary,
-            ),
-          ),
+          contentPadding: const EdgeInsets.fromLTRB(8, 12, 0, 12),
+
           border: OutlineInputBorder(
             borderSide: BorderSide.none,
             borderRadius: BorderRadius.circular(18),

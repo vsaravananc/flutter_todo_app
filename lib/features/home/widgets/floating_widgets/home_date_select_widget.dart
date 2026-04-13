@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:syncfusion_flutter_datepicker/datepicker.dart';
+import 'package:hugeicons/hugeicons.dart';
+import 'package:table_calendar/table_calendar.dart';
 
 class HomeDateSelectWidget extends StatelessWidget {
   const HomeDateSelectWidget({super.key});
@@ -13,11 +14,26 @@ class HomeDateSelectWidget extends StatelessWidget {
           await delayforSecond();
           if (context.mounted) triggerDilog(context);
         },
-        child: Icon(
-          key: const ValueKey('date_icon_holder'),
-          Icons.calendar_today_sharp,
-          size: 20,
-          color: Theme.of(context).colorScheme.secondary,
+        child: Stack(
+          alignment: Alignment.bottomCenter,
+          children: [
+            HugeIcon(
+              icon: HugeIcons.strokeRoundedCalendar04,
+              size: 30,
+              color: Theme.of(context).colorScheme.primary,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 1.1),
+              child: Text(
+                "30",
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.primary,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w800,
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -44,7 +60,9 @@ class TriggerDilog extends StatefulWidget {
 }
 
 class _TriggerDilogState extends State<TriggerDilog> {
-  final DateRangePickerController dateController = DateRangePickerController();
+  final ValueNotifier<DateTime> selectedDate = ValueNotifier(DateTime.now());
+
+  @override
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -54,35 +72,35 @@ class _TriggerDilogState extends State<TriggerDilog> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            SfDateRangePicker(
-              controller: dateController,
-              showNavigationArrow: true,
-              initialDisplayDate: DateTime.now(),
-              initialSelectedDate: DateTime.now(),
-             
-              headerStyle: DateRangePickerHeaderStyle(
-                backgroundColor: Theme.of(context).cardColor,
-                textAlign: TextAlign.center,
-              ),
-              monthViewSettings: DateRangePickerMonthViewSettings(
-                viewHeaderStyle: DateRangePickerViewHeaderStyle(
-                  backgroundColor: Theme.of(context).cardColor,
-                ),
-              ),
-
-              backgroundColor: Theme.of(context).cardColor,
-              minDate: DateTime.now(),
-              maxDate: DateTime.now().add(const Duration(days: 365)),
-              selectionColor: Theme.of(context).colorScheme.primary,
-              showTodayButton: false,
-              showActionButtons: false,
-              
-              confirmText: "SELECT",
-              onCancel: () => Navigator.pop(context),
-              view: DateRangePickerView.month,
-
-
+            ValueListenableBuilder(
+              valueListenable: selectedDate,
+              builder: (context, value, child) {
+                return TableCalendar(
+                  currentDay: value,
+                  headerStyle: HeaderStyle(
+                    formatButtonVisible: false,
+                    titleCentered: true,
+                    leftChevronIcon: Icon(
+                      Icons.arrow_back_ios_new_rounded,
+                      size: 15,
+                      color: Theme.of(context).colorScheme.secondary,
+                    ),
+                    rightChevronIcon: Icon(
+                      Icons.arrow_forward_ios_rounded,
+                      size: 15,
+                      color: Theme.of(context).colorScheme.secondary,
+                    ),
+                  ),
+                  firstDay: DateTime.now(),
+                  lastDay: DateTime.now().add(const Duration(days: 365)),
+                  focusedDay: DateTime.now(),
+                  onDaySelected: (selectedDay, focusedDay) {
+                    selectedDate.value = selectedDay;
+                  },
+                );
+              },
             ),
+            Text("data"),
           ],
         ),
       ),

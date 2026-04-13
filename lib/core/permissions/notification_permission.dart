@@ -1,3 +1,4 @@
+
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -21,6 +22,7 @@ abstract final class NotificationPermission {
     if (!(await requestNotification())) return;
     const InitializationSettings initializationSettings =
         InitializationSettings(android: _androidInitializationSettings);
+
 
     await _flutterLocalNotificationsPlugin.initialize(initializationSettings);
 

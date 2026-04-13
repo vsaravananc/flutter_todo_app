@@ -10,6 +10,8 @@ import 'package:todoapp/core/platform/device_bottom.dart';
 import 'package:todoapp/core/platform/device_verion.dart';
 import 'package:todoapp/core/services/app_show_case.dart';
 import 'package:todoapp/core/themes/colors.dart';
+import 'dart:io';
+
 import 'package:todoapp/features/home/widgets/floating_widgets/home_bottom_task_widget.dart';
 
 ///
@@ -70,12 +72,12 @@ class HomeFloatingWidget extends StatelessWidget {
         systemNavigationBarIconBrightness: Brightness.dark,
       ),
     );
-    if (DeviceProvider.of(context)) {
+    if (Platform.isAndroid) {
       showModalBottomSheet(
         context: context,
         builder: (_) => const TaskTodoBottomsheet(
           key: const ValueKey("todo_edit_screen_holder-android11"),
-        ),
+        ),   
       );
     } else {
       showCupertinoSheet(
@@ -111,16 +113,22 @@ class TaskTodoBottomsheet extends StatelessWidget {
 
     return Container(
       key: const ValueKey('Task-todo-bottomsheet-container'),
-      constraints:  BoxConstraints(minHeight: 135 + bottomValue, maxHeight: 155 + bottomValue),
-      padding:  EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 5 + bottomValue),
+      constraints:  BoxConstraints(minHeight: 135 + bottomValue, maxHeight: 205 + bottomValue),
+      padding:  const EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 5),
       margin: EdgeInsets.only(bottom: MediaQuery.viewInsetsOf(context).bottom),
       width: double.infinity,
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
         color: Theme.of(context).colorScheme.onTertiary,
       ),
-      child: const HomeFloatingBottomTaskWidget(
-        key: ValueKey('home-floating-bottom-task-widget-layer'),
+      child:  SafeArea(
+        top: false,
+        left: Platform.isIOS,
+        right: Platform.isIOS,
+        // bottom: Platform.isIOS,
+        child: const HomeFloatingBottomTaskWidget(
+          key: ValueKey('home-floating-bottom-task-widget-layer'),
+        ),
       ),
     );
   }
