@@ -19,7 +19,6 @@ class PiChartWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-          margin: const EdgeInsets.fromLTRB(12.0, 8.0, 12.0, 0),
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
           decoration: BoxDecoration(
             color: Theme.of(context).colorScheme.tertiary,

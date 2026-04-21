@@ -23,13 +23,14 @@ class HomeDateSelectWidget extends StatelessWidget {
               color: Theme.of(context).colorScheme.primary,
             ),
             Padding(
-              padding: const EdgeInsets.only(bottom: 1.1),
+              padding: const EdgeInsets.only(bottom: 1.4),
               child: Text(
-                "30",
+                "01",
                 style: TextStyle(
                   color: Theme.of(context).colorScheme.primary,
                   fontSize: 12,
                   fontWeight: FontWeight.w800,
+                  fontFeatures: const [FontFeature.liningFigures()]
                 ),
               ),
             ),
@@ -100,7 +101,11 @@ class _TriggerDilogState extends State<TriggerDilog> {
                 );
               },
             ),
-            Text("data"),
+            Text("Coming Soon",style: TextStyle(
+              color: Theme.of(context).colorScheme.primary,
+              fontSize: 16,
+              fontWeight: FontWeight.w600
+            ),)
           ],
         ),
       ),

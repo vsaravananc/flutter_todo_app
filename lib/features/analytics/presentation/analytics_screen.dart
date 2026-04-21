@@ -10,10 +10,13 @@ class AnalyticsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: const SafeArea(
-        child: Column(children: [TaskOverviewWidget(), PiChartWidget()]),
+      body:  SafeArea(
+        child: Padding(
+          padding: EdgeInsets.only(left: !isTablet ? 12.0 : 0, right: 12.0, ),
+          child: const Column(spacing: 8,children: [TaskOverviewWidget(), PiChartWidget()]),
+        ),
       ),
-      floatingActionButton: isTablet
+      floatingActionButton: !isTablet
           ? null
           : const HomeFloatingWidget(
               key: ValueKey('home-floating-action-button-analytics'),

@@ -69,8 +69,9 @@ class _HomeCategorySelectWidgetState extends State<HomeCategorySelectWidget> {
                   ),
                   child: Text(
                     model.actuallName,
-                    style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                       color: DarkColors.textColor,
+                      fontWeight: FontWeight.w600,
                     ),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,

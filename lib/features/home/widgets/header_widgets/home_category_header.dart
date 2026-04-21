@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -187,7 +189,7 @@ class HomeCategoryHeaderAddIcon extends StatelessWidget {
   }
 
   void triggerBottomSheet(BuildContext context) {
-    if (DeviceProvider.of(context)) {
+    if (Platform.isAndroid) {
       showModalBottomSheet(
         context: context,
         builder: (_) => const HomeCategoryBottomsheet(

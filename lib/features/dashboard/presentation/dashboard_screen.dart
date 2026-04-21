@@ -98,6 +98,7 @@ class TableView extends StatelessWidget {
         ),
         Expanded(
           child: AnalyticsScreen(
+            isTablet: true,
             key: ValueKey("analytics_screen_dashboard_table_view"),
           ),
         ),
