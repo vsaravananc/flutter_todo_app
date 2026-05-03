@@ -7,7 +7,6 @@ import 'package:showcaseview/showcaseview.dart';
 import 'package:todoapp/controller/analystic_bloc/bloc/analystic_bloc.dart';
 import 'package:todoapp/controller/todo_controller/bloc/todo_bloc.dart';
 import 'package:todoapp/core/platform/device_bottom.dart';
-import 'package:todoapp/core/platform/device_verion.dart';
 import 'package:todoapp/core/services/app_show_case.dart';
 import 'package:todoapp/core/themes/colors.dart';
 import 'dart:io';

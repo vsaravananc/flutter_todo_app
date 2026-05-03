@@ -14,27 +14,10 @@ class HomeDateSelectWidget extends StatelessWidget {
           await delayforSecond();
           if (context.mounted) triggerDilog(context);
         },
-        child: Stack(
-          alignment: Alignment.bottomCenter,
-          children: [
-            HugeIcon(
-              icon: HugeIcons.strokeRoundedCalendar04,
-              size: 30,
-              color: Theme.of(context).colorScheme.primary,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 1.4),
-              child: Text(
-                "01",
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.primary,
-                  fontSize: 12,
-                  fontWeight: FontWeight.w800,
-                  fontFeatures: const [FontFeature.liningFigures()]
-                ),
-              ),
-            ),
-          ],
+        child: HugeIcon(
+          icon: HugeIcons.strokeRoundedCalendar04,
+          size: 30,
+          color: Theme.of(context).colorScheme.primary,
         ),
       ),
     );
@@ -94,18 +77,31 @@ class _TriggerDilogState extends State<TriggerDilog> {
                   ),
                   firstDay: DateTime.now(),
                   lastDay: DateTime.now().add(const Duration(days: 365)),
-                  focusedDay: DateTime.now(),
+                  focusedDay: selectedDate.value,
+                  daysOfWeekStyle: DaysOfWeekStyle(
+                    weekdayStyle: TextStyle(
+                      color: Theme.of(context).colorScheme.secondary,
+                      fontWeight: FontWeight.w600,
+                    ),
+                    weekendStyle: TextStyle(
+                      color: Theme.of(context).colorScheme.secondary,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
                   onDaySelected: (selectedDay, focusedDay) {
                     selectedDate.value = selectedDay;
                   },
                 );
               },
             ),
-            Text("Coming Soon",style: TextStyle(
-              color: Theme.of(context).colorScheme.primary,
-              fontSize: 16,
-              fontWeight: FontWeight.w600
-            ),)
+            Text(
+              "Coming Soon",
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.primary,
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
           ],
         ),
       ),
