@@ -14,11 +14,26 @@ class AddTodoEvent extends TodoEvent {
   final String todo;
   final int categoryId;
   final int filterBy;
+  final String reminderAt;
   AddTodoEvent({
     required this.todo,
     required this.categoryId,
     required this.filterBy,
+    this.reminderAt = "",
   });
+  AddTodoEvent copyWith({
+    String? todo,
+    int? categoryId,
+    int? filterBy,
+    String? reminderAt,
+  }) {
+    return AddTodoEvent(
+      todo: todo ?? this.todo,
+      categoryId: categoryId ?? this.categoryId,
+      filterBy: filterBy ?? this.filterBy,
+      reminderAt: reminderAt ?? this.reminderAt,
+    );
+  }
 }
 
 class UpdateTodoEvent extends TodoEvent {

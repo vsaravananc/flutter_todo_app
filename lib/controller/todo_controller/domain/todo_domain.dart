@@ -78,6 +78,7 @@ class AddTodoDomain extends InsertTodoDomain<AddTodoEvent, bool> {
     try {
       debugPrint(event.categoryId.toString());
       debugPrint(event.todo);
+      debugPrint(event.reminderAt);
       return await insertTodo.trigger({
         "title": event.todo,
         "description": "",

@@ -54,6 +54,7 @@ class CreateDataBase {
         isDone INTEGER NOT NULL,
         categoryId INTEGER,
         createdAt TEXT NOT NULL,
+        reminderAt TEXT,
         closedAt TEXT,
         sortOrder INTEGER DEFAULT 0,
         FOREIGN KEY (categoryId) REFERENCES categories(id)

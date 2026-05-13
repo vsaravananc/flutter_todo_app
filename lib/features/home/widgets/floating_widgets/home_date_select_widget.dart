@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:todoapp/controller/todo_controller/bloc/todo_bloc.dart';
 
 class HomeDateSelectWidget extends StatelessWidget {
   const HomeDateSelectWidget({super.key});
@@ -90,6 +91,7 @@ class _TriggerDilogState extends State<TriggerDilog> {
                   ),
                   onDaySelected: (selectedDay, focusedDay) {
                     selectedDate.value = selectedDay;
+                    TodoBloc.setReminderAt(selectedDay);
                   },
                 );
               },

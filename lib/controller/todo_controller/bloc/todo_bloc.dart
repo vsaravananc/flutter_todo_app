@@ -15,6 +15,7 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
   final AddTodoDomain insertTodo;
   final DeleteTodoDomain deleteTodoDomain;
   final ReOrderTodoDomain reOrderTodoDomain;
+
   TodoBloc({
     required this.readAllListOfTodos,
     required this.updateTodo,
@@ -22,34 +23,52 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
     required this.insertTodo,
     required this.deleteTodoDomain,
     required this.reOrderTodoDomain,
-  }) : super(TodoInitial(todoList: const [])) { 
-
+  }) : super(TodoInitial(todoList: const [])) {
     on<GetAllTodoEvent>(
       (event, emit) => readAllListOfTodos.trigger(event, emit, state),
     );
-    
+
     on<UpdateTodoEvent>((event, emit) async {
       bool isUpdated = await updateTodo.trigger(event, emit, state);
-      _fetchTheList(isUpdated, event.categoryId );
+      _fetchTheList(isUpdated, event.categoryId);
     });
-   
+
     on<FilterTodoEvent>(
       (event, emit) => fetchTodoList.trigger(event, emit, state),
     );
-   
+
     on<AddTodoEvent>((event, emit) async {
+      if (reminderAt.isNotEmpty) {
+        event = event.copyWith(reminderAt: reminderAt);
+         NotificationPermission.scheduleNotification(
+          DateTime.now().add(const Duration(seconds: 30)),
+        );
+      }
       bool isUpdated = await insertTodo.trigger(event, emit, state);
-      NotificationPermission.showNotification(id: event.categoryId, title: "Add Task", body: event.todo);
+       NotificationPermission.showNotification(
+        id: event.categoryId,
+        title: "Add Task",
+        body: event.todo,
+      );
+
+      reminderAt = "";
       _fetchTheList(isUpdated, event.filterBy);
     });
-   
-    on<DeleteTodoEvent>((event,emit) async{
+
+    on<DeleteTodoEvent>((event, emit) async {
       bool isDeleted = await deleteTodoDomain.trigger(event, emit, state);
       _fetchTheList(isDeleted, event.filterBy);
     });
-  
-    on<ReOrderTodoList>((event,emit) => reOrderTodoDomain.trigger(event, emit, state));
 
+    on<ReOrderTodoList>(
+      (event, emit) => reOrderTodoDomain.trigger(event, emit, state),
+    );
+  }
+
+  static String reminderAt = "";
+
+  static void setReminderAt(DateTime value) {
+    reminderAt = value.toIso8601String();
   }
 
   void _fetchTheList(bool isUpdated, int categoryId) {
@@ -59,5 +78,4 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
       add(FilterTodoEvent(categoryId: categoryId));
     }
   }
-
 }
