@@ -73,12 +73,6 @@ class _HomeFloatingBottomTaskWidgetState
                 const HomeCategorySelectWidget(
                   key: ValueKey('home-category-select-widget'),
                 ),
-                /**
-                 * 
-                 *  WANT TO WORK :: FEATURE TO IMPLEMENT THIS TO CAPTURE 
-                 *  SELECT DATE
-                 * 
-                 */
                 const HomeDateSelectWidget(
                   key: ValueKey('home_date_select_widget'),
                 ),

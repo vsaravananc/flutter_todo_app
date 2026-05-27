@@ -32,20 +32,25 @@ class HomeDateSelectWidget extends StatelessWidget {
   void triggerDilog(context) {
     showDialog(
       context: context,
-      builder: (c) => const TriggerDilog(key: ValueKey('trigger_date_picker')),
+      builder: (c) =>
+          const SechudleDialog(key: ValueKey('trigger_date_picker')),
     );
   }
 }
 
-class TriggerDilog extends StatefulWidget {
-  const TriggerDilog({super.key});
+class SechudleDialog extends StatefulWidget {
+  const SechudleDialog({super.key});
 
   @override
-  State<TriggerDilog> createState() => _TriggerDilogState();
+  State<SechudleDialog> createState() => _SechudleDialogState();
 }
 
-class _TriggerDilogState extends State<TriggerDilog> {
+class _SechudleDialogState extends State<SechudleDialog> {
   final ValueNotifier<DateTime> selectedDate = ValueNotifier(DateTime.now());
+  Decoration decoration(context) => BoxDecoration(
+    color: Theme.of(context).colorScheme.primary,
+    shape: BoxShape.circle,
+  );
 
   @override
   @override
@@ -93,6 +98,10 @@ class _TriggerDilogState extends State<TriggerDilog> {
                     selectedDate.value = selectedDay;
                     TodoBloc.setReminderAt(selectedDay);
                   },
+                  calendarStyle: CalendarStyle(
+                    todayDecoration: decoration(context),
+                    selectedDecoration: decoration(context),
+                  ),
                 );
               },
             ),

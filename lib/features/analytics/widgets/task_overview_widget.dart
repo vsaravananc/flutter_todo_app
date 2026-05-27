@@ -3,6 +3,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todoapp/controller/analystic_bloc/bloc/analystic_bloc.dart';
 import 'package:todoapp/core/enum/task_enum.dart';
+import 'package:todoapp/core/themes/font_family.dart';
 import 'package:todoapp/features/analytics/widgets/task_card_widget.dart';
 
 class TaskOverviewWidget extends StatelessWidget {
@@ -17,7 +18,12 @@ class TaskOverviewWidget extends StatelessWidget {
       spacing: _spacingVertical,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text("Tasks Overview", style: Theme.of(context).textTheme.titleLarge),
+        Text(
+          "Tasks Overview",
+          style: Theme.of(
+            context,
+          ).textTheme.headlineMedium?.copyWith(fontFamily: FontFamily.openSans),
+        ),
         BlocBuilder<AnalysticBloc, AnalysticState>(
           builder: (context, state) {
             if (state is AnalysticLoaded) {

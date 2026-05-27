@@ -3,6 +3,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pie_chart/pie_chart.dart';
 import 'package:todoapp/controller/analystic_bloc/bloc/analystic_bloc.dart';
+import 'package:todoapp/core/themes/font_family.dart';
 
 class PiChartWidget extends StatelessWidget {
   const PiChartWidget({super.key});
@@ -62,6 +63,7 @@ class PiChartWidget extends StatelessWidget {
                               .indexOf(e)];
                       return Row(
                         spacing: 4,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Container(
                             height: 10,
@@ -71,7 +73,13 @@ class PiChartWidget extends StatelessWidget {
                               color: color,
                             ),
                           ),
-                          Text(e.label),
+                          Text(
+                            e.label,
+                            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                              fontWeight: FontWeight.w600,
+                              fontFamily: FontFamily.openSans,
+                            ),
+                          ),
                         ],
                       );
                     }).toList(),

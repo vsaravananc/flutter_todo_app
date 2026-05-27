@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:todoapp/core/themes/colors.dart';
+import 'package:todoapp/core/themes/font_family.dart';
 import 'package:todoapp/core/themes/text_theme.dart';
 
 class AppTheme {
@@ -9,6 +10,7 @@ class AppTheme {
     brightness: Brightness.light,
     primaryColor: LightColors.primaryColor,
     scaffoldBackgroundColor: LightColors.backgroundColor,
+    fontFamily: FontFamily.borel,
     colorScheme: ColorScheme.light(
       primary: LightColors.primaryColor,
       secondary: LightColors.secondaryColor,
@@ -18,7 +20,6 @@ class AppTheme {
       brightness: Brightness.light,
       error: LightColors.errorColor,
     ),
-
     appBarTheme: const AppBarTheme(
       systemOverlayStyle: const SystemUiOverlayStyle(
         statusBarIconBrightness: Brightness.dark,

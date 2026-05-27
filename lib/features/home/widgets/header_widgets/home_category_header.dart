@@ -44,7 +44,7 @@ class HomeCategoryHeader extends StatelessWidget
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(50);
+  Size get preferredSize => const Size.fromHeight(58);
 }
 
 ///

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todoapp/core/themes/colors.dart';
 import 'package:todoapp/controller/category_controller/data/model/category_model.dart';
+import 'package:todoapp/core/themes/font_family.dart';
 
 ///
 ///  FILE_PURPOSE: HOME CHOICE CHIP TO SELECT ANY CATEGORY
@@ -38,14 +39,20 @@ class HomeChoiceChip extends StatelessWidget {
         ),
         child: ConstrainedBox(
           constraints: const BoxConstraints(minWidth: 15, maxWidth: 90),
-          child: Text(
+          child: AnimatedDefaultTextStyle(
             key: const ValueKey('home-choice-chip-text'),
-            categoryModel.name,
+            duration: const Duration(milliseconds: 200),
             style: isSelected
-                ? Theme.of(
-                    context,
-                  ).textTheme.labelLarge?.copyWith(color: DarkColors.textColor)
-                : Theme.of(context).textTheme.labelLarge?.copyWith(
+                ? Theme.of(context).textTheme.titleMedium!.copyWith(
+                    color: isDark
+                        ? DarkColors.secondaryTextColor
+                        : LightColors.secondaryTextColor,
+                    fontWeight: FontWeight.w700,
+                    fontFamily: FontFamily.openSans,
+                  )
+                : Theme.of(context).textTheme.titleMedium!.copyWith(
+                    fontWeight: FontWeight.w400,
+                    fontFamily: FontFamily.openSans,
                     color: isDark
                         ? DarkColors.secondaryTextColor
                         : LightColors.secondaryTextColor,
@@ -53,6 +60,7 @@ class HomeChoiceChip extends StatelessWidget {
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             textAlign: TextAlign.center,
+            child: Text(categoryModel.name),
           ),
         ),
       ),

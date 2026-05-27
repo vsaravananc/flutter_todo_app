@@ -48,9 +48,6 @@ class HomeFloatingWidget extends StatelessWidget {
               shape: const CircleBorder(),
               onPressed: () {
                 triggerBottomSheet(context);
-                // SystemChrome.setSystemUIOverlayStyle(
-
-                // );
               },
               child: Icon(
                 Icons.add,

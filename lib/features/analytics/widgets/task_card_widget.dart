@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todoapp/core/enum/task_enum.dart';
 import 'package:todoapp/core/extension/task_extension.dart';
+import 'package:todoapp/core/themes/font_family.dart';
 
 class TaskCardWidget extends StatelessWidget {
   final TaskEnum statu;
@@ -34,7 +35,10 @@ class TaskCardWidget extends StatelessWidget {
           Text("$numberOfTask", style: Theme.of(context).textTheme.titleLarge),
           Text(
             "${statu.uiName} Tasks",
-            style: Theme.of(context).textTheme.titleMedium,
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+              fontWeight: FontWeight.w600,
+              fontFamily: FontFamily.openSans,
+            ),
             maxLines: 2,
             textAlign: TextAlign.center,
             overflow: TextOverflow.clip,
