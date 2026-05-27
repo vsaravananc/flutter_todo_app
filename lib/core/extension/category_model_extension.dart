@@ -1,7 +1,3 @@
-
-
-
-
 import 'package:todoapp/controller/category_controller/data/model/category_model.dart';
 
 extension CategoryModelExtension on CategoryModel {

@@ -42,7 +42,7 @@ class CustomTextTheme {
       fontWeight: FontWeight.w600,
       fontFamily: 'OpenSans',
     ),
-      labelMedium: TextStyle(
+    labelMedium: TextStyle(
       fontSize: 12,
       fontWeight: FontWeight.w500,
       fontFamily: 'OpenSans',

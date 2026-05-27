@@ -6,7 +6,7 @@ class SelectCategoryReadData extends ReadSelectCategoryRepo<CategoryModel> {
   final Database database;
   SelectCategoryReadData({required this.database});
   @override
-  Future<CategoryModel> selectCategoryById(int id) async{
+  Future<CategoryModel> selectCategoryById(int id) async {
     try {
       final List<Map<String, Object?>> maps = await database.query(
         'categories',

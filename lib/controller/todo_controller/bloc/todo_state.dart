@@ -21,7 +21,6 @@ class FilterTodoList extends TodoStateWithList {
   FilterTodoList({required super.todoList});
 }
 
-
 class ErrorTodo extends TodoState {
   final String message;
   final ErrorType errorType;

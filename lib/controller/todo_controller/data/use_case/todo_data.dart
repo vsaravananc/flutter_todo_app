@@ -121,12 +121,11 @@ class DeleteTodoData extends WriteTodoData<bool, int?> {
   }
 }
 
-
-class ReOrderTodoData extends WriteTodoData<void,List<TodoModel>> {
+class ReOrderTodoData extends WriteTodoData<void, List<TodoModel>> {
   final Database database;
   ReOrderTodoData({required this.database});
   @override
-  Future<void> trigger(int todoId, List<TodoModel> data) async{
+  Future<void> trigger(int todoId, List<TodoModel> data) async {
     for (int i = 0; i < data.length; i++) {
       await database.update(
         'todos',
@@ -136,5 +135,4 @@ class ReOrderTodoData extends WriteTodoData<void,List<TodoModel>> {
       );
     }
   }
-  
 }

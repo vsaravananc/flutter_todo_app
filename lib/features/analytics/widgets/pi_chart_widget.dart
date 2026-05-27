@@ -25,7 +25,7 @@ class PiChartWidget extends StatelessWidget {
         for (var element in state.pieChartModel.listOfPieChartValue) {
           dataMap.addAll(element.toJson());
         }
-        if(dataMap.isEmpty){
+        if (dataMap.isEmpty) {
           return const SizedBox.shrink();
         }
         return Container(

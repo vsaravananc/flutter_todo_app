@@ -97,7 +97,6 @@ class CategoryEditOverlayFlower extends StatelessWidget {
                         onTap: () {
                           toggle();
                           showDialog(
-                            
                             context: context,
                             builder: (_) =>
                                 CategoryEditTitle(categoryModel: categoryModel),

@@ -51,7 +51,7 @@ class TodoEditScreenAndroid11 extends StatelessWidget {
       padding: const EdgeInsets.all(0),
       controller: controller,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 13,vertical: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:todoapp/core/services/app_show_case.dart';
 import 'package:todoapp/core/services/shared_preference_services.dart';
 import 'package:todoapp/features/home/widgets/body_widgets/home_todo_list.dart';
 import 'package:todoapp/features/home/widgets/floating_widgets/home_floating_widget.dart';
@@ -59,10 +58,7 @@ class _HomeScreenAnimationState extends State<HomeScreenAnimation>
       duration: const Duration(milliseconds: 1500),
     );
     animationController.forward();
-    
   }
-
- 
 
   @override
   void dispose() {
@@ -105,20 +101,22 @@ class _HomeScreenAnimationState extends State<HomeScreenAnimation>
 ///
 
 class HomeScreenContent extends StatelessWidget {
-    final bool isTablet;
+  final bool isTablet;
 
-  const HomeScreenContent({super.key,  this.isTablet = false});
+  const HomeScreenContent({super.key, this.isTablet = false});
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       key: const ValueKey('HOME-screen-content'),
       appBar: const HomeCategoryHeader(
         key: const ValueKey('home-category-header'),
       ),
       body: const HomeTodoListWidget(key: const ValueKey('home-todo-list')),
-      floatingActionButton: isTablet ? null : const HomeFloatingWidget(
-        key: const ValueKey('home-floating-action-button'),
-      ),
+      floatingActionButton: isTablet
+          ? null
+          : const HomeFloatingWidget(
+              key: const ValueKey('home-floating-action-button'),
+            ),
     );
   }
 }

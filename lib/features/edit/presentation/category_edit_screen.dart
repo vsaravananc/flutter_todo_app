@@ -32,9 +32,7 @@ class CategoryEditScreenAndroid11 extends StatelessWidget {
     return const Column(
       children: [
         CategoryEditHeader(key: ValueKey('category_edit_screen_header')),
-        CategoryTitleHolder(
-          key: ValueKey('category_edit_screen_title_holder'),
-        ),
+        CategoryTitleHolder(key: ValueKey('category_edit_screen_title_holder')),
         CategoryEditBody(key: ValueKey('category_edit_screen_body')),
       ],
     );

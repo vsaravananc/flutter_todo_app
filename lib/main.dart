@@ -76,7 +76,8 @@ class MyApp extends StatelessWidget {
     return DeviceBottom(
       notifier: deviceBottom,
       child: MaterialApp(
-        builder: (context, child) => MediaQuery.withNoTextScaling(child: child!),
+        builder: (context, child) =>
+            MediaQuery.withNoTextScaling(child: child!),
         key: const ValueKey('material-app'),
         debugShowCheckedModeBanner: false,
         initialRoute: '/',

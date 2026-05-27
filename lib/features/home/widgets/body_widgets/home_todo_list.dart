@@ -117,8 +117,7 @@ class ReOrderableStateChangerWidget extends StatelessWidget {
           );
         }
       },
-      listener: (c, state) {
-      },
+      listener: (c, state) {},
     );
   }
 }

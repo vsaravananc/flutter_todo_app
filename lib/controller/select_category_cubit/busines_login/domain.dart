@@ -6,7 +6,7 @@ class SelectCategoryReadDomain extends ReadSelectCategoryRepo<CategoryModel> {
   final SelectCategoryReadData fetchData;
   SelectCategoryReadDomain({required this.fetchData});
   @override
-  Future<CategoryModel> selectCategoryById(int id) async{
+  Future<CategoryModel> selectCategoryById(int id) async {
     try {
       final categoryModel = await fetchData.selectCategoryById(id);
       return categoryModel;

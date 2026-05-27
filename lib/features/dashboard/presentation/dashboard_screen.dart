@@ -27,10 +27,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
     }
   }
 
-   void _startShowCase() {
+  void _startShowCase() {
     Future.delayed(const Duration(milliseconds: 1350), () {
-      if(mounted) {
-        AppShowCase.startShowCaseing(MediaQuery.sizeOf( context).width > 600);
+      if (mounted) {
+        AppShowCase.startShowCaseing(MediaQuery.sizeOf(context).width > 600);
       }
     });
     SharedPreferenceServices.instance.setValue(key: "SHOW_CASE", value: true);
@@ -51,7 +51,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
     return LayoutBuilder(
       builder: (context, constraint) {
         if (constraint.maxWidth > 600) {
-
           return const TableView();
         }
         return BlocBuilder<DashboardCubit, int>(

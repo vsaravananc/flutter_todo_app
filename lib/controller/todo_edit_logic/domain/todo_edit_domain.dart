@@ -5,7 +5,11 @@ class TodoEditDomain extends UpdateTodoEditRepo {
   final TodoEditData todoEditData;
   TodoEditDomain({required this.todoEditData});
   @override
-  Future<void> updateTodo({required String id, required String value,required String key}) async {
-    await todoEditData.updateTodo(id: id, value: value,key: key);
+  Future<void> updateTodo({
+    required String id,
+    required String value,
+    required String key,
+  }) async {
+    await todoEditData.updateTodo(id: id, value: value, key: key);
   }
 }

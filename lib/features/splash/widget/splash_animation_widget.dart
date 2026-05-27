@@ -44,15 +44,13 @@ class SplashAnimationAppWidget extends StatelessWidget {
           },
           child: value
               ? Padding(
-                padding: const EdgeInsets.only(left: 2),
-                child: Text(
+                  padding: const EdgeInsets.only(left: 2),
+                  child: Text(
                     AppWords.appName,
                     key: const ValueKey('app-name'),
-                    style: Theme.of(
-                      context,
-                    ).textTheme.headlineSmall,
+                    style: Theme.of(context).textTheme.headlineSmall,
                   ),
-              )
+                )
               : const SizedBox.shrink(key: ValueKey('sized-box')),
         );
       },

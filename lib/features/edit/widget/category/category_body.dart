@@ -19,7 +19,7 @@ class CategoryEditBody extends StatelessWidget {
               itemBuilder: (context, index) {
                 return CategoryEditCard(
                   key: ValueKey('category_edit_card_$index'),
-                  categoryModel:state.categories[index],
+                  categoryModel: state.categories[index],
                 );
               },
               scrollDirection: Axis.vertical,

@@ -13,7 +13,8 @@ class Routes {
   static Map<String, Widget Function(BuildContext)> routed = {
     splashScreen: (context) => const SplashScreen(key: Key('splash-screen')),
     welcomScreen: (context) => const WelcomeScreen(key: Key('welcome-screen')),
-    dashboardScreen: (context) => const DashboardScreen(key: Key('dashboard-screen')),
+    dashboardScreen: (context) =>
+        const DashboardScreen(key: Key('dashboard-screen')),
   };
 
   static Route? onGenerateRoute(settings) {

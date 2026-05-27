@@ -1,4 +1,3 @@
-
 import 'package:todoapp/core/enum/task_enum.dart';
 
 extension TaskExtension on TaskEnum {

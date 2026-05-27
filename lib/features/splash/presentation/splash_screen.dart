@@ -35,10 +35,12 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Future<void> changeTheme() async {
-    SystemChrome.setSystemUIOverlayStyle( SystemUiOverlayStyle(
-      statusBarIconBrightness: Brightness.dark,
-      systemNavigationBarColor: LightColors.tertiaryBackgroundColor
-    ));
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(
+        statusBarIconBrightness: Brightness.dark,
+        systemNavigationBarColor: LightColors.tertiaryBackgroundColor,
+      ),
+    );
     bool isLoged = SharedPreferenceServices.instance.isLogedIN(
       key: "IS_LOGED_IN",
     );

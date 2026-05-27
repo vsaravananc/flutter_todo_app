@@ -19,7 +19,7 @@ class TodoModel {
     required this.sortOrder,
   });
 
-  factory TodoModel.fromJson({required Map<String,dynamic> json}){
+  factory TodoModel.fromJson({required Map<String, dynamic> json}) {
     return TodoModel(
       id: json['id'],
       title: json['title'],
@@ -28,7 +28,7 @@ class TodoModel {
       isDone: (json['isDone'] as int) == 1,
       createdAt: json['createdAt'],
       closedAt: json['closedAt'] ?? '',
-      sortOrder: json['sortOrder'] ?? 0
+      sortOrder: json['sortOrder'] ?? 0,
     );
   }
 }

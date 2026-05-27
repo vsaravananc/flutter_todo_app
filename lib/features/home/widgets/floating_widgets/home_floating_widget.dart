@@ -76,7 +76,7 @@ class HomeFloatingWidget extends StatelessWidget {
         context: context,
         builder: (_) => const TaskTodoBottomsheet(
           key: const ValueKey("todo_edit_screen_holder-android11"),
-        ),   
+        ),
       );
     } else {
       showCupertinoSheet(
@@ -112,15 +112,18 @@ class TaskTodoBottomsheet extends StatelessWidget {
 
     return Container(
       key: const ValueKey('Task-todo-bottomsheet-container'),
-      constraints:  BoxConstraints(minHeight: 135 + bottomValue, maxHeight: 205 + bottomValue),
-      padding:  const EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 5),
+      constraints: BoxConstraints(
+        minHeight: 135 + bottomValue,
+        maxHeight: 205 + bottomValue,
+      ),
+      padding: const EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 5),
       margin: EdgeInsets.only(bottom: MediaQuery.viewInsetsOf(context).bottom),
       width: double.infinity,
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
         color: Theme.of(context).colorScheme.onTertiary,
       ),
-      child:  SafeArea(
+      child: SafeArea(
         top: false,
         left: Platform.isIOS,
         right: Platform.isIOS,

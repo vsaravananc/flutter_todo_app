@@ -5,8 +5,12 @@ class TodoEditData extends UpdateTodoEditRepo {
   final Database database;
   TodoEditData({required this.database});
   @override
-  Future<void> updateTodo({required String id, required String value,required String key}) async {
-     await database.update(
+  Future<void> updateTodo({
+    required String id,
+    required String value,
+    required String key,
+  }) async {
+    await database.update(
       'todos',
       {key: value},
       where: 'id = ?',

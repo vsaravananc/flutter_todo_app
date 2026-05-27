@@ -7,23 +7,18 @@ class PieChartModel extends Equatable {
   List<Object?> get props => listOfPieChartValue;
 }
 
-
 class PieChartValueModel extends Equatable {
   final String label;
   final int value;
-  const PieChartValueModel({required this.label,required this.value});
+  const PieChartValueModel({required this.label, required this.value});
   @override
-  List<Object?> get props => [
-    label,value
-  ];
+  List<Object?> get props => [label, value];
 
-  factory PieChartValueModel.fromJson(Map<String,dynamic>json) {
+  factory PieChartValueModel.fromJson(Map<String, dynamic> json) {
     return PieChartValueModel(label: json['label'], value: json['value']);
   }
 
-  Map<String,double> toJson(){
-    return {
-      label : double.parse("$value")
-    };
+  Map<String, double> toJson() {
+    return {label: double.parse("$value")};
   }
 }

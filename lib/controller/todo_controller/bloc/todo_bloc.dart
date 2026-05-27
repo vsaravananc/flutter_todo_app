@@ -15,7 +15,6 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
   final DeleteTodoDomain deleteTodoDomain;
   final ReOrderTodoDomain reOrderTodoDomain;
 
-
   TodoBloc({
     required this.readAllListOfTodos,
     required this.updateTodo,

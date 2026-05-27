@@ -25,7 +25,6 @@ class DeviceInfoImpl implements DeviceInfo {
     AndroidDeviceInfo androidInfo = await _deviceInfo.androidInfo;
     return androidInfo.version.sdkInt < 31;
   }
-
 }
 
 class DeviceProvider extends InheritedNotifier<ValueNotifier<bool>> {

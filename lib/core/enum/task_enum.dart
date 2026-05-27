@@ -1,5 +1,1 @@
-
-enum TaskEnum {
-  Completed,
-  Pending
-}
+enum TaskEnum { Completed, Pending }

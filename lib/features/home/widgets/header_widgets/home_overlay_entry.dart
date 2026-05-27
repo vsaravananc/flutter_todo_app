@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:todoapp/core/dimensions/dimension.dart';
-import 'package:todoapp/core/platform/device_verion.dart';
 import 'package:todoapp/features/edit/presentation/category_edit_screen.dart';
 import 'package:todoapp/widgets/custom_pop_widget.dart';
 

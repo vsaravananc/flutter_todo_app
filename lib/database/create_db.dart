@@ -20,7 +20,6 @@ class CreateDataBase {
   }
 
   Future<Database> _initDB() async {
-
     final dbPath = await getDatabasesPath();
 
     final path = join(dbPath, 'todo.db');
@@ -38,7 +37,6 @@ class CreateDataBase {
   }
 
   Future _createDB(Database db, int version) async {
-
     await db.execute('''
       CREATE TABLE categories (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -65,7 +63,6 @@ class CreateDataBase {
   }
 
   Future<void> _preLoadCategoryData(Database database) async {
-    
     final batch = database.batch();
 
     final List<String> defaultcategoriesList = <String>[
@@ -85,7 +82,7 @@ class CreateDataBase {
       'isDone': 0,
       'categoryId': 1,
       'createdAt': DateTime.now().toString(),
-      'closedAt': null
+      'closedAt': null,
     });
     await batch.commit(noResult: true);
   }

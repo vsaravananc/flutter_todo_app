@@ -49,7 +49,6 @@ abstract final class NotificationPermission {
 
     await _flutterLocalNotificationsPlugin.initialize(
       settings: initializationSettings,
-
     );
 
     final androidNotification = _flutterLocalNotificationsPlugin
@@ -129,5 +128,4 @@ abstract final class NotificationPermission {
     final permission = await Permission.notification.request();
     return permission.isGranted;
   }
-
 }

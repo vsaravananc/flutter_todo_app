@@ -42,6 +42,7 @@ class HomeCategoryHeader extends StatelessWidget
       ),
     );
   }
+
   @override
   Size get preferredSize => const Size.fromHeight(50);
 }
@@ -71,11 +72,9 @@ class _HomeCategoryHeaderChipListState extends State<HomeCategoryHeaderChipList>
     );
 
     animationController.forward();
-    
+
     super.initState();
   }
-
- 
 
   @override
   void dispose() {

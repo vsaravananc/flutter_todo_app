@@ -32,7 +32,7 @@ class _HomeFloatingBottomTaskWidgetState
     super.dispose();
   }
 
-   void _insertTodo(BuildContext context,int id) {
+  void _insertTodo(BuildContext context, int id) {
     if (_textEditingController.text.trim().isEmpty) return;
 
     int categoryId = (context.read<HomeBloc>().state as LoadedCategoryState)
@@ -85,7 +85,7 @@ class _HomeFloatingBottomTaskWidgetState
                 const Spacer(),
                 GestureDetector(
                   onTap: () {
-                      _insertTodo(context,model.id);
+                    _insertTodo(context, model.id);
                   },
                   child: HugeIcon(
                     icon: HugeIcons.strokeRoundedSent,
@@ -109,15 +109,13 @@ class _HomeFloatingBottomTaskWidgetState
 class TextHolderWidget extends StatelessWidget {
   final int id;
   final TextEditingController textEditingController;
-  final void Function(BuildContext context,int id) insertTodo;
+  final void Function(BuildContext context, int id) insertTodo;
   const TextHolderWidget({
     super.key,
     required this.id,
     required this.textEditingController,
     required this.insertTodo,
   });
-
- 
 
   @override
   Widget build(BuildContext context) {
@@ -126,7 +124,7 @@ class TextHolderWidget extends StatelessWidget {
       child: TextField(
         controller: textEditingController,
         autofocus: true,
-        onSubmitted: (_) => insertTodo(context,id),
+        onSubmitted: (_) => insertTodo(context, id),
         style: const TextStyle(fontSize: 20),
         maxLines: null,
         minLines: null,

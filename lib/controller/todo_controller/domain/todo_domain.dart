@@ -102,11 +102,15 @@ class DeleteTodoDomain extends WriteTodoDomain<DeleteTodoEvent> {
   }
 }
 
-class  ReOrderTodoDomain extends InsertTodoDomain<ReOrderTodoList,void>{
+class ReOrderTodoDomain extends InsertTodoDomain<ReOrderTodoList, void> {
   final ReOrderTodoData reOrder;
   ReOrderTodoDomain({required this.reOrder});
   @override
-  Future<void> trigger(ReOrderTodoList event, Emitter<TodoState> emit, TodoState state) async{
+  Future<void> trigger(
+    ReOrderTodoList event,
+    Emitter<TodoState> emit,
+    TodoState state,
+  ) async {
     await reOrder.trigger(0, event.todoList);
   }
 }
