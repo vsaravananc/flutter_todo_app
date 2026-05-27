@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,9 +7,7 @@ import 'package:todoapp/controller/category_controller/bloc/home_bloc_bloc.dart'
 import 'package:todoapp/controller/category_controller/data/model/category_model.dart';
 import 'package:todoapp/controller/select_category_cubit/selectcategory_cubit.dart';
 import 'package:todoapp/controller/todo_controller/bloc/todo_bloc.dart';
-import 'package:todoapp/core/platform/device_verion.dart';
 import 'package:todoapp/core/services/app_show_case.dart';
-import 'package:todoapp/core/services/shared_preference_services.dart';
 import 'package:todoapp/features/home/widgets/header_widgets/home_category_bottomsheet.dart';
 import 'package:todoapp/features/home/widgets/header_widgets/home_choice_chip.dart';
 

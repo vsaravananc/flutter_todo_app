@@ -4,7 +4,6 @@ import 'package:todoapp/controller/todo_controller/data/model/todo_model.dart';
 import 'package:todoapp/controller/todo_controller/domain/todo_domain.dart';
 import 'package:todoapp/core/permissions/notification_permission.dart';
 import 'package:todoapp/core/services/error_handeling_service.dart';
-
 part 'todo_event.dart';
 part 'todo_state.dart';
 
@@ -15,6 +14,7 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
   final AddTodoDomain insertTodo;
   final DeleteTodoDomain deleteTodoDomain;
   final ReOrderTodoDomain reOrderTodoDomain;
+
 
   TodoBloc({
     required this.readAllListOfTodos,
@@ -38,19 +38,9 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
     );
 
     on<AddTodoEvent>((event, emit) async {
-      if (reminderAt.isNotEmpty) {
-        event = event.copyWith(reminderAt: reminderAt);
-         NotificationPermission.scheduleNotification(
-          DateTime.now().add(const Duration(seconds: 30)),
-        );
-      }
+      _scheduleNotification(reminderAt, event);
       bool isUpdated = await insertTodo.trigger(event, emit, state);
-       NotificationPermission.showNotification(
-        id: event.categoryId,
-        title: "Add Task",
-        body: event.todo,
-      );
-
+      _instedNotification(event);
       reminderAt = "";
       _fetchTheList(isUpdated, event.filterBy);
     });
@@ -77,5 +67,24 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
     } else if (isUpdated && categoryId != 1) {
       add(FilterTodoEvent(categoryId: categoryId));
     }
+  }
+
+  void _scheduleNotification(String reminder, AddTodoEvent event) {
+    if (reminder.isEmpty) return;
+    final id = DateTime.now().microsecondsSinceEpoch.remainder(1000);
+    NotificationPermission.scheduleNotification(
+      id: id,
+      title: "Reminder for ${event.todo}",
+      body: "Don't forget to complete your task!",
+      scheduleTime: DateTime.parse(reminderAt),
+    );
+  }
+
+  void _instedNotification(AddTodoEvent event) {
+    NotificationPermission.showNotification(
+      id: event.categoryId,
+      title: "Add Task",
+      body: event.todo,
+    );
   }
 }

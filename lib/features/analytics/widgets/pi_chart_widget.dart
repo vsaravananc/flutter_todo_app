@@ -18,20 +18,23 @@ class PiChartWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
-          decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.tertiary,
-            borderRadius: BorderRadius.circular(16),
-          ),
-          child: BlocBuilder<AnalysticBloc, AnalysticState>(
-            builder: (context, state) {
-              if (state is! AnalysticLoaded) return const SizedBox.shrink();
-              Map<String, double> dataMap = {};
-              for (var element in state.pieChartModel.listOfPieChartValue) {
-                dataMap.addAll(element.toJson());
-              }
-              return Row(
+    return BlocBuilder<AnalysticBloc, AnalysticState>(
+      builder: (context, state) {
+        if (state is! AnalysticLoaded) return const SizedBox.shrink();
+        Map<String, double> dataMap = {};
+        for (var element in state.pieChartModel.listOfPieChartValue) {
+          dataMap.addAll(element.toJson());
+        }
+        if(dataMap.isEmpty){
+          return const SizedBox.shrink();
+        }
+        return Container(
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.tertiary,
+                borderRadius: BorderRadius.circular(16),
+              ),
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   SizedBox(
@@ -44,7 +47,6 @@ class PiChartWidget extends StatelessWidget {
                         dataMap: dataMap,
                         legendOptions: const LegendOptions(showLegends: false),
                         ringStrokeWidth: 35,
-
                         chartValuesOptions: const ChartValuesOptions(
                           showChartValues: false,
                         ),
@@ -75,16 +77,16 @@ class PiChartWidget extends StatelessWidget {
                     }).toList(),
                   ),
                 ],
-              );
-            },
-          ),
-        )
-        .animate()
-        .fadeIn(duration: const Duration(milliseconds: 450))
-        .move(
-          begin: const Offset(0, 8),
-          end: const Offset(0, 0),
-          duration: const Duration(milliseconds: 450),
-        );
+              ),
+            )
+            .animate()
+            .fadeIn(duration: const Duration(milliseconds: 450))
+            .move(
+              begin: const Offset(0, 8),
+              end: const Offset(0, 0),
+              duration: const Duration(milliseconds: 450),
+            );
+      },
+    );
   }
 }

@@ -1,7 +1,9 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:timezone/data/latest.dart' as tl;
 import 'package:timezone/timezone.dart' as tz;
+import 'package:flutter_timezone/flutter_timezone.dart';
 
 abstract final class NotificationPermission {
   static const addTaskNotificationChannelNameID = "0001";
@@ -42,10 +44,12 @@ abstract final class NotificationPermission {
         InitializationSettings(android: _androidInitializationSettings);
 
     tl.initializeTimeZones();
-    tz.setLocalLocation(tz.getLocation('Asia/Kolkata'));
+    final timezone = await FlutterTimezone.getLocalTimezone();
+    tz.setLocalLocation(tz.getLocation(timezone.identifier));
 
     await _flutterLocalNotificationsPlugin.initialize(
       settings: initializationSettings,
+
     );
 
     final androidNotification = _flutterLocalNotificationsPlugin
@@ -83,7 +87,12 @@ abstract final class NotificationPermission {
     );
   }
 
-  static Future<void> scheduleNotification(DateTime scheduleTime) async {
+  static Future<void> scheduleNotification({
+    required int id,
+    required String title,
+    required String body,
+    required DateTime scheduleTime,
+  }) async {
     if (!(await requestNotification())) return;
 
     const AndroidNotificationDetails androidDetails =
@@ -102,25 +111,17 @@ abstract final class NotificationPermission {
 
     final scheduledDate = tz.TZDateTime.from(scheduleTime, tz.local);
 
-    if (scheduledDate.isBefore(tz.TZDateTime.now(tz.local))) {
-      print("Error: Scheduled time is in the past");
-      return;
-    }
-
-    print("Now: ${DateTime.now()}");
-    print("Scheduled: $scheduledDate");
-
     try {
       await _flutterLocalNotificationsPlugin.zonedSchedule(
-        id: 9987,
-        title: "Reminder",
-        body: "Scheduled notification working",
+        id: id,
+        title: title,
+        body: body,
         scheduledDate: scheduledDate,
         notificationDetails: notificationDetails,
-        androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+        androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
       );
     } catch (e) {
-      print("Error scheduling notification: $e");
+      debugPrint("Error scheduling notification: $e");
     }
   }
 
@@ -129,8 +130,4 @@ abstract final class NotificationPermission {
     return permission.isGranted;
   }
 
-  static Future<bool> allowScheduleExactAlarm() async {
-    final permission = await Permission.scheduleExactAlarm.request();
-    return permission.isGranted;
-  }
 }
