@@ -19,7 +19,6 @@ import 'package:todoapp/controller/todo_edit_logic/data/todo_edit_data.dart';
 import 'package:todoapp/controller/todo_edit_logic/domain/todo_edit_domain.dart';
 import 'package:todoapp/core/permissions/notification_permission.dart';
 import 'package:todoapp/core/platform/device_bottom.dart';
-// import 'package:todoapp/core/permissions/notification_permission.dart';
 import 'package:todoapp/core/platform/device_verion.dart';
 import 'package:todoapp/core/route/routes.dart';
 import 'package:todoapp/core/services/app_show_case.dart';
@@ -30,7 +29,6 @@ import 'package:todoapp/controller/category_controller/bloc/home_bloc_bloc.dart'
 import 'package:todoapp/controller/category_controller/data/use_case/home_data.dart';
 import 'package:todoapp/controller/category_controller/domain/home_domain.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
-import 'package:uuid/uuid.dart';
 
 Future<void> main() async {
   if (kReleaseMode == true) {

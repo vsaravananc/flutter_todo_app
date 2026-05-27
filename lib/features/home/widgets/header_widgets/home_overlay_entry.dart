@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:todoapp/core/dimensions/dimension.dart';
@@ -127,7 +129,7 @@ class HomecategoryBottomOverLayEntry extends StatelessWidget {
   }
 
   void triggerBottomSheet(BuildContext context) {
-    if (DeviceProvider.of(context)) {
+    if (Platform.isAndroid) {
       showModalBottomSheet(
         context: context,
         isScrollControlled: true,

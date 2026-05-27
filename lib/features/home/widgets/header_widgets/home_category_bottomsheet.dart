@@ -18,20 +18,25 @@ class HomeCategoryBottomsheet extends StatelessWidget {
     return Container(
       key: const ValueKey('home-category-bottomsheet-container'),
       height: 75 + bottomValue,
-      padding:  EdgeInsets.only(left: 10,right : 10, top: 10,bottom:  10 + bottomValue),
+      padding: const EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
       margin: EdgeInsets.only(bottom: MediaQuery.viewInsetsOf(context).bottom),
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
         color: Theme.of(context).colorScheme.onTertiary,
       ),
       width: double.infinity,
-      child: const Row(
-        children: [
-          HomeCategoryTextfield(),
-          HomeCategoryVerticalMore(
-            key: ValueKey('home-category-bottomsheet-kick-start-overlay-entry'),
-          ),
-        ],
+      child: const SafeArea(
+        top: false,
+        child: Row(
+          children: [
+            HomeCategoryTextfield(),
+            HomeCategoryVerticalMore(
+              key: ValueKey(
+                'home-category-bottomsheet-kick-start-overlay-entry',
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
