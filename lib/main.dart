@@ -31,12 +31,19 @@ import 'package:todoapp/controller/category_controller/domain/home_domain.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
 Future<void> main() async {
-  if (kReleaseMode == true) {
+  if (kReleaseMode != true) {
     await SentryFlutter.init(
+      
       (options) {
         options.dsn =
             'https://ff712c9132906bd2a58b5f5acbb456e1@o4510412501876736.ingest.de.sentry.io/4510412506792016';
         options.tracesSampleRate = 1.0;
+        options.attachScreenshot = true;
+        options.enableLogs = true;
+        options.debug = true;
+        options.replay.sessionSampleRate = 1.0;
+        options.replay.onErrorSampleRate = 1.0;
+        options.privacy.maskAllText = false;
       },
       appRunner: () {
         FlutterError.onError = (FlutterErrorDetails details) {
@@ -46,20 +53,39 @@ Future<void> main() async {
             message: SentryMessage("UI issues"),
           );
         };
+        PlatformDispatcher.instance.onError = (error, stack) {
+          debugPrint("\u001b[31mError from dispatcher: $error\u001b[0m");
+          debugPrint("\u001b[31mStackTrace from dispatcher: $stack\u001b[0m");
+          Sentry.captureException(
+            error,
+            stackTrace: stack,
+            message: SentryMessage("Platform issues"),
+          );
+          return true;
+        };
         runZonedGuarded(
           () async =>
-              runApp(await DependencyInjection.injectBloc(const MyApp())),
+              runApp(
+            await DependencyInjection.injectBloc(
+              DefaultAssetBundle(
+                bundle: SentryAssetBundle(),
+                child: SentryWidget(child: const MyApp()),
+              ),
+            ),
+          ),
           (e, s) {
+            debugPrint("\u001b[31mError: $e\u001b[0m");
+            debugPrint("\u001b[31mStackTrace: $s\u001b[0m");
             Sentry.captureException(
               e,
               stackTrace: s,
-              message: SentryMessage("Zoned issues"),
             );
           },
         );
       },
     );
   } else {
+
     runApp(await DependencyInjection.injectBloc(const MyApp()));
   }
 }
@@ -76,6 +102,7 @@ class MyApp extends StatelessWidget {
     return DeviceBottom(
       notifier: deviceBottom,
       child: MaterialApp(
+        navigatorObservers: [SentryNavigatorObserver()],
         builder: (context, child) =>
             MediaQuery.withNoTextScaling(child: child!),
         key: const ValueKey('material-app'),
@@ -132,6 +159,8 @@ class DependencyInjection {
     FetchAllTodoData fetchAllTodoData = FetchAllTodoData(database: database);
     ValueNotifier<bool> deviceInfo = ValueNotifier(false);
     deviceInfo.value = await info.isAndroid11;
+
+
     return MultiBlocProvider(
       providers: [
         BlocProvider<HomeBloc>(
@@ -189,5 +218,7 @@ class DependencyInjection {
       ],
       child: DeviceProvider(notifier: deviceInfo, child: child),
     );
+
+    
   }
 }

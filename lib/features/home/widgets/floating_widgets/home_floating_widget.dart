@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:showcaseview/showcaseview.dart';
 import 'package:todoapp/controller/analystic_bloc/bloc/analystic_bloc.dart';
 import 'package:todoapp/controller/todo_controller/bloc/todo_bloc.dart';
@@ -47,7 +48,8 @@ class HomeFloatingWidget extends StatelessWidget {
               elevation: 2,
               shape: const CircleBorder(),
               onPressed: () {
-                triggerBottomSheet(context);
+                // triggerBottomSheet(context);
+                Sentry.logger.fmt.info( 'MIS - MATCH TYPE :',['sentry']);
               },
               child: Icon(
                 Icons.add,
