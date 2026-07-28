@@ -48,8 +48,8 @@ class HomeFloatingWidget extends StatelessWidget {
               elevation: 2,
               shape: const CircleBorder(),
               onPressed: () {
-                // triggerBottomSheet(context);
-                Sentry.logger.fmt.info( 'MIS - MATCH TYPE :',['sentry']);
+                triggerBottomSheet(context);
+                // Sentry.logger.fmt.info( 'MIS - MATCH TYPE :',['sentry']);
               },
               child: Icon(
                 Icons.add,
