@@ -57,7 +57,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
           builder: (context, state) {
             return Scaffold(
               body: dashBoardScreens(state),
-              bottomNavigationBar: BottomNavigationWidget(
+              floatingActionButtonLocation:
+                  FloatingActionButtonLocation.centerDocked,
+              floatingActionButton: BottomNavigationWidget(
                 key: const ValueKey("bottom_navigation_custom"),
                 currentIndex: state,
                 onTap: (index) {
