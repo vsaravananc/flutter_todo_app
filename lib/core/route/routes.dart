@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todoapp/core/pagebuilder/page_route_builder.dart';
 import 'package:todoapp/features/dashboard/presentation/dashboard_screen.dart';
+import 'package:todoapp/features/gemma/presentation/screen/gemma_screen.dart';
 import 'package:todoapp/features/home/presentation/home_screen.dart';
 import 'package:todoapp/features/splash/presentation/splash_screen.dart';
 import 'package:todoapp/features/welcome/presentation/welcome_screen.dart';
@@ -15,7 +16,9 @@ class Routes {
     welcomScreen: (context) => const WelcomeScreen(key: Key('welcome-screen')),
     dashboardScreen: (context) =>
         const DashboardScreen(key: Key('dashboard-screen')),
+    gemmaScreen: (context) => const GemmaScreenAI(key: Key('gemma-screen')),
   };
+  static const String gemmaScreen = '/gemmaAi';
 
   static Route? onGenerateRoute(settings) {
     switch (settings.name) {

@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:showcaseview/showcaseview.dart';
+import 'package:todoapp/core/route/routes.dart';
 import 'package:todoapp/core/services/app_show_case.dart';
-import 'package:todoapp/features/home/widgets/floating_widgets/home_floating_widget.dart';
 
 class BottomNavigationWidget extends StatelessWidget {
   final Function(int) onTap;
@@ -197,7 +197,7 @@ class BottomNavigationWidget extends StatelessWidget {
                 ),
               ),
               const Spacer(),
-              const HomeFloatingWidget(),
+              const GemmaAI(),
             ],
           );
         },
@@ -231,6 +231,33 @@ class CustomButtonIcon extends StatelessWidget {
         borderRadius: BorderRadius.circular(9999),
       ),
       child: child,
+    );
+  }
+}
+
+class GemmaAI extends StatelessWidget {
+  const GemmaAI({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    return FloatingActionButton(
+      key: const ValueKey('home-floating-action-button-add-todo'),
+      splashColor: theme.colorScheme.surface,
+      elevation: 0.5,
+      backgroundColor: theme.colorScheme.surface,
+      shape: const CircleBorder(),
+      onPressed: () {
+        Navigator.pushNamed(
+          context,
+          Routes.gemmaScreen,
+        );
+      },
+      child: HugeIcon(
+        icon: HugeIcons.strokeRoundedArtificialIntelligence08,
+        color: theme.colorScheme.primary,
+        size: 24,
+      ),
     );
   }
 }

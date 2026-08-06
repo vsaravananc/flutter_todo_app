@@ -4,6 +4,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_gemma/core/api/flutter_gemma.dart';
+import 'package:flutter_gemma_mediapipe/flutter_gemma_mediapipe.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:todoapp/controller/analystic_bloc/bloc/analystic_bloc.dart';
 import 'package:todoapp/controller/analystic_bloc/usecase/get_analystic.dart';
@@ -120,6 +123,7 @@ class MyApp extends StatelessWidget {
 
 class DependencyInjection {
   static Future<Widget> injectBloc(Widget child) async {
+    await dotenv.load(fileName: 'token.env');
     final DeviceInfoPlugin infoPlugin = DeviceInfoPlugin();
     WidgetsFlutterBinding.ensureInitialized();
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
@@ -159,6 +163,11 @@ class DependencyInjection {
     ValueNotifier<bool> deviceInfo = ValueNotifier(false);
     deviceInfo.value = await info.isAndroid11;
 
+    await FlutterGemma.initialize(
+      inferenceEngines: const [MediaPipeEngine()],
+      huggingFaceToken: dotenv.get('HUGGINGFACETOKEN'),
+      maxDownloadRetries: 10,
+    );
 
     return MultiBlocProvider(
       providers: [

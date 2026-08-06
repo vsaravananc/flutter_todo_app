@@ -59,6 +59,9 @@ dependencies:
   table_calendar: ^3.2.0
   timezone: ^0.11.0
   flutter_timezone: ^5.0.2
+  flutter_dotenv: ^6.0.1
+  flutter_gemma: ^1.5.2
+  flutter_gemma_mediapipe: ^1.0.4
 
 dev_dependencies:
   sentry_dart_plugin: ^3.2.0
@@ -87,6 +90,7 @@ flutter:
   assets:
     - assets/images/
     - assets/audio/
+    - token.env
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
