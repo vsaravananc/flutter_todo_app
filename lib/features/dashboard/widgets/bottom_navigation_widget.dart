@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:showcaseview/showcaseview.dart';
 import 'package:todoapp/core/services/app_show_case.dart';
@@ -33,9 +34,9 @@ class BottomNavigationWidget extends StatelessWidget {
                 flex: 4,
                 child: GestureDetector(
                   onHorizontalDragUpdate: (details) {
-                    if (details.delta.dx > 1) {
+                    if (details.delta.dx < 1.6 && details.delta.dx > 0) {
                       onTap(1);
-                    } else if (details.delta.dx < -1) {
+                    } else if (details.delta.dx < -2) {
                       onTap(0);
                     }
                   },
@@ -62,30 +63,63 @@ class BottomNavigationWidget extends StatelessWidget {
                           child: IconButton(
                             icon: Column(
                               children: [
-                                const HugeIcon(
+                                    HugeIcon(
                                   icon: HugeIcons.strokeRoundedHome01,
-                                ),
+                                          strokeWidth: currentIndex == 0
+                                              ? 2
+                                              : 1.5,
+                                        )
+                                        .animate(
+                                          target: currentIndex == 0 ? 1 : 0,
+                                        )
+                                        .scale(
+                                          begin: const Offset(.9, .9),
+                                          end: const Offset(1, 1),
+                                          duration: 250.ms,
+                                          curve: Curves.easeOutBack,
+                                        ),
                                 Text(
                                   "Home",
-                                  style: Theme.of(context).textTheme.labelSmall
-                                      ?.copyWith(
-                                        color: currentIndex == 0
-                                            ? Theme.of(
-                                                context,
-                                              ).colorScheme.primary
-                                            : Theme.of(
-                                                context,
+                                          style: currentIndex == 0
+                                              ? Theme.of(context)
+                                                    .textTheme
+                                                    .labelMedium
+                                                    ?.copyWith(
+                                                      color: Theme.of(
+                                                        context,
+                                                      ).colorScheme.onPrimary,
+                                                    )
+                                              : Theme.of(context)
+                                                    .textTheme
+                                                    .labelSmall
+                                                    ?.copyWith(
+                                                      color: Theme.of(context,
                                               ).textTheme.labelSmall?.color,
-                                      ),
-                                ),
+                                                    ),
+                                        )
+                                        .animate(
+                                          target: currentIndex == 0 ? 1 : 0,
+                                        )
+                                        .fade(duration: 180.ms)
+                                        .scale(
+                                          begin: const Offset(.95, .95),
+                                          end: const Offset(1, 1),
+                                        ),
                               ],
                             ),
                             onPressed: () => onTap(0),
                             color: currentIndex == 0
-                                ? Theme.of(context).colorScheme.primary
+                                    ? Theme.of(context).colorScheme.onPrimary
                                 : Theme.of(context).iconTheme.color,
                           ),
-                        ),
+                            )
+                            .animate(target: currentIndex == 0 ? 1 : 0)
+                            .moveY(
+                              begin: 6,
+                              end: 0,
+                              duration: 300.ms,
+                              curve: Curves.easeOutCubic,
+                            ),
                         CustomButtonIcon(
                           isSelected: currentIndex == 1,
                           width: width,
@@ -97,31 +131,66 @@ class BottomNavigationWidget extends StatelessWidget {
                             child: IconButton(
                               icon: Column(
                                 children: [
-                                  const HugeIcon(
+                                      HugeIcon(
                                     icon: HugeIcons.strokeRoundedAnalytics01,
-                                  ),
+                                            strokeWidth: currentIndex == 1
+                                                ? 2
+                                                : 1.5,
+                                          )
+                                          .animate(
+                                            target: currentIndex == 1 ? 1 : 0,
+                                          )
+                                          .scale(
+                                            begin: const Offset(.9, .9),
+                                            end: const Offset(1, 1),
+                                            duration: 250.ms,
+                                            curve: Curves.easeOutBack,
+                                          ),
                                   Text(
                                     "Analytics",
-                                    style: Theme.of(context).textTheme.labelSmall
-                                        ?.copyWith(
-                                          color: currentIndex == 1
-                                              ? Theme.of(
-                                                  context,
-                                                ).colorScheme.primary
-                                              : Theme.of(
+                                            style: currentIndex == 1
+                                                ? Theme.of(context)
+                                                      .textTheme
+                                                      .labelMedium
+                                                      ?.copyWith(
+                                                        color: Theme.of(
+                                                          context,
+                                                        ).colorScheme.onPrimary,
+                                                      )
+                                                : Theme.of(
+                                                context)
+                                                      .textTheme
+                                                      .labelSmall
+                                                      ?.copyWith(
+                                                        color: Theme.of(
                                                   context,
                                                 ).textTheme.labelSmall?.color,
                                         ),
-                                  ),
+                                          )
+                                          .animate(
+                                            target: currentIndex == 1 ? 1 : 0,
+                                          )
+                                          .fade(duration: 180.ms)
+                                          .scale(
+                                            begin: const Offset(.95, .95),
+                                            end: const Offset(1, 1),
+                                          ),
                                 ],
                               ),
                               onPressed: () => onTap(1),
                               color: currentIndex == 1
-                                  ? Theme.of(context).colorScheme.primary
+                                      ? Theme.of(context).colorScheme.onPrimary
                                   : Theme.of(context).iconTheme.color,
                             ),
                           ),
-                        ),
+                            )
+                            .animate(target: currentIndex == 1 ? 1 : 0)
+                            .moveY(
+                              begin: 6,
+                              end: 0,
+                              duration: 300.ms,
+                              curve: Curves.easeOutCubic,
+                            ),
                       ],
                     ),
                   ),
@@ -150,14 +219,16 @@ class CustomButtonIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return AnimatedContainer(
+      duration: 280.ms,
+      curve: Curves.easeOutCubic,
       height: kToolbarHeight + (Platform.isIOS ? 0 : 2),
       width: width,
       decoration: BoxDecoration(
         color: isSelected
-            ? Theme.of(context).colorScheme.primary.withValues(alpha: 0.1)
+            ? Theme.of(context).colorScheme.primary.withValues(alpha: 0.8)
             : Colors.transparent,
-        borderRadius: BorderRadius.circular(9e3),
+        borderRadius: BorderRadius.circular(9999),
       ),
       child: child,
     );

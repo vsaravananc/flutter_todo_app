@@ -31,9 +31,8 @@ import 'package:todoapp/controller/category_controller/domain/home_domain.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
 Future<void> main() async {
-  if (kReleaseMode != true) {
+  if (kReleaseMode) {
     await SentryFlutter.init(
-      
       (options) {
         options.dsn =
             'https://ff712c9132906bd2a58b5f5acbb456e1@o4510412501876736.ingest.de.sentry.io/4510412506792016';
