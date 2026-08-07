@@ -1,7 +1,9 @@
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:showcaseview/showcaseview.dart';
 import 'package:todoapp/controller/category_controller/bloc/home_bloc_bloc.dart';
 import 'package:todoapp/controller/category_controller/data/model/category_model.dart';
@@ -14,52 +16,75 @@ import 'package:todoapp/features/home/widgets/header_widgets/home_choice_chip.da
 ///
 ///  FILE_PURPOSE: HOME CATEGORY HEADER TO SELECT ANY CATEGORY
 ///
-class HomeCategoryHeader extends StatelessWidget
-    implements PreferredSizeWidget {
-  const HomeCategoryHeader({super.key});
+class PrivateCategory extends StatelessWidget {
+  const PrivateCategory({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return PreferredSize(
-      key: const ValueKey('home-category-header-category-holder'),
-      preferredSize: preferredSize,
-      child: Material(
-        color: Theme.of(context).scaffoldBackgroundColor,
-        child: const SafeArea(
-          key: ValueKey('home-category-header-safe-area'),
-          child: Row(
-            key: ValueKey('home-category-header-row'),
-            children: [
-              HomeCategoryHeaderChipList(
-                key: ValueKey('home-category-header-chip-list'),
-              ),
-              HomeCategoryHeaderAddIcon(
-                key: ValueKey('home-category-header-add-icon'),
-              ),
-            ],
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(16, 20, 16, 0),
+      child: Column(
+        spacing: 4,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(left: 6,right: 10),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    "PRIVATE",
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                GestureDetector(
+                  behavior: HitTestBehavior.opaque,
+                  onTap: () {},
+                  child: const SizedBox(
+                    height: 30,
+                    width: 30,
+                    child: Padding(
+                      padding: EdgeInsets.all(3),
+                      child: HugeIcon(icon: HugeIcons.strokeRoundedAdd01),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
-        ),
+          AnimatedContainer(
+            duration: 250.ms,
+            padding: const EdgeInsets.all(10),
+            decoration: ShapeDecoration(
+              shape: ContinuousRectangleBorder(
+                borderRadius: BorderRadius.circular(45),
+              ),
+              color: Theme.of(context).cardColor,
+            ),
+            child: const PrivateCategoryList(),
+          ),
+        ],
       ),
     );
   }
-
-  @override
-  Size get preferredSize => const Size.fromHeight(58);
 }
 
 ///
 /// HOME CATEGORY HEADER CHIP LIST PURPOSE: ANIMATE LIST OF CATEGORIES TO SELECT
 ///
+///
+///. [ NOTE: (PrivateCategoryChipList) HAVE NOT USED IN THE APP, BUT IT IS A GOOD PRACTICE TO ANIMATE THE LIST OF CATEGORIES TO SELECT ]
 
-class HomeCategoryHeaderChipList extends StatefulWidget {
-  const HomeCategoryHeaderChipList({super.key});
+class PrivateCategoryChipList extends StatefulWidget {
+  const PrivateCategoryChipList({super.key});
 
   @override
-  State<HomeCategoryHeaderChipList> createState() =>
-      _HomeCategoryHeaderChipListState();
+  State<PrivateCategoryChipList> createState() =>
+      _PrivateCategoryChipListState();
 }
 
-class _HomeCategoryHeaderChipListState extends State<HomeCategoryHeaderChipList>
+class _PrivateCategoryChipListState extends State<PrivateCategoryChipList>
     with SingleTickerProviderStateMixin {
   late AnimationController animationController;
   int selectedIndex = 0;
@@ -98,7 +123,7 @@ class _HomeCategoryHeaderChipListState extends State<HomeCategoryHeaderChipList>
           description:
               "View categories designed to keep your tasks clean, sorted, and clutter-free.",
 
-          child: const HomeCategoryHeaderList(
+          child: const PrivateCategoryList(
             key: const ValueKey('home-category-header-list'),
           ),
         ),
@@ -111,8 +136,8 @@ class _HomeCategoryHeaderChipListState extends State<HomeCategoryHeaderChipList>
 /// HOME CATEGORY HEADER LIST PURPOSE: LIST OF CATEGORIES TO SELECT
 ///
 
-class HomeCategoryHeaderList extends StatelessWidget {
-  const HomeCategoryHeaderList({super.key});
+class PrivateCategoryList extends StatelessWidget {
+  const PrivateCategoryList({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -124,8 +149,23 @@ class HomeCategoryHeaderList extends StatelessWidget {
       },
       builder: (context, state) {
         if (state is LoadedCategoryState) {
-          return ListView.builder(
-            key: const ValueKey('home-category-header-list-view'),
+          return ListView.separated(
+            separatorBuilder: (context, index) {
+              return Row(
+                children: [
+                  const Expanded(child: SizedBox(width: 1)),
+                  Expanded(
+                    flex: 6,
+                    child: Divider(
+                      color: Colors.grey.shade300,
+                      thickness: 0.2,
+                      height: 1,
+                    ),
+                  ),
+                ],
+              );
+            },
+            padding: const EdgeInsets.all(0),
             physics: const ClampingScrollPhysics(),
             shrinkWrap: true,
             addAutomaticKeepAlives: true,
@@ -134,6 +174,7 @@ class HomeCategoryHeaderList extends StatelessWidget {
             itemBuilder: (context, index) {
               CategoryModel categoryModel = state.categories[index];
               return HomeChoiceChip(
+                key: ValueKey('home-choice-chip-${categoryModel.id}'),
                 isSelected: state.selectedCategories.id == categoryModel.id,
                 categoryModel: categoryModel,
                 onSelected: () {
@@ -149,7 +190,7 @@ class HomeCategoryHeaderList extends StatelessWidget {
                 },
               );
             },
-            scrollDirection: Axis.horizontal,
+            scrollDirection: Axis.vertical,
             itemCount: state.categories.length,
           );
         } else {
@@ -164,8 +205,8 @@ class HomeCategoryHeaderList extends StatelessWidget {
 /// HOME CATEGORY HEADER ADD ICON PURPOSE: ADD NEW CATEGORYT TO LIST
 ///
 
-class HomeCategoryHeaderAddIcon extends StatelessWidget {
-  const HomeCategoryHeaderAddIcon({super.key});
+class PrivateCategoryAddIcon extends StatelessWidget {
+  const PrivateCategoryAddIcon({super.key});
 
   @override
   Widget build(BuildContext context) {

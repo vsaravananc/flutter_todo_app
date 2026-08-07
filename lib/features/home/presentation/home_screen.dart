@@ -107,8 +107,13 @@ class HomeScreenContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      appBar: HomeCategoryHeader(),
-      body: HomeTodoListWidget(),
+      // appBar: HomeCategoryHeader(),
+      body: Column(
+        children: [
+          const SizedBox(height: 40),
+          PrivateCategory(),
+        ],
+      ),
     );
   }
 }
