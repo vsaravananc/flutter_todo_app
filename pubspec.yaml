@@ -16,7 +16,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
-version: 1.0.0+11
+version: 1.0.0+12
 
 environment:
   sdk: ^3.9.2
@@ -101,25 +101,47 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
+    # - family: OpenSans
+    #   fonts:
+    #     - asset: assets/fonts/Open_Sans/OpenSans-Light.ttf
+    #       weight: 300
+    #     - asset: assets/fonts/Open_Sans/OpenSans-Regular.ttf
+    #       weight: 400
+    #     - asset: assets/fonts/Open_Sans/OpenSans-Medium.ttf
+    #       weight: 500
+    #     - asset: assets/fonts/Open_Sans/OpenSans-SemiBold.ttf
+    #       weight: 600
+    #     - asset: assets/fonts/Open_Sans/OpenSans-Bold.ttf
+    #       weight: 700
+    #     - asset: assets/fonts/Open_Sans/OpenSans-ExtraBold.ttf
+    #       weight: 800
+
+    # - family: Borel
+    #   fonts:
+    #     - asset: assets/fonts/Borel/Borel-Regular.ttf
+    #       weight: 400
+
     - family: OpenSans
       fonts:
-        - asset: assets/fonts/Open_Sans/OpenSans-Light.ttf
-          weight: 300
-        - asset: assets/fonts/Open_Sans/OpenSans-Regular.ttf
+        - asset: assets/fonts/sf/SF-Pro-Text-Regular.otf
           weight: 400
-        - asset: assets/fonts/Open_Sans/OpenSans-Medium.ttf
+        - asset: assets/fonts/sf/SF-Pro-Text-Medium.otf
           weight: 500
-        - asset: assets/fonts/Open_Sans/OpenSans-SemiBold.ttf
+        - asset: assets/fonts/sf/SF-Pro-Text-Semibold.otf
           weight: 600
-        - asset: assets/fonts/Open_Sans/OpenSans-Bold.ttf
+        - asset: assets/fonts/sf/SF-Pro-Text-Bold.otf
           weight: 700
-        - asset: assets/fonts/Open_Sans/OpenSans-ExtraBold.ttf
-          weight: 800
 
     - family: Borel
       fonts:
-        - asset: assets/fonts/Borel/Borel-Regular.ttf
+        - asset: assets/fonts/sf/SF-Pro-Display-Regular.otf
           weight: 400
+        - asset: assets/fonts/sf/SF-Pro-Display-Medium.otf
+          weight: 500
+        - asset: assets/fonts/sf/SF-Pro-Display-Semibold.otf
+          weight: 600
+        - asset: assets/fonts/sf/SF-Pro-Display-Bold.otf
+          weight: 700
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
   #

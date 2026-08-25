@@ -24,7 +24,7 @@ class PrivateCategory extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 20, 16, 0),
       child: Column(
-        spacing: 4,
+        spacing: 8,
         children: [
           Padding(
             padding: const EdgeInsets.only(left: 6,right: 10),
@@ -34,22 +34,11 @@ class PrivateCategory extends StatelessWidget {
                   child: Text(
                     "PRIVATE",
                     style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
                 ),
-                GestureDetector(
-                  behavior: HitTestBehavior.opaque,
-                  onTap: () {},
-                  child: const SizedBox(
-                    height: 30,
-                    width: 30,
-                    child: Padding(
-                      padding: EdgeInsets.all(3),
-                      child: HugeIcon(icon: HugeIcons.strokeRoundedAdd01),
-                    ),
-                  ),
-                ),
+                const PrivateCategoryAddIcon(),
               ],
             ),
           ),
@@ -68,6 +57,7 @@ class PrivateCategory extends StatelessWidget {
       ),
     );
   }
+
 }
 
 ///
@@ -216,12 +206,19 @@ class PrivateCategoryAddIcon extends StatelessWidget {
       descriptionTextAlign: TextAlign.center,
       description:
           "Create your own category to organize tasks the way you like.",
-      child: IconButton(
-        onPressed: () {
+      child: GestureDetector(
+        onTap: () {
           triggerBottomSheet(context);
         },
-        icon: const Icon(Icons.add),
         key: const ValueKey('home-category-header-icon-button'),
+        child: const SizedBox(
+          height: 30,
+          width: 30,
+          child: Padding(
+            padding: EdgeInsets.all(3),
+            child:  HugeIcon(icon: HugeIcons.strokeRoundedAdd01),
+          ),
+        ),
       ),
     );
   }
@@ -237,7 +234,7 @@ class PrivateCategoryAddIcon extends StatelessWidget {
     } else {
       showCupertinoSheet(
         context: context,
-        builder: (_) => const Wrap(
+        scrollableBuilder: (_, s) => const Wrap(
           runAlignment: WrapAlignment.end,
           children: [
             HomeCategoryBottomsheet(
