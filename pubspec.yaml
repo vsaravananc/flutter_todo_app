@@ -101,27 +101,27 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    # - family: OpenSans
-    #   fonts:
-    #     - asset: assets/fonts/Open_Sans/OpenSans-Light.ttf
-    #       weight: 300
-    #     - asset: assets/fonts/Open_Sans/OpenSans-Regular.ttf
-    #       weight: 400
-    #     - asset: assets/fonts/Open_Sans/OpenSans-Medium.ttf
-    #       weight: 500
-    #     - asset: assets/fonts/Open_Sans/OpenSans-SemiBold.ttf
-    #       weight: 600
-    #     - asset: assets/fonts/Open_Sans/OpenSans-Bold.ttf
-    #       weight: 700
-    #     - asset: assets/fonts/Open_Sans/OpenSans-ExtraBold.ttf
-    #       weight: 800
-
-    # - family: Borel
-    #   fonts:
-    #     - asset: assets/fonts/Borel/Borel-Regular.ttf
-    #       weight: 400
-
     - family: OpenSans
+      fonts:
+        - asset: assets/fonts/Open_Sans/OpenSans-Light.ttf
+          weight: 300
+        - asset: assets/fonts/Open_Sans/OpenSans-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Open_Sans/OpenSans-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Open_Sans/OpenSans-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Open_Sans/OpenSans-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Open_Sans/OpenSans-ExtraBold.ttf
+          weight: 800
+
+    - family: Borel
+      fonts:
+        - asset: assets/fonts/Borel/Borel-Regular.ttf
+          weight: 400
+
+    - family: sfPro
       fonts:
         - asset: assets/fonts/sf/SF-Pro-Text-Regular.otf
           weight: 400
@@ -132,7 +132,7 @@ flutter:
         - asset: assets/fonts/sf/SF-Pro-Text-Bold.otf
           weight: 700
 
-    - family: Borel
+    - family: sfProDisplay
       fonts:
         - asset: assets/fonts/sf/SF-Pro-Display-Regular.otf
           weight: 400
