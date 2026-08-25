@@ -46,3 +46,5 @@ app.*.map.json
 
 sentry.properties
 sentry-wizard
+
+version_*.md
