@@ -25,6 +25,7 @@ class FetchAllTodoDomain extends ReadListDomain<GetAllTodoEvent> {
   @override
   Future<void> trigger(event, Emitter<TodoState> emit, TodoState state) async {
     try {
+      emit(LoadingTodoList());
       List<TodoModel> value = await fetchAllTodo.trigger(null);
       emit(AllTodoList(todoList: value));
     } on ErrorHandelingService catch (e) {
@@ -55,6 +56,7 @@ class FetchFilterTodoDomain extends ReadListDomain<FilterTodoEvent> {
   @override
   Future<void> trigger(event, Emitter<TodoState> emit, TodoState state) async {
     try {
+      emit(LoadingTodoList());
       List<TodoModel> value = await fetchAllTodo.trigger(event.categoryId);
       emit(FilterTodoList(todoList: value));
     } on ErrorHandelingService catch (e) {

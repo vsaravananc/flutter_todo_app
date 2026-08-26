@@ -70,6 +70,9 @@ class _HomeChoiceChipState extends State<HomeChoiceChip> {
         }
       },
       child: Expansible(
+        animationStyle: const AnimationStyle(
+          duration: Duration(milliseconds: 150),
+        ),
         headerBuilder: (context, animation) {
           return AnimatedBuilder(
             animation: animation,
@@ -136,21 +139,46 @@ class _HomeChoiceChipState extends State<HomeChoiceChip> {
                     ),
                   ),
                 );
+              } else if (todos is LoadingTodoList) {
+                return Align(
+                  alignment: const AlignmentDirectional(-0.75, 0.0),
+                  child: Text(
+                    'Searching for this topic..',
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: LightColors.hintColor,
+                    ),
+                  ),
+                );
               } else {
                 return (todos is TodoStateWithList && todos.todoList.isNotEmpty)
-                    ? ListView.builder(
-                        shrinkWrap: true,
-                        padding: const EdgeInsets.all(0),
-                        itemBuilder: (context, index) {
-                          return HomeSlidableWidget(
-                            todo: todos.todoList[index],
-                            index: index,
-                            key: ValueKey(index),
-                          );
-                        },
-                        itemCount: todos.todoList.length,
+                    ? FadeTransition(
+                        opacity: animation,
+                        child: ListView.builder(
+                          shrinkWrap: true,
+                          padding: const EdgeInsets.all(0),
+                          itemBuilder: (context, index) {
+                            return HomeSlidableWidget(
+                              todo: todos.todoList[index],
+                              index: index,
+                              key: ValueKey(index),
+                            );
+                          },
+                          itemCount: todos.todoList.length,
+                        ),
                       )
-                    : const EmptListWidget();
+                    : FadeTransition(
+                        opacity: animation,
+                        child: Padding(
+                          padding: const EdgeInsets.only(bottom: 6),
+                          child: Align(
+                            alignment: const AlignmentDirectional(-0.75, 0.0),
+                            child: Text(
+                              'No page inside',
+                              style: Theme.of(context).textTheme.bodyLarge,
+                            ),
+                          ),
+                        ),
+                      );
               }
             },
           );

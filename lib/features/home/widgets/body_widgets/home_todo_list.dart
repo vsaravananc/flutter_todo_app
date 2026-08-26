@@ -3,8 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:todoapp/controller/todo_controller/bloc/todo_bloc.dart';
 import 'package:todoapp/controller/todo_controller/data/model/todo_model.dart';
-import 'package:todoapp/core/images/images.dart';
-import 'package:todoapp/core/themes/colors.dart';
 import 'package:todoapp/features/home/widgets/body_widgets/home_slidable_widget.dart';
 import 'package:todoapp/features/home/widgets/body_widgets/home_todo_card.dart';
 
@@ -113,7 +111,7 @@ class ReOrderableStateChangerWidget extends StatelessWidget {
             },
             child: (todos is TodoStateWithList && todos.todoList.isNotEmpty)
                 ? ReorderableStateCahgeWidget(todos: todos)
-                : const EmptListWidget(),
+                : const  Text('No page inside'),
           );
         }
       },
@@ -191,38 +189,6 @@ class ReorderableStateCahgeWidget extends StatelessWidget {
           key: ValueKey(index),
         );
       },
-    );
-  }
-}
-
-///
-/// EMPTYLISTWIDGET CLASS: IF THE LIST IS EMPTY SHOW THIS WIDGET
-///
-
-class EmptListWidget extends StatelessWidget {
-  const EmptListWidget({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    bool isDark = Theme.of(context).brightness == Brightness.dark;
-    return Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        spacing: 20,
-        children: [
-          Image.asset(
-            Images.noTask,
-            height: 150,
-            width: 150,
-            color: isDark ? DarkColors.textColor : LightColors.textColor,
-          ),
-          Text(
-            "No task in this Category\n Click + to create your task.",
-            textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.titleMedium,
-          ),
-        ],
-      ),
     );
   }
 }

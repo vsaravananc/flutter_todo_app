@@ -48,10 +48,18 @@ class HomeTodoCardWidget extends StatelessWidget {
                   categoryId: todo.categoryId,
                   key: const ValueKey('checkbox-home-todo-card-widget'),
                 ),
-                TitleHomeTodoCardWidget(
-                  title: todo.title,
-                  key: const ValueKey('title-home-todo-card-widget'),
-                ),
+                Expanded(
+                  child: Text(
+                    todo.title,
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      decoration: todo.isDone
+                          ? TextDecoration.lineThrough
+                          : TextDecoration.none,
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                )
               ],
             ),
           ),
@@ -190,27 +198,5 @@ class _CheckBoxHomeTodoCardWidgetState
   void dispose() {
     player.dispose();
     super.dispose();
-  }
-}
-
-///
-/// TITLEHOMETODOCARDWIDGET CLASS: TO SHOW THE TITLE OF THE TODOWidget
-///
-
-class TitleHomeTodoCardWidget extends StatelessWidget {
-  final String title;
-  const TitleHomeTodoCardWidget({super.key, required this.title});
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: Text(
-        key: ValueKey('title-home-todo-card-widget-title-$title'),
-        title,
-        style: Theme.of(context).textTheme.titleMedium,
-        maxLines: 1,
-        overflow: TextOverflow.ellipsis,
-      ),
-    );
   }
 }

@@ -27,3 +27,6 @@ class ErrorTodo extends TodoState {
 
   ErrorTodo({required this.message, required this.errorType});
 }
+
+class LoadingTodoList extends TodoState{
+}
