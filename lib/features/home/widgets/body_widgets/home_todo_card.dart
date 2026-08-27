@@ -21,48 +21,36 @@ class HomeTodoCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ReorderableDelayedDragStartListener(
-      index: index,
-      key: ValueKey('reorderable-delayed-drag-start-listener$index'),
-      child: Material(
-        color: Theme.of(context).colorScheme.tertiary,
-        borderRadius: BorderRadius.circular(8),
-        child: InkWell(
-          borderRadius: BorderRadius.circular(8),
-          splashColor: Theme.of(
-            context,
-          ).colorScheme.secondary.withValues(alpha: 0.2),
-          onTap: () {
-            final widgetinfo = widgetInfo(context);
-
-            showDialog(context, widgetinfo.$1, widgetinfo.$2);
-          },
-          child: SizedBox(
-            key: ValueKey('todo-item-${todo.id}'),
-            height: 55,
-            child: Row(
-              children: [
-                CheckBoxHomeTodoCardWidget(
-                  isChecked: todo.isDone,
-                  id: todo.id,
-                  categoryId: todo.categoryId,
-                  key: const ValueKey('checkbox-home-todo-card-widget'),
-                ),
-                Expanded(
-                  child: Text(
-                    todo.title,
-                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      decoration: todo.isDone
-                          ? TextDecoration.lineThrough
-                          : TextDecoration.none,
-                    ),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                )
-              ],
+    return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+      onTap: () {
+        final widgetinfo = widgetInfo(context);
+        showDialog(context, widgetinfo.$1, widgetinfo.$2);
+      },
+      child: SizedBox(
+        key: ValueKey('todo-item-${todo.id}'),
+        height: 55,
+        child: Row(
+          children: [
+            CheckBoxHomeTodoCardWidget(
+              isChecked: todo.isDone,
+              id: todo.id,
+              categoryId: todo.categoryId,
+              key: const ValueKey('checkbox-home-todo-card-widget'),
             ),
-          ),
+            Expanded(
+              child: Text(
+                todo.title,
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                  decoration: todo.isDone
+                      ? TextDecoration.lineThrough
+                      : TextDecoration.none,
+                ),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+          ],
         ),
       ),
     );
