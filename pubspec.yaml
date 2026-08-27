@@ -49,7 +49,6 @@ dependencies:
   audioplayers: ^6.5.1
   showcaseview: ^5.0.1
   flutter_local_notifications: ^21.0.0
-  vibration: ^3.1.8
   hugeicons: ^1.1.5
   pie_chart: ^5.4.0
   equatable: ^2.0.8

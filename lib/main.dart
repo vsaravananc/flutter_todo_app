@@ -112,6 +112,7 @@ class MyApp extends StatelessWidget {
         title: 'Do it now',
         theme: AppTheme.lightTheme,
         darkTheme: AppTheme.darkTheme,
+        // debugShowMaterialGrid: true,
         onGenerateRoute: (s) => Routes.onGenerateRoute(s),
       ),
     );

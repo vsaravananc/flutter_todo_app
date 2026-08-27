@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todoapp/controller/category_controller/bloc/home_bloc_bloc.dart';
 import 'package:todoapp/controller/category_controller/data/model/category_model.dart';
+import 'package:todoapp/core/services/happtic_effect.dart';
 
 class CategoryEditButton extends StatefulWidget {
   final CategoryModel categoryModel;
@@ -16,6 +17,7 @@ class _CategoryEditButtonState extends State<CategoryEditButton> {
   LayerLink layerLink = LayerLink();
 
   void _toggle() {
+    HappticEffect.selectionEffect();
     if (overlayEntry == null) {
       overlayEntry = _createOverlayEntery();
       Overlay.of(context).insert(overlayEntry!);
@@ -95,6 +97,7 @@ class CategoryEditOverlayFlower extends StatelessWidget {
                     Expanded(
                       child: GestureDetector(
                         onTap: () {
+                          HappticEffect.selectionEffect();
                           toggle();
                           showDialog(
                             context: context,
@@ -111,6 +114,7 @@ class CategoryEditOverlayFlower extends StatelessWidget {
                     Expanded(
                       child: GestureDetector(
                         onTap: () {
+                          HappticEffect.selectionEffect();
                           context.read<HomeBloc>().add(
                             DeleteCategoryEvent(categoryId: categoryModel.id),
                           );

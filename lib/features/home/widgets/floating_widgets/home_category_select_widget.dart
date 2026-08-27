@@ -4,6 +4,7 @@ import 'package:todoapp/controller/category_controller/bloc/home_bloc_bloc.dart'
 import 'package:todoapp/controller/category_controller/data/model/category_model.dart';
 import 'package:todoapp/controller/select_category_cubit/selectcategory_cubit.dart';
 import 'package:todoapp/core/extension/category_model_extension.dart';
+import 'package:todoapp/core/services/happtic_effect.dart';
 import 'package:todoapp/core/themes/colors.dart';
 import 'package:todoapp/widgets/custom_pop_widget.dart';
 
@@ -189,6 +190,7 @@ class SelectCateGoryCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
+        HappticEffect.selectionEffect();
         context.read<SelectcategoryCubit>().selectCategory(categoryModel);
         onTap();
       },

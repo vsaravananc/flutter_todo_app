@@ -5,6 +5,7 @@ import 'package:todoapp/controller/category_controller/bloc/home_bloc_bloc.dart'
 import 'package:todoapp/controller/category_controller/data/model/category_model.dart';
 import 'package:todoapp/controller/select_category_cubit/selectcategory_cubit.dart';
 import 'package:todoapp/controller/todo_controller/bloc/todo_bloc.dart';
+import 'package:todoapp/core/services/happtic_effect.dart';
 import 'package:todoapp/core/words/app_words.dart';
 import 'package:todoapp/features/home/widgets/floating_widgets/home_category_select_widget.dart';
 import 'package:todoapp/features/home/widgets/floating_widgets/home_date_select_widget.dart';
@@ -79,6 +80,7 @@ class _HomeFloatingBottomTaskWidgetState
                 const Spacer(),
                 GestureDetector(
                   onTap: () {
+                    HappticEffect.selectionEffect();
                     _insertTodo(context, model.id);
                   },
                   child: HugeIcon(

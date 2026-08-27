@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:todoapp/controller/todo_controller/bloc/todo_bloc.dart';
+import 'package:todoapp/core/services/happtic_effect.dart';
 import 'package:todoapp/core/themes/colors.dart';
 import 'package:todoapp/controller/category_controller/data/model/category_model.dart';
 import 'package:todoapp/core/themes/font_family.dart';
@@ -64,6 +65,7 @@ class _HomeChoiceChipState extends State<HomeChoiceChip> {
 
     return GestureDetector(
       onTap: () {
+        HappticEffect.selectionEffect();
         widget.onSelected?.call();
         if (widget.isSelected) {
           controller.toggle();
@@ -105,7 +107,9 @@ class _HomeChoiceChipState extends State<HomeChoiceChip> {
                     ),
                     GestureDetector(
                       behavior: HitTestBehavior.opaque,
-                      onTap: () {},
+                      onTap: () {
+                         HappticEffect.selectionEffect();
+                      },
                       child: Transform.scale(
                         scale: 1.0 + (0.03 * value),
                         child: const SizedBox(

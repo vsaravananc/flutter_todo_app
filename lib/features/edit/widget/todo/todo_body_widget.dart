@@ -6,6 +6,7 @@ import 'package:todoapp/controller/select_category_cubit/selectcategory_cubit.da
 import 'package:todoapp/controller/todo_controller/data/model/todo_model.dart';
 import 'package:todoapp/controller/todo_edit_logic/controller/todo_edit_controller.dart';
 import 'package:todoapp/core/extension/category_model_extension.dart';
+import 'package:todoapp/core/services/happtic_effect.dart';
 import 'package:todoapp/core/themes/colors.dart';
 import 'package:todoapp/widgets/custom_pop_widget.dart';
 
@@ -70,6 +71,7 @@ class _CustomDropDownWidgetState extends State<CustomDropDownWidget> {
   OverlayEntry? overlayEntry;
 
   void _toggle() {
+    HappticEffect.selectionEffect();
     if (overlayEntry == null) {
       overlayEntry = _createOverlayEntry();
       Overlay.of(context).insert(overlayEntry!);

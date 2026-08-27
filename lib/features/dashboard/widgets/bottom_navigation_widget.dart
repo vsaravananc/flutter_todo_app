@@ -5,6 +5,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:showcaseview/showcaseview.dart';
 import 'package:todoapp/core/services/app_show_case.dart';
+import 'package:todoapp/core/services/happtic_effect.dart';
 import 'package:todoapp/features/home/widgets/floating_widgets/home_floating_widget.dart';
 
 class BottomNavigationWidget extends StatelessWidget {
@@ -34,6 +35,7 @@ class BottomNavigationWidget extends StatelessWidget {
                 flex: 4,
                 child: GestureDetector(
                   onHorizontalDragUpdate: (details) {
+                    HappticEffect.mediumEffect();
                     if (details.delta.dx < 1.6 && details.delta.dx > 0) {
                       onTap(1);
                     } else if (details.delta.dx < -2) {
